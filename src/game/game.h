@@ -1,3 +1,4 @@
+
 namespace game {
-    void loop();
+    void loop()	{return;};
 }

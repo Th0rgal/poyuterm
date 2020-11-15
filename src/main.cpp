@@ -1,5 +1,7 @@
 #include <ncurses.h>
-#include "game.h"
+#include "game/game.h"
+
+using namespace std;
 
 int main(void)
 {	
