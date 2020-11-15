@@ -60,3 +60,4 @@ _deps
 ### binaries ###
 bin/*
 poyuterm
+test_*

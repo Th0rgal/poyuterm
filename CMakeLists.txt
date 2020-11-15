@@ -4,7 +4,7 @@ project(poyuterm)
 
 # tests
 enable_testing()
-add_executable(fail_test tests/fail.cpp)
+add_executable(test_fail tests/fail.cpp)
 
 set(SRCS
     src/main.cpp
@@ -18,4 +18,4 @@ set(HEADERS
 add_executable(poyuterm ${SRCS} ${HEADERS})
 target_link_libraries(poyuterm ncurses)
 
-add_test(NAME fail COMMAND fail_test)
+add_test(NAME fail COMMAND test_fail)
