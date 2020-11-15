@@ -1,6 +1,8 @@
 #include <ncurses.h>
 #include "game.h"
 
-void loop() {
+using namespace game;
+
+void game::loop() {
     printw("test");
 }

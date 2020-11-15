@@ -1,4 +1,4 @@
-
+#pragma once
 namespace game {
-    void loop()	{return;};
+    void loop();
 }
