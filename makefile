@@ -1,4 +1,4 @@
-poyuterm: ./src/main.cpp ./bin/grid.so ./bin/game.so ./bin/events.so ./bin/display.so
+./bin/poyuterm: ./src/main.cpp ./bin/grid.so ./bin/game.so ./bin/events.so ./bin/display.so
 	g++ ./src/main.cpp -o ./bin/poyuterm -lncurses
 
 ./bin/grid.so: ./src/grid/grid.cpp ./src/grid/grid.h
