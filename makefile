@@ -1,2 +1,2 @@
 poyuterm: ./src/main.cpp
-	g++ `pkg-config --libs --cflags ncurses` ./src/main.cpp -o ./bin/poyuterm
+	g++ ./src/main.cpp -o ./bin/poyuterm -lncurses
