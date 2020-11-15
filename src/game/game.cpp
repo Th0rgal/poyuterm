@@ -1,5 +1,5 @@
 #include <ncurses.h>
-#include "game.h"
+#include "game.hpp"
 
 using namespace game;
 

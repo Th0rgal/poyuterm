@@ -12,7 +12,7 @@ set(SRCS
     )
     
 set(HEADERS
-    src/game/game.h
+    src/game/game.hpp
     )
 
 add_executable(poyuterm ${SRCS} ${HEADERS})
