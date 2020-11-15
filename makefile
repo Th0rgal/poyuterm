@@ -13,5 +13,5 @@
 ./bin/display.so: ./src/display/display.cpp ./src/display/display.h
 	g++ -c ./src/display/display.cpp -o ./bin/display.so
 
-lancer: ./bin/poyuterm
+start: ./bin/poyuterm
 	./bin/poyuterm
