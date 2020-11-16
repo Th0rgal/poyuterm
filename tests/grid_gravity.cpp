@@ -1,4 +1,4 @@
-#include "grid/grid.hpp"
+#include "domains/grid.hpp"
 #include <iostream>
 
 int main()

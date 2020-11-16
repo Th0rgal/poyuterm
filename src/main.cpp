@@ -1,10 +1,10 @@
 #include <ncurses.h>
-#include "game/game.hpp"
+#include "controllers/gameManager.hpp"
 
 using namespace std;
 
 int main() {
-    game::loop();
+    gameManager::loop();
     /*
     initscr();              // Initialise la structure WINDOW et autres paramètres 
     printw("Hello World");  // Écrit Hello World à l'endroit où le curseur logique est positionné

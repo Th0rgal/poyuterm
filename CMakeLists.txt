@@ -4,13 +4,13 @@ project(poyuterm)
 
 set(SRCS
     src/main.cpp
-    src/game/game.cpp
-    src/grid/grid.cpp
+    src/controllers/gameManager.cpp
+    src/domains/grid.cpp
     )
     
 set(HEADERS
-    src/game/game.hpp
-    src/grid/grid.hpp
+    src/controllers/gameManager.hpp
+    src/domains/grid.hpp
     )
 
 add_executable(poyuterm ${SRCS} ${HEADERS})
