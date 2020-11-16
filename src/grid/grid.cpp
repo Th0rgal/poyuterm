@@ -1,4 +1,5 @@
 #include "grid.hpp"
+#include <iostream>
 
 using namespace grid;
 
@@ -8,11 +9,19 @@ using namespace grid;
  **/
 bool grid::trigger_gravity()
 {
+    vector<vector<PuyoType>> gridClone = grid;
     for (int x = 0; x < grid.size(); x++)
-        for (int y = 0; y < grid[0].size(); y++)
-        {
-            grid[4][6] = PuyoType(red);
-        }
+        for (int y = 0; y < grid[0].size() - 1; y++)
+            if (gridClone[x][y] && !gridClone[x][y + 1])
+            {
+                grid[x][y + 1] = grid[x][y];
+                grid[x][y] = PuyoType(none);
+            }
+
+    for (int x = 0; x < grid.size(); x++)
+        for (int y = 0; y < grid[0].size() - 1; y++)
+            if (grid[x][y] && !grid[x][y + 1])
+                return false;
     return true;
 }
 
