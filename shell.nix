@@ -1,5 +1,5 @@
 with import <nixpkgs> {};
 stdenv.mkDerivation {
     name = "poyuterm-dev-environment";
-    buildInputs = [ pkg-config ncurses cmake ];
+    buildInputs = [ pkg-config ncurses cmake doctest ];
 }
