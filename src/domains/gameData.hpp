@@ -1,6 +1,6 @@
 #pragma once
 
-struct GameData 
+struct GameData
 {
-
+    GameData();
 };
