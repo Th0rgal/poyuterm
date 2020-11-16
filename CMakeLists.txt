@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.0)
 
 project(poyuterm)
 
-# tests
-enable_testing()
-add_executable(test_fail tests/fail.cpp)
-
 set(SRCS
     src/main.cpp
     src/game/game.cpp
@@ -18,4 +14,7 @@ set(HEADERS
 add_executable(poyuterm ${SRCS} ${HEADERS})
 target_link_libraries(poyuterm ncurses)
 
-add_test(NAME fail COMMAND test_fail)
+# tests
+enable_testing()
+add_executable(test_grid_gravity tests/grid_gravity.cpp)
+add_test(NAME grid_gravity COMMAND test_grid_gravity)

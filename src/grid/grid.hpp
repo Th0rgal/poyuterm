@@ -17,4 +17,4 @@ namespace grid
     vector<vector<PuyoType>> grid(6, vector<PuyoType>(12));
     bool trigger_gravity();
     void remove_adjectives();
-} // namespace grid
+}
