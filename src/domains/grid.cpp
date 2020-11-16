@@ -11,15 +11,6 @@ Grid::Grid(vector<vector<PuyoType>> initialGrid)
 }
 
 /**
- * to change the grid content
- * @param vector<vector<PuyoType>> the new grid content
- **/
-void Grid::setContent(vector<vector<PuyoType>> newGrid)
-{
-    content = newGrid;
-}
-
-/**
  * to make the falling puyo fall from a box
  * @return bool false if all puyo have fallen down
  **/

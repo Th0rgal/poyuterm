@@ -3,8 +3,9 @@
 
 using namespace std;
 
-int main() {
-    gameManager::loop();
+int main()
+{
+    loop();
     /*
     initscr();              // Initialise la structure WINDOW et autres paramètres 
     printw("Hello World");  // Écrit Hello World à l'endroit où le curseur logique est positionné

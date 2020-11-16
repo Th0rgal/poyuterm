@@ -24,30 +24,6 @@ TEST_CASE("testing the constructor")
     CHECK(grid.content == content);
 }
 
-TEST_CASE("testing the setContent function")
-{
-    vector<vector<Grid::PuyoType>> content = {
-        {Grid::red, Grid::none, Grid::none},
-        {Grid::none, Grid::red, Grid::red},
-        {Grid::none, Grid::none, Grid::red}};
-
-    Grid grid = Grid(content);
-
-    content = {
-        {Grid::none, Grid::blue},
-        {Grid::red, Grid::yellow},
-        {Grid::green, Grid::none}};
-    grid.setContent(content);
-    CHECK(grid.content == content);
-
-    content = {
-        {Grid::red, Grid::none},
-        {Grid::none, Grid::blue},
-        {Grid::none, Grid::green}};
-    grid.setContent(content);
-    CHECK(grid.content == content);
-}
-
 TEST_CASE("testing the triggerGravity function")
 {
 
