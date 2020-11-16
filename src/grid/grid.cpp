@@ -1,10 +1,10 @@
-#include "grid.hpp"
+#include "grid/grid.hpp"
 #include <iostream>
 
 using namespace grid;
 
 /**
- * makes the falling puyo fall from a box
+ * to make the falling puyo fall from a box
  * @return bool false if all puyo have fallen down
  **/
 bool grid::trigger_gravity()
@@ -26,8 +26,8 @@ bool grid::trigger_gravity()
 }
 
 /**
- * delete all combinations of linked puyos with a 
- * minimum size of 4
+ * to delete all combinations of linked puyos with 
+ * a minimum size of 4
  **/
 void grid::remove_adjectives()
 {

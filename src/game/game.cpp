@@ -1,9 +1,9 @@
-#include "game.hpp"
-#include "../grid/grid.hpp"
-#include "../grid/grid.cpp"
+#include "game/game.hpp"
+#include "grid/grid.hpp"
 
 using namespace game;
+using namespace grid;
 
 void game::loop() {
-    grid::trigger_gravity();
+    trigger_gravity();
 }
