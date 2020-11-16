@@ -1,26 +1,42 @@
 #include "domains/grid.hpp"
 #include <iostream>
 
-using namespace grid;
+/**
+ * to intialize the grid
+ * @param vector<vector<PuyoType>> the initial grid content
+ **/
+Grid::Grid(vector<vector<PuyoType>> initialGrid)
+{
+    content = initialGrid;
+}
+
+/**
+ * to change the grid content
+ * @param vector<vector<PuyoType>> the new grid content
+ **/
+void Grid::setContent(vector<vector<PuyoType>> newGrid)
+{
+    content = newGrid;
+}
 
 /**
  * to make the falling puyo fall from a box
  * @return bool false if all puyo have fallen down
  **/
-bool grid::trigger_gravity()
+bool Grid::triggerGravity()
 {
-    vector<vector<PuyoType>> gridClone = grid;
-    for (int x = 0; x < grid.size(); x++)
-        for (int y = 0; y < grid[0].size() - 1; y++)
-            if (gridClone[x][y] && !gridClone[x][y + 1])
+    vector<vector<PuyoType>> clone = content;
+    for (int x = 0; x < clone.size(); x++)
+        for (int y = 0; y < clone[0].size() - 1; y++)
+            if (clone[x][y] && !clone[x][y + 1])
             {
-                grid[x][y + 1] = grid[x][y];
-                grid[x][y] = none;
+                content[x][y + 1] = clone[x][y];
+                content[x][y] = none;
             }
 
-    for (int x = 0; x < grid.size(); x++)
-        for (int y = 0; y < grid[0].size() - 1; y++)
-            if (grid[x][y] && !grid[x][y + 1])
+    for (int x = 0; x < content.size(); x++)
+        for (int y = 0; y < content[0].size() - 1; y++)
+            if (content[x][y] && !content[x][y + 1])
                 return false;
     return true;
 }
@@ -29,7 +45,7 @@ bool grid::trigger_gravity()
  * to delete all combinations of linked puyos with 
  * a minimum size of 4
  **/
-void grid::remove_adjectives()
+void Grid::removeAdjectives()
 {
     return;
 }

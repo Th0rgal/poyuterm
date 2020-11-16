@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace grid
+struct Grid 
 {
     enum PuyoType
     {
@@ -14,7 +14,9 @@ namespace grid
         blue = 4,
         pink = 5
     };
-    static vector<vector<PuyoType>> grid(6, vector<PuyoType>(12));
-    bool trigger_gravity();
-    void remove_adjectives();
-}
+    vector<vector<PuyoType>> content;
+    Grid(vector<vector<PuyoType>> initialGrid);
+    void setContent(vector<vector<PuyoType>> newGrid);
+    bool triggerGravity();
+    void removeAdjectives();
+};
