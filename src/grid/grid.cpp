@@ -15,7 +15,7 @@ bool grid::trigger_gravity()
             if (gridClone[x][y] && !gridClone[x][y + 1])
             {
                 grid[x][y + 1] = grid[x][y];
-                grid[x][y] = PuyoType(none);
+                grid[x][y] = none;
             }
 
     for (int x = 0; x < grid.size(); x++)

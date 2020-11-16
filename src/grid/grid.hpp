@@ -14,7 +14,7 @@ namespace grid
         blue = 4,
         pink = 5
     };
-    vector<vector<PuyoType>> grid(6, vector<PuyoType>(12));
+    static vector<vector<PuyoType>> grid(6, vector<PuyoType>(12));
     bool trigger_gravity();
     void remove_adjectives();
 }
