@@ -15,27 +15,27 @@ void loop()
     InputsListener inputsListener = InputsListener();
 
     // load views
-    ConsoleDisplay display = ConsoleDisplay();
+    ConsoleDisplay display = ConsoleDisplay(inputsListener);
 
     display.start();
 }
 
-InputsListener::InputsListener() {
-
+InputsListener::InputsListener()
+{
 }
 
-void InputsListener::onKeyPressed(int code) {
-
+void InputsListener::onKeyPressed(int code)
+{
 }
 
-void InputsListener::onRightMove() {
-
+void InputsListener::onRightMove()
+{
 }
 
-void InputsListener::onLeftMove() {
-
+void InputsListener::onLeftMove()
+{
 }
 
-void InputsListener::onDownMove() {
-
+void InputsListener::onDownMove()
+{
 }

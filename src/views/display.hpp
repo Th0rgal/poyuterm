@@ -1,8 +1,10 @@
 #pragma once
 
+#include "controllers/gameManager.hpp"
+
 class ConsoleDisplay
 {
 public:
-    ConsoleDisplay();
+    ConsoleDisplay(InputsListener &inputsListener);
     void start();
 };
