@@ -7,4 +7,6 @@ class ConsoleDisplay
 public:
     ConsoleDisplay(InputsListener &inputsListener);
     void start();
+private:
+    InputsListener inputsListener;
 };

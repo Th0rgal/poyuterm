@@ -2,17 +2,22 @@
 #include <ncurses.h>
 #include "views/display.hpp"
 
-ConsoleDisplay::ConsoleDisplay(InputsListener &inputsListener)
+ConsoleDisplay::ConsoleDisplay(InputsListener &inputsListenerReference)
 {
+    inputsListener = inputsListenerReference;
 }
 
 void ConsoleDisplay::start()
 {
     initscr();
+    intrflush(stdscr, FALSE);
+    keypad(stdscr, TRUE);
     int inputCode;
     do
     {
         inputCode = getch();
-    } while (inputCode != 113); // q to exit
+        inputsListener.onKeyPressed(inputCode);
+    } while (inputCode != KEY_SDL);
+
     endwin();
 }

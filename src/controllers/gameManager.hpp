@@ -6,9 +6,9 @@ class InputsListener
 {
 public:
     InputsListener();
+    void onKeyPressed(int code);
 
 private:
-    void onKeyPressed(int code);
     void onRightMove();
     void onLeftMove();
     void onDownMove();

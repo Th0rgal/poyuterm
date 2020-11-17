@@ -24,13 +24,17 @@ set(HEADERS
     src/views/display.hpp
     )
 
+set(LIBS
+    ncurses
+    pthread
+)
+
 add_executable(poyuterm ${SRCS} ${HEADERS})
 target_include_directories(poyuterm PUBLIC src/)
-target_link_libraries(poyuterm ncurses)
-
+target_link_libraries(poyuterm ${LIBS})
 
 # Make test executable
 add_executable(test_grid tests/grid.cpp ${SRCS} ${HEADERS})
 target_compile_features(test_grid PRIVATE cxx_std_17)
 target_include_directories(test_grid PUBLIC src/)
-target_link_libraries(test_grid PRIVATE ncurses doctest::doctest)
+target_link_libraries(test_grid PRIVATE doctest::doctest ${LIBS})

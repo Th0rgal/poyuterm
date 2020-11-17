@@ -2,6 +2,8 @@
 #include "domains/gameData.hpp"
 #include "domains/grid.hpp"
 #include "views/display.hpp"
+#include <iostream>
+#include <future>
 
 void loop()
 {
@@ -17,7 +19,7 @@ void loop()
     // load views
     ConsoleDisplay display = ConsoleDisplay(inputsListener);
 
-    display.start();
+    std::async(std::launch::async, [&display] { display.start(); });
 }
 
 InputsListener::InputsListener()
