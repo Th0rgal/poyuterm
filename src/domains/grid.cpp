@@ -37,5 +37,20 @@ bool Grid::triggerGravity()
  **/
 void Grid::removeAdjectives()
 {
+    int combinations = 0;
+    bool destruction = true;
+    int xCombianison = 0, yCombinaison = 0;
+    PuyoType type = none;
+    for(int x = content.size() - 1; x >= 0; x++){
+        for(int y = 0; y < content.size(); y++){
+            type = content[x][y];
+            combinations = 1;
+            xCombianison = x;
+            yCombinaison = y;
+            while(content[xCombianison][yCombinaison] == type){
+                
+            }
+        }
+    }
     return;
 }
