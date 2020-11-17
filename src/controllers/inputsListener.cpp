@@ -2,13 +2,13 @@
 #include <functional>
 #include "controllers/inputsListener.hpp"
 
-void handleInputs(std::function<void()> applyMechanics)
+void handleInputs(std::function<void()> loop)
 {
     int inputCode;
     while ((inputCode = getch()) != KEY_ENTER)
     {
         if (inputCode == ERR)
-            applyMechanics();
+            loop();
         else
             onKeyPressed(inputCode);
     }

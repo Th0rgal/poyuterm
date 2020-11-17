@@ -11,7 +11,7 @@ void GameManager::start()
     if (succeeded)
     {
         handleInputs([&] {
-            applyMechanics();
+            loop();
         });
         (display).close();
     }
@@ -19,6 +19,6 @@ void GameManager::start()
         (display).showError();
 }
 
-void GameManager::applyMechanics()
+void GameManager::loop()
 {
 }
