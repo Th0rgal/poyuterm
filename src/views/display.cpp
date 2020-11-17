@@ -1,12 +1,9 @@
 
 #include <ncurses.h>
 #include "views/display.hpp"
-#include "controllers/gameManager.hpp"
-
 
 ConsoleDisplay::ConsoleDisplay(InputsListener &inputsListener)
 {
-
 }
 
 void ConsoleDisplay::start()
