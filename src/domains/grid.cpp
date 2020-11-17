@@ -2,12 +2,11 @@
 #include <iostream>
 
 /**
- * to intialize the grid
+ * to intialize the grid with a 2d vector
  * @param vector<vector<PuyoType>> the initial grid content
  **/
-Grid::Grid(vector<vector<PuyoType>> initialGrid)
+Grid::Grid(vector<vector<PuyoType>> initialGrid) : content(initialGrid)
 {
-    content = initialGrid;
 }
 
 /**

@@ -1,15 +1,18 @@
 #pragma once
 
-void loop();
+#include "domains/gameData.hpp"
+#include "domains/grid.hpp"
+#include "views/display.hpp"
 
-class InputsListener
+class GameManager
 {
 public:
-    InputsListener();
-    void onKeyPressed(int code);
+    GameManager(GameData &gameData, Grid &grid, ConsoleDisplay &display);
+    void start();
+    void applyMechanics();
 
 private:
-    void onRightMove();
-    void onLeftMove();
-    void onDownMove();
+    ConsoleDisplay display;
+    GameData gameData;
+    Grid grid;
 };

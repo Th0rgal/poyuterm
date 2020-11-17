@@ -8,6 +8,7 @@ find_package(doctest REQUIRED)
 set(SRCS
     src/main.cpp
     src/controllers/gameManager.cpp
+    src/controllers/inputsListener.cpp
 
     src/domains/gameData.cpp
     src/domains/grid.cpp
@@ -17,6 +18,7 @@ set(SRCS
 
 set(HEADERS
     src/controllers/gameManager.hpp
+    src/controllers/inputsListener.hpp
 
     src/domains/gameData.hpp
     src/domains/grid.hpp

@@ -1,16 +1,15 @@
 #pragma once
 
-#include "controllers/gameManager.hpp"
 #include "domains/grid.hpp"
 
 class ConsoleDisplay
 {
 public:
-    ConsoleDisplay(InputsListener &inputsListener);
+    bool start();
+    void showError();
     void setCell(int x, int y, Grid::PuyoType puyo);
-    void start();
+    void close();
 
 private:
     int virtualScale;
-    InputsListener inputsListener;
 };

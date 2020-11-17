@@ -3,9 +3,27 @@
 #include "views/display.hpp"
 #include <string>
 
-ConsoleDisplay::ConsoleDisplay(InputsListener &inputsListenerReference)
+bool ConsoleDisplay::start()
 {
-    inputsListener = inputsListenerReference;
+    initscr();
+    int boxHeight = LINES - 2;
+    // it must be superior to 0
+    virtualScale = (boxHeight - boxHeight % 12) / 12;
+    
+    // to fix arrow keys detection
+    intrflush(stdscr, FALSE);
+    keypad(stdscr, TRUE);
+
+    // to make getch() not blocking
+    nodelay(stdscr, TRUE);
+    return (COLS > 20 + 2 + 12 && virtualScale > 0);
+}
+
+void ConsoleDisplay::showError()
+{
+    printw("Error: your terminal is too small \nminimum cols: 44 \nminimum lines: 14");
+    getch();
+    close();
 }
 
 void ConsoleDisplay::setCell(int x, int y, Grid::PuyoType puyo)
@@ -14,29 +32,7 @@ void ConsoleDisplay::setCell(int x, int y, Grid::PuyoType puyo)
     addch('#');
 }
 
-void ConsoleDisplay::start()
+void ConsoleDisplay::close()
 {
-    initscr();
-    int boxHeight = LINES - 2;
-    virtualScale = (boxHeight - boxHeight % 12) / 12; // it must be superior to 0
-
-    intrflush(stdscr, FALSE);
-    keypad(stdscr, TRUE);
-    if (COLS > 20 + 2 + 12 && virtualScale > 0)
-    {
-        int inputCode;
-        do
-        {
-            inputCode = getch();
-            inputsListener.onKeyPressed(inputCode);
-        } while (inputCode != KEY_SDL);
-        endwin();
-    }
-    else
-    {
-        printw("Error: your terminal is too small \nminimum cols: 44 \nminimum lines: 14");
-
-        getch();
-        endwin();
-    }
+    endwin();
 }
