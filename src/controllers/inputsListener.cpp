@@ -5,7 +5,7 @@
 
 using namespace std::chrono;
 
-void handleInputs(std::function<void(double)> loop)
+void handleInputs(std::function<void(int)> loop)
 {
     int inputCode;
     high_resolution_clock::time_point previousTime = high_resolution_clock::now();
@@ -13,7 +13,7 @@ void handleInputs(std::function<void(double)> loop)
     {
         if (inputCode == ERR)
         {
-            loop((high_resolution_clock::now() - previousTime).count());
+            loop(int((high_resolution_clock::now() - previousTime).count()*1e-6));
             previousTime = high_resolution_clock::now();
         }
         else

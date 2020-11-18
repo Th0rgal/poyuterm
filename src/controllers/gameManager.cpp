@@ -2,6 +2,7 @@
 #include "controllers/inputsListener.hpp"
 #include <stdlib.h>
 #include <time.h>
+#include <ncurses.h>
 
 GameManager::GameManager(GameData &gameData, Grid &grid, ConsoleDisplay &display) : gameData(gameData), grid(grid), display(display)
 {
@@ -13,7 +14,7 @@ void GameManager::start()
     bool succeeded = (display).start();
     if (succeeded)
     {
-        handleInputs([&](double delay) {
+        handleInputs([&](int delay) {
             loop(delay);
         });
         (display).close();
@@ -22,12 +23,12 @@ void GameManager::start()
         (display).showError();
 }
 
-void GameManager::loop(double delay)
+void GameManager::loop(int delay)
 {
     if (gameData.activePiece.empty())
         gameData.activePiece = createNewPiece();
 
-    if (gameData.delaySinceGravity > 1e9) //1e9 = 1sec
+    if (gameData.delaySinceGravity > 1000) // in milliseconds
     {
         bool falling = grid.triggerGravity();
         if (!falling)
