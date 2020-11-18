@@ -48,3 +48,26 @@ TEST_CASE("testing the triggerGravity function")
 
     CHECK(grid.triggerGravity() == true);
 }
+
+TEST_CASE("testing the removeAdjectives function")
+{
+    vector<vector<Grid::PuyoType>> content = {
+        {Grid::red, Grid::none, Grid::none, Grid::red},
+        {Grid::red, Grid::red, Grid::red, Grid::red},
+        {Grid::none, Grid::none, Grid::red, Grid::none}};
+
+    vector<vector<Grid::PuyoType>> expectedOutput = {
+        {Grid::red, Grid::none, Grid::none, Grid::red},
+        {Grid::red, Grid::red, Grid::red, Grid::red},
+        {Grid::none, Grid::none, Grid::red, Grid::none}};
+
+    Grid grid = Grid(content);
+
+    grid.removeAdjectives();
+
+    for(int x= 0; x < grid.content.size(); x++){
+        for(int y = 0; y < grid.content[0].size(); y++){
+            CHECK(grid.content[x][y] == expectedOutput[x][y]);
+        }
+    }
+}
