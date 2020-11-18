@@ -3,6 +3,6 @@
 /**
  * to intialize the GameData
  **/
-GameData::GameData()
+GameData::GameData() : activePiece({}), delaySinceGravity(0)
 {
 }

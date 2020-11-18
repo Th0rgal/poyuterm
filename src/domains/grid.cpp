@@ -10,6 +10,24 @@ Grid::Grid(vector<vector<PuyoType>> initialGrid) : content(initialGrid)
 }
 
 /**
+ * to get the grid width
+ * @return int the length of the first line
+ **/
+int Grid::width()
+{
+    return content.size();
+}
+
+/**
+ * to get the grid height
+ * @return int the length of the first column
+ **/
+int Grid::height()
+{
+    return content.size() ? content[0].size() : 0;
+}
+
+/**
  * to make the falling puyo fall from a box
  * @return bool false if all puyo have fallen down
  **/
@@ -42,27 +60,36 @@ void Grid::removeAdjectives()
     bool destruction = true;
     int xCombianison = 0, yCombinaison = 0;
     PuyoType type = none;
-    for(int x = content.size() - 1; x >= 0; x++){
-        for(int y = 0; y < content.size(); y++){
+    for (int x = content.size() - 1; x >= 0; x++)
+    {
+        for (int y = 0; y < content.size(); y++)
+        {
             type = content[x][y];
             combinationsColone = 1;
             combinationsLigne = 1;
             xCombianison = x;
             yCombinaison = y;
-            while(content[x][yCombinaison] == type){
+            while (content[x][yCombinaison] == type)
+            {
                 yCombinaison++;
                 combinationsLigne++;
             }
-            while(content[yCombinaison][x] == type){
+            while (content[yCombinaison][x] == type)
+            {
                 xCombianison++;
                 combinationsColone--;
             }
-            if(yCombinaison > xCombianison){
-                for(int i = y; i < yCombinaison; i++){
+            if (yCombinaison > xCombianison)
+            {
+                for (int i = y; i < yCombinaison; i++)
+                {
                     content[x][i] = none;
                 }
-            }else {
-                for(int i = x; i < xCombianison; i++){
+            }
+            else
+            {
+                for (int i = x; i < xCombianison; i++)
+                {
                     content[i][y] = none;
                 }
             }
