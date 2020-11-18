@@ -10,8 +10,8 @@ void GameManager::start()
     bool succeeded = (display).start();
     if (succeeded)
     {
-        handleInputs([&] {
-            loop();
+        handleInputs([&](double delay) {
+            loop(delay);
         });
         (display).close();
     }
@@ -19,6 +19,7 @@ void GameManager::start()
         (display).showError();
 }
 
-void GameManager::loop()
+void GameManager::loop(double delay)
 {
+    gameData.activePiece;
 }

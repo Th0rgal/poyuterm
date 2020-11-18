@@ -5,5 +5,4 @@
  **/
 GameData::GameData()
 {
-
 }

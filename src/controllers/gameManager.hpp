@@ -9,7 +9,7 @@ class GameManager
 public:
     GameManager(GameData &gameData, Grid &grid, ConsoleDisplay &display);
     void start();
-    void loop();
+    void loop(double delay);
 
 private:
     ConsoleDisplay display;
