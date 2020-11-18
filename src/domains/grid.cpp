@@ -62,7 +62,7 @@ void Grid::removeAdjectives()
                     content[x][i] = none;
                 }
             }else {
-                for(int i = x; i < xCombinaison; i++){
+                for(int i = x; i < xCombianison; i++){
                     content[i][y] = none;
                 }
             }

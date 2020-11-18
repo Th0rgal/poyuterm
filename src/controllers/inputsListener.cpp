@@ -16,16 +16,30 @@ void handleInputs(std::function<void()> loop)
 
 void onKeyPressed(int code)
 {
+    switch (code)
+    {
+    case KEY_LEFT:
+        translateLeft();
+        break;
+
+    case KEY_RIGHT:
+        translateRight();
+        break;
+
+    case KEY_DOWN:
+        translateRight();
+        break;
+    }
 }
 
-void onRightMove()
+void translateLeft()
 {
 }
 
-void onLeftMove()
+void translateRight()
 {
 }
 
-void onDownMove()
+void translateDown()
 {
 }
