@@ -1,11 +1,9 @@
 #include "controllers/gameManager.hpp"
 #include "controllers/inputsListener.hpp"
 #include <stdlib.h>
-#include <time.h>
 
-GameManager::GameManager(GameData &gameData, Grid &grid, ConsoleDisplay &display) : gameData(gameData), grid(grid), display(display)
+GameManager::GameManager(GameData &gameDataRef, Grid &gridRef, ConsoleDisplay &displayRef) : gameData(gameDataRef), grid(gridRef), display(displayRef), rd(), gen(rd())
 {
-    srand(time(NULL));
 }
 
 void GameManager::start()
@@ -23,7 +21,7 @@ void GameManager::start()
         (display).showError();
 }
 
-void GameManager::loop(int delay)
+void GameManager::loop(long delay)
 {
     if (gameData.activePiece.empty())
         gameData.activePiece = createNewPiece();
@@ -41,24 +39,30 @@ void GameManager::loop(int delay)
         gameData.delaySinceGravity += delay;
 }
 
-std::vector<std::pair<int, int>> GameManager::createNewPiece()
+std::vector<std::pair<std::size_t, std::size_t>> GameManager::createNewPiece()
 {
-    int base = rand() % (grid.width() - 1);
-    std::vector<std::pair<int, int>> activePiece(2);
-    activePiece[0] = std::pair<int, int>(base, 0);
-    activePiece[1] = std::pair<int, int>(base + 1, 0);
-    grid.content[0][base] = Grid::PuyoType(rand() % 5 + 1);
-    grid.content[0][base + 1] = Grid::PuyoType(rand() % 5 + 1);
+    std::size_t base = random_index(0, grid.width() - 1);
+    std::vector<std::pair<std::size_t, std::size_t>> activePiece(2);
+    activePiece[0] = std::pair<std::size_t, std::size_t>(base, 0);
+    activePiece[1] = std::pair<std::size_t, std::size_t>(base + 1, 0);
+    grid.content[0][base] = Grid::PuyoType(random_index(1, 5));
+    grid.content[0][base + 1] = Grid::PuyoType(random_index(1, 5));
     return activePiece;
 }
 
 void GameManager::shiftActivePiece()
 {
-    std::vector<std::pair<int, int>> updatedPiece(2);
-    for (int i = 0; i < gameData.activePiece.size(); i++)
+    std::vector<std::pair<std::size_t, std::size_t>> updatedPiece(2);
+    for (std::size_t i = 0; i < gameData.activePiece.size(); i++)
     {
         updatedPiece[i] = gameData.activePiece[i];
         updatedPiece[i].second -= 1;
     }
     gameData.activePiece = updatedPiece;
+}
+
+std::size_t GameManager::random_index(std::size_t lower, std::size_t higher)
+{
+    std::uniform_int_distribution<std::size_t> dist(lower, higher);
+    return dist(gen);
 }

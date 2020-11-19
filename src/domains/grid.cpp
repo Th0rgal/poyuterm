@@ -13,7 +13,7 @@ Grid::Grid(vector<vector<PuyoType>> initialGrid) : content(initialGrid)
  * to get the grid width
  * @return int the length of the first line
  **/
-int Grid::width()
+std::size_t Grid::width()
 {
     return content.size();
 }
@@ -22,7 +22,7 @@ int Grid::width()
  * to get the grid height
  * @return int the length of the first column
  **/
-int Grid::height()
+std::size_t Grid::height()
 {
     return content.size() ? content[0].size() : 0;
 }

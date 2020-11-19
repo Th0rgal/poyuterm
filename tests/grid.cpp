@@ -42,8 +42,8 @@ TEST_CASE("testing the triggerGravity function")
 
     CHECK(grid.triggerGravity() == false);
 
-    for (int x = 0; x < grid.content.size(); x++)
-        for (int y = 0; y < grid.content.size(); y++)
+    for (unsigned int x = 0; x < grid.content.size(); x++)
+        for (unsigned int y = 0; y < grid.content.size(); y++)
             CHECK(grid.content[x][y] == expectedOutput[x][y]);
 
     CHECK(grid.triggerGravity() == true);

@@ -5,6 +5,6 @@
 struct GameData
 {
     GameData();
-    std::vector<std::pair<int, int>> activePiece;
-    int delaySinceGravity;
+    std::vector<std::pair<std::size_t, std::size_t>> activePiece;
+    long delaySinceGravity;
 };
