@@ -1,10 +1,20 @@
 #pragma once
 #include <functional>
+#include "domains/gameData.hpp"
+#include "domains/grid.hpp"
 
-void handleInputs(std::function<void(int)> loop);
+class InputsListener
+{
+public:
+    InputsListener(GameData &gameData, Grid &grid);
+    void handleInputs(const std::function<void(int)> &loop);
+    void shift(int x, int y);
 
-void onKeyPressed(int code);
-
-void translateLeft();
-void translateRight();
-void translateDown();
+private:
+    GameData &gameData;
+    Grid &grid;
+    void onKeyPressed(int code);
+    void translateLeft();
+    void translateRight();
+    void translateDown();
+};

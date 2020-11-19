@@ -12,9 +12,9 @@ public:
     void loop(int delay);
 
 private:
-    ConsoleDisplay display;
-    GameData gameData;
-    Grid grid;
+    ConsoleDisplay &display;
+    GameData &gameData;
+    Grid &grid;
     std::vector<std::pair<int, int>> createNewPiece();
     void shiftActivePiece();
 };

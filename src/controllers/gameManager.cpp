@@ -2,7 +2,6 @@
 #include "controllers/inputsListener.hpp"
 #include <stdlib.h>
 #include <time.h>
-#include <ncurses.h>
 
 GameManager::GameManager(GameData &gameData, Grid &grid, ConsoleDisplay &display) : gameData(gameData), grid(grid), display(display)
 {
@@ -14,7 +13,8 @@ void GameManager::start()
     bool succeeded = (display).start();
     if (succeeded)
     {
-        handleInputs([&](int delay) {
+        InputsListener InputsListener(gameData, grid);
+        InputsListener.handleInputs([&](int delay) {
             loop(delay);
         });
         (display).close();
@@ -57,8 +57,8 @@ void GameManager::shiftActivePiece()
     std::vector<std::pair<int, int>> updatedPiece(2);
     for (int i = 0; i < gameData.activePiece.size(); i++)
     {
-        std::pair<int, int> coordinates = gameData.activePiece[i];
-        coordinates.second -= 1;
+        updatedPiece[i] = gameData.activePiece[i];
+        updatedPiece[i].second -= 1;
     }
     gameData.activePiece = updatedPiece;
 }
