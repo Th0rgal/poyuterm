@@ -9,7 +9,7 @@ bool ConsoleDisplay::start()
     int boxHeight = LINES - 2;
     // it must be superior to 0
     virtualScale = (boxHeight - boxHeight % 12) / 12;
-    
+
     // to fix arrow keys detection
     intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
@@ -28,6 +28,29 @@ void ConsoleDisplay::showError()
 
 void ConsoleDisplay::setCell(int x, int y, Grid::PuyoType puyo)
 {
+    switch (puyo)
+    {
+    case Grid::none:
+        break;
+
+    case Grid::red:
+        break;
+
+    case Grid::green:
+        break;
+
+    case Grid::yellow:
+        break;
+
+    case Grid::blue:
+        break;
+
+    case Grid::pink:
+        break;
+
+    default:
+        break;
+    }
     move(x * virtualScale, y * virtualScale);
     addch('#');
 }

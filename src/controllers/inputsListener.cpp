@@ -76,14 +76,14 @@ void InputsListener::shift(int x, int y)
         updatedPiece[i] = piece;
 
         // avoid impossible x
-        if (piece.first < x || piece.first + x >= grid.width())
+        if (piece.first < static_cast<unsigned int>(x) || static_cast<int>(piece.first) + x >= static_cast<int>(grid.width()))
             return;
-        piece.first += x;
+        piece.first += static_cast<unsigned int>(x);
 
         // avoid impossible y
-        if (piece.second < y || piece.second + y >= grid.height())
+        if (piece.second < static_cast<unsigned int>(x) || static_cast<int>(piece.second) + y >= static_cast<int>(grid.height()))
             return;
-        piece.second += y;
+        piece.second += static_cast<unsigned int>(y);
 
         // avoid overwriting
         if (grid.content[piece.first][piece.second])
