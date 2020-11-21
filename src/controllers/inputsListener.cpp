@@ -67,12 +67,12 @@ void InputsListener::shift(int x, int y)
 {
 
     const size_t size = gameData.activePiece.size();
-    vector<vector<Grid::PuyoType>> clonedContent = grid.content;
-    vector<pair<size_t, size_t>> updatedPiece(size);
+    std::vector<std::vector<Grid::PuyoType>> clonedContent = grid.content;
+    std::vector<std::pair<size_t, size_t>> updatedPiece(size);
     for (size_t i = 0; i < size; i++)
     {
 
-        pair<size_t, size_t> piece = gameData.activePiece[i];
+        std::pair<size_t, size_t> piece = gameData.activePiece[i];
         updatedPiece[i] = piece;
 
         // avoid impossible x
