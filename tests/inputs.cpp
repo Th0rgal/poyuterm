@@ -4,7 +4,7 @@
 
 TEST_CASE("testing the constructor")
 {
-    vector<vector<Grid::PuyoType>> content =
+    std::vector<std::vector<Grid::PuyoType>> content =
         {
             {Grid::red, Grid::none, Grid::none},
             {Grid::none, Grid::red, Grid::red},

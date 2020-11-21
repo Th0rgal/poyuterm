@@ -6,7 +6,7 @@
 int main()
 {
     // todo: read a file
-    vector<vector<Grid::PuyoType>> content(6, vector<Grid::PuyoType>(12));
+    std::vector<std::vector<Grid::PuyoType>> content(6, std::vector<Grid::PuyoType>(12));
 
     // load domains
     GameData gameData = GameData();
