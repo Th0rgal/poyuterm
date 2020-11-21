@@ -28,13 +28,13 @@ TEST_CASE("testing the triggerGravity function")
 
     std::vector<std::vector<Grid::PuyoType>> content = {
         {Grid::red, Grid::none, Grid::none},
-        {Grid::none, Grid::red, Grid::red},
-        {Grid::none, Grid::none, Grid::red}};
+        {Grid::none, Grid::red, Grid::none},
+        {Grid::none, Grid::red, Grid::red}};
 
     std::vector<std::vector<Grid::PuyoType>> expectedOutput =
         {
-            {Grid::none, Grid::none, Grid::none},
-            {Grid::red, Grid::none, Grid::red},
+            {Grid::none, Grid::red, Grid::none},
+            {Grid::none, Grid::none, Grid::red},
             {Grid::none, Grid::red, Grid::red}};
 
     Grid grid = Grid(content);
