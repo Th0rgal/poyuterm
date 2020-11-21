@@ -4,7 +4,7 @@
 
 TEST_CASE("testing the constructor")
 {
-    vector<vector<Grid::PuyoType>> content =
+    std::vector<std::vector<Grid::PuyoType>> content =
         {
             {Grid::red, Grid::none, Grid::none},
             {Grid::none, Grid::red, Grid::red},
@@ -26,12 +26,12 @@ TEST_CASE("testing the constructor")
 TEST_CASE("testing the triggerGravity function")
 {
 
-    vector<vector<Grid::PuyoType>> content = {
+    std::vector<std::vector<Grid::PuyoType>> content = {
         {Grid::red, Grid::none, Grid::none},
         {Grid::none, Grid::red, Grid::red},
         {Grid::none, Grid::none, Grid::red}};
 
-    vector<vector<Grid::PuyoType>> expectedOutput =
+    std::vector<std::vector<Grid::PuyoType>> expectedOutput =
         {
             {Grid::none, Grid::none, Grid::none},
             {Grid::red, Grid::none, Grid::red},

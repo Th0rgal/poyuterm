@@ -1,8 +1,6 @@
 #pragma once
 #include <vector>
 
-using namespace std;
-
 struct Grid
 {
     enum PuyoType
@@ -16,8 +14,8 @@ struct Grid
     };
     std::size_t width();
     std::size_t height();
-    Grid(vector<vector<PuyoType>> initialGrid);
+    Grid(std::vector<std::vector<PuyoType>> initialGrid);
     bool triggerGravity();
     void removeAdjectives();
-    vector<vector<PuyoType>> content;
+    std::vector<std::vector<PuyoType>> content;
 };
