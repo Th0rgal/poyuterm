@@ -5,10 +5,19 @@
 
 using namespace std::chrono;
 
+/**
+ * to intialize the InputsListener with game and grid domains
+ * @param GameData gameDataRef the GameData instance
+ * @param Grid gridRef the Grid instance
+ **/
 InputsListener::InputsListener(GameData &gameDataRef, Grid &gridRef) : gameData(gameDataRef), grid(gridRef)
 {
 }
 
+/**
+ * to handle user inputs while callig the game loop
+ * @param std::function<void(long)> loop the game loop function
+ **/
 void InputsListener::handleInputs(const std::function<void(long)> &loop)
 {
     int inputCode;
@@ -27,6 +36,10 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
     }
 }
 
+/**
+ * to translate user inputs to actions (e.g. movements on the grid)
+ * @param int code the key code
+ **/
 void InputsListener::onKeyPressed(int code)
 {
     switch (code)
@@ -48,24 +61,37 @@ void InputsListener::onKeyPressed(int code)
     }
 }
 
+/**
+ * to shift the falling piece to the left (one case) if it is possible
+ **/
 void InputsListener::translateLeft()
 {
     shift(-1, 0);
 }
 
+/**
+ * to shift the falling piece to the right (one case) if it is possible
+ **/
 void InputsListener::translateRight()
 {
     shift(1, 0);
 }
 
+/**
+ * to shift the falling piece to the bottom (one case) if it is possible
+ **/
 void InputsListener::translateDown()
 {
     shift(0, -1);
 }
 
+/**
+ * to shift the falling piece in gameData and on the grid
+ * @param int x, -1 <= x <= 1, the shift on the x axis
+ * @param int y, -1 <= y <= 1, the shift on the y axis
+ **/
 void InputsListener::shift(int x, int y)
 {
-
     const size_t size = gameData.activePiece.size();
     std::vector<std::vector<Grid::PuyoType>> clonedContent = grid.content;
     std::vector<std::pair<size_t, size_t>> updatedPiece(size);
