@@ -9,10 +9,10 @@ public:
     InputsListener(GameData &gameDataRef, Grid &gridRef);
     void handleInputs(const std::function<void(long)> &loop);
     void shift(int x, int y);
-
-private:
     GameData &gameData;
     Grid &grid;
+
+private:
     void onKeyPressed(int code);
     void translateLeft();
     void translateRight();

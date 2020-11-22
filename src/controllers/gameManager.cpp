@@ -11,8 +11,8 @@ void GameManager::start()
     bool succeeded = (display).start();
     if (succeeded)
     {
-        InputsListener InputsListener(gameData, grid);
-        InputsListener.handleInputs([&](int delay) {
+        InputsListener inputsListener(gameData, grid);
+        inputsListener.handleInputs([&](int delay) {
             loop(delay);
         });
         (display).close();

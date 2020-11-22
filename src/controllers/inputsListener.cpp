@@ -2,6 +2,8 @@
 #include <functional>
 #include "controllers/inputsListener.hpp"
 #include <chrono>
+#include <algorithm>
+#include <iostream>
 
 using namespace std::chrono;
 
@@ -95,9 +97,9 @@ void InputsListener::shift(int x, int y)
     const size_t size = gameData.activePiece.size();
     std::vector<std::vector<Grid::PuyoType>> clonedContent = grid.content;
     std::vector<std::pair<size_t, size_t>> updatedPiece(size);
+
     for (size_t i = 0; i < size; i++)
     {
-
         std::pair<size_t, size_t> piece = gameData.activePiece[i];
         updatedPiece[i] = piece;
 
@@ -112,9 +114,11 @@ void InputsListener::shift(int x, int y)
         piece.second += static_cast<unsigned int>(y);
 
         // avoid overwriting
-        if (grid.content[piece.first][piece.second])
+        if (grid.content[piece.first][piece.second] &&
+            std::find_if(gameData.activePiece.begin(), gameData.activePiece.end(), [&piece](auto &&element) {
+                return (element.first == piece.first && element.second == piece.second);
+            }) == gameData.activePiece.end())
             return;
-
         Grid::PuyoType type = grid.content[gameData.activePiece[i].first][gameData.activePiece[i].second];
         clonedContent[gameData.activePiece[i].first][gameData.activePiece[i].second] = Grid::none;
         clonedContent[piece.first][piece.second] = type;
