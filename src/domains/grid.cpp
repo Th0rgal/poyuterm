@@ -15,7 +15,7 @@ Grid::Grid(std::vector<std::vector<PuyoType>> initialGrid) : content(initialGrid
  **/
 std::size_t Grid::width()
 {
-    return content.size() ? content[0].size() : 0;
+    return content.size();
 }
 
 /**
@@ -24,7 +24,7 @@ std::size_t Grid::width()
  **/
 std::size_t Grid::height()
 {
-    return content.size();
+    return content.size() ? content[0].size() : 0;
 }
 
 /**
@@ -40,10 +40,10 @@ bool Grid::triggerGravity()
     for (std::size_t x = 0; x < gridWidth; x++)
         for (std::size_t y = gridHeight - 1; y > 0; y--)
         {
-            if (clone[x][y-1] && !clone[x][y])
+            if (clone[x][y - 1] && !clone[x][y])
             {
-                content[x][y] = clone[x][y-1];
-                content[x][y-1] = none;
+                content[x][y] = clone[x][y - 1];
+                content[x][y - 1] = none;
             }
         }
     for (std::size_t x = 0; x < gridWidth; x++)
