@@ -7,14 +7,11 @@
 <h4 align="center">👾 A retro game within terminal.</h4>
 
 <p align="center">
-    <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FTh0rgal%2Fbinance.py?ref=badge_shield" alt="FOSSA Status">
-        <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FTh0rgal%2Fbinance.py.svg?type=shield"/>
+    <a href="https://lgtm.com/projects/g/Th0rgal/poyuterm/alerts/">
+        <img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/Th0rgal/poyuterm.svg?logo=lgtm"/>
     </a>
-    <a href="https://pypi.org/project/binance.py/">
-        <img src="https://img.shields.io/pypi/dm/binance.py"/>
-    </a>
-    <a href="https://lgtm.com/projects/g/Th0rgal/binance.py/context:python">
-        <img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/Th0rgal/binance.py.svg?logo=lgtm"/>
+    <a href="https://lgtm.com/projects/g/Th0rgal/poyuterm/context:cpp">
+        <img alt="Language grade: C/C++" src="https://img.shields.io/lgtm/grade/cpp/g/Th0rgal/poyuterm.svg?logo=lgtm"/>
     </a>
 </p>
 
