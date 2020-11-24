@@ -64,7 +64,12 @@ std::vector<Puyo> GameManager::createNewPiece()
     activePiece[0] = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
     activePiece[1] = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
     for (Puyo puyo : activePiece)
+    {
+        if (grid.content[puyo.x][puyo.y]) {
+            // set gameState to lost
+        }
         display.setCell(puyo.x, puyo.y, puyo.type);
+    }
     return activePiece;
 }
 

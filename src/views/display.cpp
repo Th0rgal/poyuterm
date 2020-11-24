@@ -18,12 +18,17 @@ bool ConsoleDisplay::start()
     }
 
     int boxHeight = LINES - 2;
+
     // it must be superior to 0
     virtualScale = (boxHeight - boxHeight % 12) / 12;
     for (int i = 0; i < virtualScale; i++)
     {
         puyoLine += "  ";
     }
+
+    // to disable cursor
+    curs_set(0);
+
     // to fix arrow keys detection
     intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
