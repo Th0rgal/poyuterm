@@ -8,17 +8,17 @@
 
 /**
  * to intialize a GameManager object
- * @param GameData &gameDataRef a GameData instance passed by reference
- * @param Grid &gridRef a Grid instance passed by reference
- * @param ConsoleDisplay &displayRef a GameDisplay instance passed by reference
+ * @param GameData &gameData GameData instance passed by reference
+ * @param Grid &grid a Grid instance passed by reference
+ * @param ConsoleDisplay &display a GameDisplay instance passed by reference
  **/
-GameManager::GameManager(GameData &gameDataRef,
-                         Grid &gridRef,
-                         ConsoleDisplay &displayRef) : gameData(gameDataRef),
-                                                       grid(gridRef),
-                                                       display(displayRef),
-                                                       rd(),
-                                                       gen(rd())
+GameManager::GameManager(GameData &gameData,
+                         Grid &grid,
+                         ConsoleDisplay &display) : gameData(gameData),
+                                                    grid(grid),
+                                                    display(display),
+                                                    rd(),
+                                                    gen(rd())
 {
 }
 

@@ -10,12 +10,13 @@ using namespace std::chrono;
 
 /**
  * to intialize the InputsListener with game and grid domains
- * @param GameData gameDataRef the GameData instance
- * @param Grid gridRef the Grid instance
+ * @param GameData &gameData the GameData instance
+ * @param ConsoleDisplay display the ConsoleDisplay instance
+ * @param Grid &grid the Grid instance
  **/
 InputsListener::InputsListener(GameData &gameData,
-                               ConsoleDisplay &consoleDisplay,
-                               Grid &grid) : consoleDisplay(consoleDisplay),
+                               ConsoleDisplay &display,
+                               Grid &grid) : display(display),
                                              gameData(gameData),
                                              grid(grid)
 {
@@ -23,7 +24,7 @@ InputsListener::InputsListener(GameData &gameData,
 
 /**
  * to handle user inputs while callig the game loop
- * @param std::function<void(long)> loop the game loop function
+ * @param std::function<void(long)> loop the game loop function (callback)
  **/
 void InputsListener::handleInputs(const std::function<void(long)> &loop)
 {
@@ -76,9 +77,9 @@ void InputsListener::onKeyPressed(int code)
     if (shifted)
     {
         for (Puyo puyo : clone)
-            consoleDisplay.setCell(puyo.x, puyo.y, Grid::none);
+            display.setCell(puyo.x, puyo.y, Grid::none);
         for (Puyo puyo : gameData.activePiece)
-            consoleDisplay.setCell(puyo.x, puyo.y, puyo.type);
+            display.setCell(puyo.x, puyo.y, puyo.type);
     }
 }
 
@@ -107,7 +108,7 @@ bool InputsListener::translateDown()
 }
 
 /**
- * to rotate the falling piece clockwisz
+ * to rotate the falling piece clockwisely
  **/
 bool InputsListener::rotate()
 {
