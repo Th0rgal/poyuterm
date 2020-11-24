@@ -5,6 +5,8 @@
 
 /**
  * to intialize a display
+ * 
+ * @author Valeran Maytié
  **/
 ConsoleDisplay::ConsoleDisplay()
 {
@@ -13,6 +15,8 @@ ConsoleDisplay::ConsoleDisplay()
 /**
  * to start the display
  * @return bool true if startup was successful
+ * 
+ * @author Thomas Marchand and Valeran Maytié
  **/
 bool ConsoleDisplay::start()
 {
@@ -73,6 +77,8 @@ bool ConsoleDisplay::start()
  * @param int x position of the cell on the virtual x axis
  * @param int y position of the cell on the virtual y axis
  * @param Grid::PuyoType type of the Puyo (affects its color)
+ * 
+ * @author Valeran Maytié
  **/
 void ConsoleDisplay::setCell(int x,
                              int y,
@@ -98,6 +104,8 @@ void ConsoleDisplay::setCell(int x,
 
 /**
  * to close the display
+ * 
+ * @author Valeran Maytié
  **/
 void ConsoleDisplay::close()
 {

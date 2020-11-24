@@ -13,6 +13,8 @@ using namespace std::chrono;
  * @param GameData &gameData the GameData instance
  * @param ConsoleDisplay display the ConsoleDisplay instance
  * @param Grid &grid the Grid instance
+ * 
+ * @author Thomas Marchand
  **/
 InputsListener::InputsListener(GameData &gameData,
                                ConsoleDisplay &display,
@@ -25,6 +27,8 @@ InputsListener::InputsListener(GameData &gameData,
 /**
  * to handle user inputs while callig the game loop
  * @param std::function<void(long)> loop the game loop function (callback)
+ * 
+ * @author Thomas Marchand
  **/
 void InputsListener::handleInputs(const std::function<void(long)> &loop)
 {
@@ -47,6 +51,8 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
 /**
  * to translate user inputs to actions (e.g. movements on the grid)
  * @param int code the key code
+ * 
+ * @author Thomas Marchand and Valeran Maytié
  **/
 void InputsListener::onKeyPressed(int code)
 {
@@ -85,6 +91,8 @@ void InputsListener::onKeyPressed(int code)
 
 /**
  * to shift the falling piece to the left (one case) if it is possible
+ * 
+ * @author Thomas Marchand
  **/
 bool InputsListener::translateLeft()
 {
@@ -93,6 +101,8 @@ bool InputsListener::translateLeft()
 
 /**
  * to shift the falling piece to the right (one case) if it is possible
+ * 
+ * @author Thomas Marchand
  **/
 bool InputsListener::translateRight()
 {
@@ -101,6 +111,8 @@ bool InputsListener::translateRight()
 
 /**
  * to shift the falling piece to the bottom (one case) if it is possible
+ * 
+ * @author Thomas Marchand
  **/
 bool InputsListener::translateDown()
 {
@@ -109,6 +121,8 @@ bool InputsListener::translateDown()
 
 /**
  * to rotate the falling piece clockwisely
+ * 
+ * @author Valeran Maytié
  **/
 bool InputsListener::rotate()
 {

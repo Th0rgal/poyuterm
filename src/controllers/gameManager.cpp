@@ -11,6 +11,8 @@
  * @param GameData &gameData GameData instance passed by reference
  * @param Grid &grid a Grid instance passed by reference
  * @param ConsoleDisplay &display a GameDisplay instance passed by reference
+ * 
+ * @author Thomas Marchand
  **/
 GameManager::GameManager(GameData &gameData,
                          Grid &grid,
@@ -25,6 +27,8 @@ GameManager::GameManager(GameData &gameData,
 /**
  * to load the display and start listening to inputs. The inputsListener
  * takes a callback to the loop function.
+ * 
+ * @author Thomas Marchand
  **/
 void GameManager::start()
 {
@@ -42,6 +46,8 @@ void GameManager::start()
 /**
  * The game loop called everytime a user input hasn't been detected
  * @param long delay the delay in nanoseconds with the previous loop call
+ * 
+ * @author Thomas Marchand
  **/
 void GameManager::loop(long delay)
 {
@@ -75,6 +81,8 @@ void GameManager::loop(long delay)
  * to create a new movingPiece (a Puyo's vector)
  * @return std::vector<Puyo> a vector of two linked Puyo generated randomly
  * on the first line (y:=0) with a random color
+ * 
+ * @author Thomas Marchand
  **/
 std::vector<Puyo> GameManager::createNewPiece()
 {
@@ -98,6 +106,8 @@ std::vector<Puyo> GameManager::createNewPiece()
  * @param std::size_t lower the lowest possible number
  * @param std::size_t lower the biggest possible number
  * @return std::size_t a positive number between lower and higher
+ * 
+ * @author Thomas Marchand
  **/
 std::size_t GameManager::random_index(std::size_t lower, std::size_t higher)
 {

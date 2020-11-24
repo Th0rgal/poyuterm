@@ -3,6 +3,8 @@
 
 /**
  * to intialize the GameData
+ * 
+ * @author Thomas Marchand
  **/
 GameData::GameData() : activePiece({}), delaySinceGravity(0)
 {
@@ -15,6 +17,8 @@ GameData::GameData() : activePiece({}), delaySinceGravity(0)
  * @param int x, -1 <= x <= 1, the shift on the x axis
  * @param int y, -1 <= y <= 1, the shift on the y axis
  * @return bool true if the piece has been shifted
+ * 
+ * @author Thomas Marchand
  **/
 bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
 {
@@ -53,6 +57,8 @@ bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
 /**
  * empty constructor for puyo. Will create an instance
  * of type none with (0,0) coordinates
+ * 
+ * @author Thomas Marchand
  **/
 Puyo::Puyo() : type(Grid::none), x(0), y(0)
 {
@@ -63,6 +69,8 @@ Puyo::Puyo() : type(Grid::none), x(0), y(0)
  * @param Grid::PuyoType type the type of the Puyo
  * @param std::size_t x, position of the Puyo on the x axis
  * @param std::size_t y, position of the Puyo on the y axis
+ * 
+ * @author Thomas Marchand
  **/
 Puyo::Puyo(Grid::PuyoType type,
            std::size_t x,
@@ -75,6 +83,8 @@ Puyo::Puyo(Grid::PuyoType type,
  * Shift your puyo on x and y axis
  * @param int xAdd, shift to add to the x axis
  * @param int yAdd, shift to add to the y axis
+ * 
+ * @author Thomas Marchand
  **/
 void Puyo::move(int xAdd,
                 int yAdd)
@@ -87,6 +97,8 @@ void Puyo::move(int xAdd,
  * comparison operator overloading: to allow comparison between two Puyo
  * @param const Puyo &other the other Puyo instance to compare this with
  * @return bool true if Puyo are similar
+ * 
+ * @author Thomas Marchand
  **/
 bool Puyo::operator==(const Puyo &other) const
 {

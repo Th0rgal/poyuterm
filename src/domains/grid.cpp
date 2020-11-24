@@ -4,6 +4,8 @@
 /**
  * to intialize the grid with a 2d vector
  * @param vector<vector<PuyoType>> the initial grid content
+ * 
+ * @author Thomas Marchand
  **/
 Grid::Grid(std::vector<std::vector<PuyoType>> initialGrid) : content(initialGrid)
 {
@@ -12,6 +14,8 @@ Grid::Grid(std::vector<std::vector<PuyoType>> initialGrid) : content(initialGrid
 /**
  * to get the grid width
  * @return std::size_t the length of the first line
+ * 
+ * @author Thomas Marchand
  **/
 std::size_t Grid::width()
 {
@@ -21,6 +25,8 @@ std::size_t Grid::width()
 /**
  * to get the grid height
  * @return std::size_t the length of the first column
+ * 
+ * @author Thomas Marchand
  **/
 std::size_t Grid::height()
 {
@@ -30,6 +36,8 @@ std::size_t Grid::height()
 /**
  * to delete all combinations of linked puyos with 
  * a minimum size of 4
+ * 
+ * @author unknown
  **/
 void Grid::removeAdjectives()
 {
