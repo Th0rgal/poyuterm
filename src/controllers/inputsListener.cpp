@@ -33,7 +33,7 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
     {
         if (inputCode == ERR)
         {
-            loop((high_resolution_clock::now() - previousTime).count() / 1000000l);
+            loop(duration_cast<nanoseconds>(high_resolution_clock::now() - previousTime).count());
             previousTime = high_resolution_clock::now();
         }
         else
