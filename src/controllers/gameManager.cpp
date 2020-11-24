@@ -56,7 +56,7 @@ void GameManager::loop(long delay)
 
 std::vector<Puyo> GameManager::createNewPiece()
 {
-    std::size_t base = random_index(0, grid.width() - 1);
+    std::size_t base = random_index(0, grid.width() - 2);
     std::vector<Puyo> activePiece(2);
     activePiece[0] = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
     activePiece[1] = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
