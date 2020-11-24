@@ -18,11 +18,16 @@ Puyo::Puyo(Grid::PuyoType type,
 {
 }
 
-void Puyo::add(std::size_t xAdd,
-               std::size_t yAdd)
+void Puyo::move(std::size_t xAdd,
+                std::size_t yAdd)
 {
     x += xAdd;
     y += yAdd;
+}
+
+bool Puyo::operator==(const Puyo &other) const
+{
+    return type == other.type && x == other.x && y == other.y;
 }
 
 /**
@@ -52,7 +57,7 @@ bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
             static_cast<int>(puyo.y) + y >= static_cast<int>(constraint.height()))
             return false;
 
-        puyo.add(static_cast<unsigned int>(x), static_cast<unsigned int>(y));
+        puyo.move(static_cast<unsigned int>(x), static_cast<unsigned int>(y));
 
         // avoid overwriting
         if (constraint.content[puyo.x][puyo.y])

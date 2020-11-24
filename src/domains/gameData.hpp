@@ -9,10 +9,8 @@ struct Puyo
     std::size_t y;
     Puyo();
     Puyo(Grid::PuyoType type, std::size_t x, std::size_t y);
-    void add(std::size_t x, std::size_t y);
-
-    Puyo operator+=(const Puyo &coordinate);
-    Puyo operator+(Puyo coordinate);
+    void move(std::size_t x, std::size_t y);
+    bool operator==(const Puyo &other) const;
 };
 
 struct GameData
