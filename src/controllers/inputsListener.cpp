@@ -66,7 +66,7 @@ void InputsListener::onKeyPressed(int code)
         break;
 
     case ' ':
-        shifted = translateDown();
+        shifted = rotate();
         break;
 
     case '\n':
