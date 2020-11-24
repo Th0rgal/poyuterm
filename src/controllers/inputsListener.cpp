@@ -65,6 +65,7 @@ void InputsListener::onKeyPressed(int code)
         shifted = translateDown();
         break;
 
+    case 
     default:
         shifted = false;
         break;
@@ -100,4 +101,12 @@ bool InputsListener::translateRight()
 bool InputsListener::translateDown()
 {
     return shift(gameData.activePiece, grid, 0, 1);
+}
+
+/**
+ * to rotate the falling piece clockwisz
+ **/
+void InputsListener::rotate()
+{
+
 }
