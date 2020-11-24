@@ -24,8 +24,6 @@ void GameManager::start()
         });
         (display).close();
     }
-    else
-        (display).showError();
 }
 
 void GameManager::loop(long delay)

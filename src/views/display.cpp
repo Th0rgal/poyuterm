@@ -8,12 +8,17 @@
 
 ConsoleDisplay::ConsoleDisplay()
 {
-
 }
 
 bool ConsoleDisplay::start()
 {
     initscr();
+
+    if (LINES < 12+2 or COLS < 6*2 +2) {
+        showError();
+        return false;
+    }
+    
     int boxHeight = LINES - 2;
     // it must be superior to 0
     virtualScale = (boxHeight - boxHeight % 12) / 12;
@@ -25,22 +30,20 @@ bool ConsoleDisplay::start()
     // to make getch() not blocking
     nodelay(stdscr, TRUE);
 
-
-    if(!has_colors()){
+    if (!has_colors())
+    {
         endwin();
-        printf("Error: your terminal doesn't suport the colors");
+        printf("Error: your terminal doesn't suport colors");
         return false;
     }
     use_default_colors();
     start_color();
 
-
-
     WINDOW *gridScreen;
-    int x = (6 * 6) + 2;
-    int y = (12 * 3) + 2;
-    
-    gridScreen = subwin(stdscr, x, y, LINES - y - 5, COLS / 2 - x /2);
+    int x = (6 * virtualScale * 2) + 2;
+    int y = (12 * virtualScale) + 2;
+
+    gridScreen = subwin(stdscr, x, y, LINES - y - 5, COLS / 2 - x / 2);
     box(gridScreen, ACS_VLINE, ACS_HLINE);
 
     wrefresh(gridScreen);
@@ -53,7 +56,6 @@ bool ConsoleDisplay::start()
     setCell(5, 12, Grid::blue);
     setCell(6, 12, Grid::pink);
 
-    
     return (COLS > 20 + 2 + 12 && virtualScale > 0);
 }
 
@@ -61,7 +63,6 @@ void ConsoleDisplay::showError()
 {
     printw("Error: your terminal is too small \nminimum cols: 44 \nminimum lines: 14");
     getch();
-    close();
 }
 
 void ConsoleDisplay::setCell(int x,
@@ -71,7 +72,7 @@ void ConsoleDisplay::setCell(int x,
     x = 6 * x + COLS / 2 - 24;
     y = 3 * y + LINES - 45;
 
-    init_color(COLOR_PINK,238,66,244);
+    init_color(COLOR_PINK, 238, 66, 244);
     init_pair(Grid::red, -1, COLOR_RED);
     init_pair(Grid::green, -1, COLOR_GREEN);
     init_pair(Grid::yellow, -1, COLOR_YELLOW);
@@ -80,7 +81,8 @@ void ConsoleDisplay::setCell(int x,
     init_pair(Grid::none, -1, -1);
 
     attron(COLOR_PAIR(puyo));
-    for(int i = y; i < y + 3; i++){
+    for (int i = y; i < y + 3; i++)
+    {
         mvwprintw(stdscr, i, x, "      ");
     }
     attroff(COLOR_PAIR(puyo));
