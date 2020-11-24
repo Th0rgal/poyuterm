@@ -49,45 +49,55 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
  **/
 void InputsListener::onKeyPressed(int code)
 {
+    const std::vector<Puyo> clone = gameData.activePiece;
+    bool shifted;
     switch (code)
     {
     case KEY_LEFT:
-        translateLeft();
+        shifted = translateLeft();
         break;
 
     case KEY_RIGHT:
-        translateRight();
+        shifted = translateRight();
         break;
 
     case KEY_DOWN:
-        translateDown();
+        shifted = translateDown();
         break;
 
     default:
+        shifted = false;
         break;
+    };
+    if (shifted)
+    {
+        for (Puyo puyo : clone)
+            consoleDisplay.setCell(puyo.x, puyo.y, Grid::none);
+        for (Puyo puyo : gameData.activePiece)
+            consoleDisplay.setCell(puyo.x, puyo.y, puyo.type);
     }
 }
 
 /**
  * to shift the falling piece to the left (one case) if it is possible
  **/
-void InputsListener::translateLeft()
+bool InputsListener::translateLeft()
 {
-    shift(gameData.activePiece, consoleDisplay, grid, -1, 0);
+    return shift(gameData.activePiece, grid, -1, 0);
 }
 
 /**
  * to shift the falling piece to the right (one case) if it is possible
  **/
-void InputsListener::translateRight()
+bool InputsListener::translateRight()
 {
-    shift(gameData.activePiece, consoleDisplay, grid, 1, 0);
+    return shift(gameData.activePiece, grid, 1, 0);
 }
 
 /**
  * to shift the falling piece to the bottom (one case) if it is possible
  **/
-void InputsListener::translateDown()
+bool InputsListener::translateDown()
 {
-    shift(gameData.activePiece, consoleDisplay, grid, 0, 1);
+    return shift(gameData.activePiece, grid, 0, 1);
 }

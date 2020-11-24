@@ -14,7 +14,7 @@ public:
 
 private:
     void onKeyPressed(int code);
-    void translateLeft();
-    void translateRight();
-    void translateDown();
+    bool translateLeft();
+    bool translateRight();
+    bool translateDown();
 };
