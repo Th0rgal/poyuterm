@@ -4,10 +4,18 @@
 #include "views/display.hpp"
 #include <string>
 
+#define COLOR_RED 1
+#define COLOR_GREEN 2
+#define COLOR_YELLOW 3
+#define COLOR_BLUE 4
 #define COLOR_PINK 5
 
 ConsoleDisplay::ConsoleDisplay()
 {
+    init_color(COLOR_RED, 155, 0, 0);
+    init_color(COLOR_GREEN, 0, 255, 0);
+    init_color(COLOR_YELLOW, 255, 255, 0);
+    init_color(COLOR_PINK, 238, 66, 244);
 }
 
 bool ConsoleDisplay::start()
