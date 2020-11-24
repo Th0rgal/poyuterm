@@ -7,29 +7,6 @@ GameData::GameData() : activePiece({}), delaySinceGravity(0)
 {
 }
 
-Puyo::Puyo() : type(Grid::none), x(0), y(0)
-{
-}
-
-Puyo::Puyo(Grid::PuyoType type,
-           std::size_t x,
-           std::size_t y) : type(type),
-                            x(x), y(y)
-{
-}
-
-void Puyo::move(std::size_t xAdd,
-                std::size_t yAdd)
-{
-    x += xAdd;
-    y += yAdd;
-}
-
-bool Puyo::operator==(const Puyo &other) const
-{
-    return type == other.type && x == other.x && y == other.y;
-}
-
 /**
  * to shift the falling piece in gameData and on the grid
  * @param std::vector<Puyo> &activePiece the falling piece to shift
@@ -48,16 +25,16 @@ bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
         Puyo puyo = activePiece[i];
 
         // avoid impossible x
-        if (puyo.x < static_cast<unsigned int>(x) ||
+        if (static_cast<int>(puyo.x) + x < 0 ||
             static_cast<int>(puyo.x) + x >= static_cast<int>(constraint.width()))
             return false;
 
         // avoid impossible y
-        if (puyo.y < static_cast<unsigned int>(y) ||
+        if (static_cast<int>(puyo.y) + y < 0 ||
             static_cast<int>(puyo.y) + y >= static_cast<int>(constraint.height()))
             return false;
 
-        puyo.move(static_cast<unsigned int>(x), static_cast<unsigned int>(y));
+        puyo.move(x, y);
 
         // avoid overwriting
         if (constraint.content[puyo.x][puyo.y])
@@ -71,4 +48,42 @@ bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
         activePiece[i] = updatedPiece[i];
 
     return true;
+}
+
+/**
+ * Empty constructor for puyo. Will create an instance
+ * of type none with (0,0) coordinates
+ **/
+Puyo::Puyo() : type(Grid::none), x(0), y(0)
+{
+}
+
+/**
+ * Constructor of a Puyo
+ * @param Grid::PuyoType type the type of the Puyo
+ * @param std::size_t x, position of the Puyo on the x axis
+ * @param std::size_t y, position of the Puyo on the y axis
+ **/
+Puyo::Puyo(Grid::PuyoType type,
+           std::size_t x,
+           std::size_t y) : type(type),
+                            x(x), y(y)
+{
+}
+
+/**
+ * Shift your puyo on x and y axis
+ * @param int xAdd, shift to add to the x axis
+ * @param int yAdd, shift to add to the y axis
+ **/
+void Puyo::move(int xAdd,
+                int yAdd)
+{
+    x += xAdd;
+    y += yAdd;
+}
+
+bool Puyo::operator==(const Puyo &other) const
+{
+    return type == other.type && x == other.x && y == other.y;
 }

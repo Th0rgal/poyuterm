@@ -28,4 +28,9 @@ TEST_CASE("testing shift")
     CHECK(activePiece[0] == Puyo(Grid::red, 2, 0));
     CHECK(activePiece[1] == Puyo(Grid::green, 3, 0));
 
+    moved = shift(activePiece, grid, -1, 0);
+    CHECK(moved == true);
+    CHECK(activePiece.size() == 2);
+    CHECK(activePiece[0] == Puyo(Grid::red, 1, 0));
+    CHECK(activePiece[1] == Puyo(Grid::green, 2, 0));
 }
