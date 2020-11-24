@@ -36,7 +36,7 @@ bool Puyo::operator==(const Puyo &other) const
  * @param Grid::Grid constraint the grid to compare to
  * @param int x, -1 <= x <= 1, the shift on the x axis
  * @param int y, -1 <= y <= 1, the shift on the y axis
- * 
+ * @return bool true if the piece has been shifted
  **/
 bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
 {

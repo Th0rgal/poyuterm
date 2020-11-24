@@ -35,11 +35,13 @@ void GameManager::loop(long delay)
 
     if (gameData.delaySinceGravity > 1000) // in milliseconds
     {
-        bool falling = shift(gameData.activePiece, grid, 0, -1);
-        if (!falling)
+        bool shifted = shift(gameData.activePiece, grid, 0, -1);
+        if (!shifted)
+        { // if we touched the ground
+            for (Puyo puyo : gameData.activePiece)
+                grid.content[puyo.x][puyo.y] = puyo.type;
             gameData.activePiece = {};
-        else
-            shiftActivePiece();
+        }
         gameData.delaySinceGravity = 0;
     }
     else
@@ -53,17 +55,6 @@ std::vector<Puyo> GameManager::createNewPiece()
     activePiece[0] = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
     activePiece[1] = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
     return activePiece;
-}
-
-void GameManager::shiftActivePiece()
-{
-    std::vector<Puyo> updatedPiece(2);
-    for (std::size_t i = 0; i < gameData.activePiece.size(); i++)
-    {
-        updatedPiece[i] = gameData.activePiece[i];
-        updatedPiece[i].y -= 1;
-    }
-    gameData.activePiece = updatedPiece;
 }
 
 std::size_t GameManager::random_index(std::size_t lower, std::size_t higher)
