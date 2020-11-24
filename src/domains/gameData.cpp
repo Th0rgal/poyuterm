@@ -62,7 +62,8 @@ bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
 bool shift(std::vector<Puyo> &activePiece, ConsoleDisplay &display, Grid constraint, int x, int y)
 {
     const std::vector<Puyo> clone = activePiece;
-    shift(activePiece, constraint, x, y);
+    if (!shift(activePiece, constraint, x, y))
+        return false;
 
     for (std::size_t i = 0; i < clone.size(); i++)
         display.setCell(clone[i].x, clone[i].x, Grid::none);
