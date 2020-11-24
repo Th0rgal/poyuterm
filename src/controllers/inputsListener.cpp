@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <functional>
 #include "controllers/inputsListener.hpp"
+#include "views/display.hpp"
 #include <chrono>
 #include <algorithm>
 #include <iostream>
@@ -12,9 +13,11 @@ using namespace std::chrono;
  * @param GameData gameDataRef the GameData instance
  * @param Grid gridRef the Grid instance
  **/
-InputsListener::InputsListener(GameData &gameDataRef,
-                               Grid &gridRef) : gameData(gameDataRef),
-                                                grid(gridRef)
+InputsListener::InputsListener(GameData &gameData,
+                               ConsoleDisplay &consoleDisplay,
+                               Grid &grid) : consoleDisplay(consoleDisplay),
+                                             gameData(gameData),
+                                             grid(grid)
 {
 }
 
@@ -70,7 +73,7 @@ void InputsListener::onKeyPressed(int code)
  **/
 void InputsListener::translateLeft()
 {
-    shift(gameData.activePiece, grid, -1, 0);
+    shift(gameData.activePiece, consoleDisplay, grid, -1, 0);
 }
 
 /**
@@ -78,7 +81,7 @@ void InputsListener::translateLeft()
  **/
 void InputsListener::translateRight()
 {
-    shift(gameData.activePiece, grid, 1, 0);
+    shift(gameData.activePiece, consoleDisplay, grid, 1, 0);
 }
 
 /**
@@ -86,5 +89,5 @@ void InputsListener::translateRight()
  **/
 void InputsListener::translateDown()
 {
-    shift(gameData.activePiece, grid, 0, -1);
+    shift(gameData.activePiece, consoleDisplay, grid, 0, -1);
 }

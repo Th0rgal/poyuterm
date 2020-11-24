@@ -1,4 +1,5 @@
 #include "domains/gameData.hpp"
+#include "views/display.hpp"
 
 /**
  * to intialize the GameData
@@ -43,9 +44,33 @@ bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
         updatedPiece[i] = puyo;
     }
 
-    // shift
     for (std::size_t i = 0; i < updatedPiece.size(); i++)
         activePiece[i] = updatedPiece[i];
+
+    return true;
+}
+
+/**
+ * to shift the falling piece in gameData and on the grid and update the display
+ * @param std::vector<Puyo> &activePiece the falling piece to shift
+ * @param ConsoleDisplay &display the display to update
+ * @param Grid::Grid constraint the grid to compare to
+ * @param int x, -1 <= x <= 1, the shift on the x axis
+ * @param int y, -1 <= y <= 1, the shift on the y axis
+ * @return bool true if the piece has been shifted
+ **/
+bool shift(std::vector<Puyo> &activePiece, ConsoleDisplay &display, Grid constraint, int x, int y)
+{
+    const std::vector<Puyo> clone = activePiece;
+    shift(activePiece, constraint, x, y);
+
+    for (std::size_t i = 0; i < clone.size(); i++)
+        display.setCell(clone[i].x, clone[i].x, Grid::none);
+
+    for (std::size_t i = 0; i < activePiece.size(); i++)
+    {
+        display.setCell(activePiece[i].x, activePiece[i].y, activePiece[i].type);
+    }
 
     return true;
 }

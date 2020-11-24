@@ -18,7 +18,7 @@ void GameManager::start()
     bool succeeded = (display).start();
     if (succeeded)
     {
-        InputsListener inputsListener(gameData, grid);
+        InputsListener inputsListener(gameData, display, grid);
         inputsListener.handleInputs([&](int delay) {
             loop(delay);
         });
@@ -33,7 +33,7 @@ void GameManager::loop(long delay)
 
     if (gameData.delaySinceGravity > 1000) // in milliseconds
     {
-        bool shifted = shift(gameData.activePiece, grid, 0, -1);
+        bool shifted = shift(gameData.activePiece, display, grid, 0, -1);
         if (!shifted)
         { // if we touched the ground
             for (Puyo puyo : gameData.activePiece)

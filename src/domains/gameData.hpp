@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "domains/grid.hpp"
+#include "views/display.hpp"
 
 struct Puyo
 {
@@ -21,3 +22,4 @@ struct GameData
 };
 
 bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y);
+bool shift(std::vector<Puyo> &activePiece, ConsoleDisplay &display, Grid constraint, int x, int y);
