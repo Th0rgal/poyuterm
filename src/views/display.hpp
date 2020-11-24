@@ -11,7 +11,7 @@ public:
     void showError();
     void setCell(int x, int y, Grid::PuyoType puyo);
     void close();
-
+    ConsoleDisplay();
 
 private:
     int virtualScale;

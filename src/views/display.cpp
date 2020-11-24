@@ -4,6 +4,13 @@
 #include "views/display.hpp"
 #include <string>
 
+#define COLOR_PINK 5
+
+ConsoleDisplay::ConsoleDisplay()
+{
+
+}
+
 bool ConsoleDisplay::start()
 {
     initscr();
@@ -15,17 +22,38 @@ bool ConsoleDisplay::start()
     intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
 
+    // to make getch() not blocking
+    nodelay(stdscr, TRUE);
+
+
+    if(!has_colors()){
+        endwin();
+        printf("Error: your terminal doesn't suport the colors");
+        return false;
+    }
+    use_default_colors();
+    start_color();
+
+
+
     WINDOW *gridScreen;
     int x = (6 * 6) + 2;
     int y = (12 * 3) + 2;
-
+    
     gridScreen = subwin(stdscr, x, y, LINES - y - 5, COLS / 2 - x /2);
     box(gridScreen, ACS_VLINE, ACS_HLINE);
 
     wrefresh(gridScreen);
 
-    // to make getch() not blocking
-    nodelay(stdscr, TRUE);
+    //mvwprintw(stdscr, 0, 0, "aaaaaa");
+    setCell(1, 12, Grid::none);
+    setCell(2, 12, Grid::red);
+    setCell(3, 12, Grid::green);
+    setCell(4, 12, Grid::yellow);
+    setCell(5, 12, Grid::blue);
+    setCell(6, 12, Grid::pink);
+
+    
     return (COLS > 20 + 2 + 12 && virtualScale > 0);
 }
 
@@ -40,29 +68,22 @@ void ConsoleDisplay::setCell(int x,
                              int y,
                              Grid::PuyoType puyo)
 {
-    switch (puyo)
-    {
-    case Grid::none:
-        break;
+    x = 6 * x + COLS / 2 - 24;
+    y = 3 * y + LINES - 45;
 
-    case Grid::red:
-        break;
+    init_color(COLOR_PINK,238,66,244);
+    init_pair(Grid::red, -1, COLOR_RED);
+    init_pair(Grid::green, -1, COLOR_GREEN);
+    init_pair(Grid::yellow, -1, COLOR_YELLOW);
+    init_pair(Grid::blue, -1, COLOR_BLUE);
+    init_pair(Grid::pink, -1, COLOR_PINK);
+    init_pair(Grid::none, -1, -1);
 
-    case Grid::green:
-        break;
-
-    case Grid::yellow:
-        break;
-
-    case Grid::blue:
-        break;
-
-    case Grid::pink:
-        break;
-
-    default:
-        break;
+    attron(COLOR_PAIR(puyo));
+    for(int i = y; i < y + 3; i++){
+        mvwprintw(stdscr, i, x, "      ");
     }
+    attroff(COLOR_PAIR(puyo));
 }
 
 void ConsoleDisplay::close()
