@@ -6,6 +6,12 @@
 #include <string>
 #include <iostream>
 
+/**
+ * to intialize a GameManager object
+ * @param GameData &gameDataRef a GameData instance passed by reference
+ * @param Grid &gridRef a Grid instance passed by reference
+ * @param ConsoleDisplay &displayRef a GameDisplay instance passed by reference
+ **/
 GameManager::GameManager(GameData &gameDataRef,
                          Grid &gridRef,
                          ConsoleDisplay &displayRef) : gameData(gameDataRef),
@@ -16,6 +22,10 @@ GameManager::GameManager(GameData &gameDataRef,
 {
 }
 
+/**
+ * to load the display and start listening to inputs. The inputsListener
+ * takes a callback to the loop function.
+ **/
 void GameManager::start()
 {
     bool succeeded = (display).start();
@@ -29,6 +39,10 @@ void GameManager::start()
     }
 }
 
+/**
+ * The game loop called everytime a user input hasn't been detected
+ * @param long delay the delay in nanoseconds with the previous loop call
+ **/
 void GameManager::loop(long delay)
 {
     if (gameData.activePiece.empty())
@@ -57,6 +71,11 @@ void GameManager::loop(long delay)
         gameData.delaySinceGravity += delay;
 }
 
+/**
+ * to create a new movingPiece (a Puyo's vector)
+ * @return std::vector<Puyo> a vector of two linked Puyo generated randomly
+ * on the first line (y:=0) with a random color
+ **/
 std::vector<Puyo> GameManager::createNewPiece()
 {
     std::size_t base = random_index(0, grid.width() - 2);
@@ -65,7 +84,8 @@ std::vector<Puyo> GameManager::createNewPiece()
     activePiece[1] = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
     for (Puyo puyo : activePiece)
     {
-        if (grid.content[puyo.x][puyo.y]) {
+        if (grid.content[puyo.x][puyo.y])
+        {
             // set gameState to lost
         }
         display.setCell(puyo.x, puyo.y, puyo.type);
@@ -73,6 +93,12 @@ std::vector<Puyo> GameManager::createNewPiece()
     return activePiece;
 }
 
+/**
+ * to generate a random number between two positive integers
+ * @param std::size_t lower the lowest possible number
+ * @param std::size_t lower the biggest possible number
+ * @return std::size_t a positive number between lower and higher
+ **/
 std::size_t GameManager::random_index(std::size_t lower, std::size_t higher)
 {
     std::uniform_int_distribution<std::size_t> dist(lower, higher);
