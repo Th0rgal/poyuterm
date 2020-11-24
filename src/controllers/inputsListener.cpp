@@ -29,7 +29,7 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
 {
     int inputCode;
     high_resolution_clock::time_point previousTime = high_resolution_clock::now();
-    while ((inputCode = getch()) != KEY_ENTER)
+    while ((inputCode = getch()) != 'q')
     {
         if (inputCode == ERR)
         {
@@ -107,5 +107,5 @@ bool InputsListener::translateDown()
  **/
 bool InputsListener::rotate()
 {
-
+    return true;
 }
