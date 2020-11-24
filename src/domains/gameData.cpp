@@ -25,13 +25,45 @@ void Puyo::add(std::size_t xAdd,
     y += yAdd;
 }
 
-Puyo Puyo::operator+=(const Puyo &coordinate)
+/**
+ * to shift the falling piece in gameData and on the grid
+ * @param std::vector<Puyo> &activePiece the falling piece to shift
+ * @param Grid::Grid constraint the grid to compare to
+ * @param int x, -1 <= x <= 1, the shift on the x axis
+ * @param int y, -1 <= y <= 1, the shift on the y axis
+ * 
+ **/
+bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
 {
-    add(coordinate.x, coordinate.y);
-    return *this;
-}
+    const size_t size = activePiece.size();
+    std::vector<Puyo> updatedPiece(size);
 
-Puyo Puyo::operator+(Puyo coordinate)
-{
-    return coordinate += *this;
+    for (size_t i = 0; i < size; i++)
+    {
+        Puyo puyo = activePiece[i];
+
+        // avoid impossible x
+        if (puyo.x < static_cast<unsigned int>(x) ||
+            static_cast<int>(puyo.x) + x >= static_cast<int>(constraint.width()))
+            return false;
+
+        // avoid impossible y
+        if (puyo.y < static_cast<unsigned int>(y) ||
+            static_cast<int>(puyo.y) + y >= static_cast<int>(constraint.height()))
+            return false;
+
+        puyo.add(static_cast<unsigned int>(x), static_cast<unsigned int>(y));
+
+        // avoid overwriting
+        if (constraint.content[puyo.x][puyo.y])
+            return false;
+
+        updatedPiece[i] = puyo;
+    }
+
+    // shift
+    for (std::size_t i = 0; i < updatedPiece.size(); i++)
+        activePiece[i] = updatedPiece[i];
+
+    return true;
 }

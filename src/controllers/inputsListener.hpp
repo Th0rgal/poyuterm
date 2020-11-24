@@ -8,7 +8,6 @@ class InputsListener
 public:
     InputsListener(GameData &gameDataRef, Grid &gridRef);
     void handleInputs(const std::function<void(long)> &loop);
-    void shift(int x, int y);
     GameData &gameData;
     Grid &grid;
 

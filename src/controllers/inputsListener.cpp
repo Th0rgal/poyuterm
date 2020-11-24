@@ -70,7 +70,7 @@ void InputsListener::onKeyPressed(int code)
  **/
 void InputsListener::translateLeft()
 {
-    shift(-1, 0);
+    shift(gameData.activePiece, grid, -1, 0);
 }
 
 /**
@@ -78,7 +78,7 @@ void InputsListener::translateLeft()
  **/
 void InputsListener::translateRight()
 {
-    shift(1, 0);
+    shift(gameData.activePiece, grid, 1, 0);
 }
 
 /**
@@ -86,43 +86,5 @@ void InputsListener::translateRight()
  **/
 void InputsListener::translateDown()
 {
-    shift(0, -1);
-}
-
-/**
- * to shift the falling piece in gameData and on the grid
- * @param int x, -1 <= x <= 1, the shift on the x axis
- * @param int y, -1 <= y <= 1, the shift on the y axis
- **/
-void InputsListener::shift(int x, int y)
-{
-    const size_t size = gameData.activePiece.size();
-    std::vector<Puyo> updatedPiece(size);
-
-    for (size_t i = 0; i < size; i++)
-    {
-        Puyo piecePart = gameData.activePiece[i];
-
-        // avoid impossible x
-        if (piecePart.x < static_cast<unsigned int>(x) ||
-            static_cast<int>(piecePart.x) + x >= static_cast<int>(grid.width()))
-            return;
-
-        // avoid impossible y
-        if (piecePart.y < static_cast<unsigned int>(y) ||
-            static_cast<int>(piecePart.y) + y >= static_cast<int>(grid.height()))
-            return;
-
-        std::size_t previousX = piecePart.x;
-        std::size_t previousY = piecePart.y;
-        piecePart.add(static_cast<unsigned int>(x), static_cast<unsigned int>(y));
-
-        // avoid overwriting
-        if (grid.content[piecePart.x][piecePart.y])
-            return;
-
-        updatedPiece[i] = piecePart;
-    }
-
-    gameData.activePiece = updatedPiece;
+    shift(gameData.activePiece, grid, 0, -1);
 }

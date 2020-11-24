@@ -1,4 +1,5 @@
 #include "controllers/gameManager.hpp"
+#include "domains/gameData.hpp"
 #include "controllers/inputsListener.hpp"
 #include <stdlib.h>
 
@@ -34,7 +35,7 @@ void GameManager::loop(long delay)
 
     if (gameData.delaySinceGravity > 1000) // in milliseconds
     {
-        bool falling = grid.triggerGravity();
+        bool falling = shift(gameData.activePiece, grid, 0, -1);
         if (!falling)
             gameData.activePiece = {};
         else

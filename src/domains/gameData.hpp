@@ -21,3 +21,5 @@ struct GameData
     std::vector<Puyo> activePiece;
     long delaySinceGravity;
 };
+
+bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y);

@@ -15,7 +15,6 @@ struct Grid
     std::size_t width();
     std::size_t height();
     Grid(std::vector<std::vector<PuyoType>> initialGrid);
-    bool triggerGravity();
     void removeAdjectives();
     std::vector<std::vector<PuyoType>> content;
 };
