@@ -89,5 +89,5 @@ void InputsListener::translateRight()
  **/
 void InputsListener::translateDown()
 {
-    shift(gameData.activePiece, consoleDisplay, grid, 0, -1);
+    shift(gameData.activePiece, consoleDisplay, grid, 0, 1);
 }
