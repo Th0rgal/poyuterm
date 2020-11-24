@@ -3,30 +3,25 @@
 #include "views/display.hpp"
 #include <string>
 
-#define COLOR_RED 1
-#define COLOR_GREEN 2
-#define COLOR_YELLOW 3
-#define COLOR_BLUE 4
-#define COLOR_PINK 5
-
 ConsoleDisplay::ConsoleDisplay()
 {
-    
 }
 
 bool ConsoleDisplay::start()
 {
     initscr();
 
-    if (LINES < 12+2 or COLS < 6*2 +2) {
+    if (LINES < 12 + 2 or COLS < 6 * 2 + 2)
+    {
         showError();
         return false;
     }
-    
+
     int boxHeight = LINES - 2;
     // it must be superior to 0
     virtualScale = (boxHeight - boxHeight % 12) / 12;
-    for(int i = 0; i < virtualScale; i++){
+    for (int i = 0; i < virtualScale; i++)
+    {
         puyoLine += "  ";
     }
     // to fix arrow keys detection
@@ -35,7 +30,7 @@ bool ConsoleDisplay::start()
 
     // to disable the keystroke display
     noecho();
-    
+
     // to make getch() not blocking
     nodelay(stdscr, TRUE);
 
@@ -57,7 +52,6 @@ bool ConsoleDisplay::start()
 
     wrefresh(gridScreen);
 
-
     return (COLS > 20 + 2 + 12 && virtualScale > 0);
 }
 
@@ -71,20 +65,14 @@ void ConsoleDisplay::setCell(int x,
                              int y,
                              Grid::PuyoType puyo)
 {
-    x = 1 + (x) * virtualScale * 2 + COLS / 2 - width / 2;
-    y = 1 + (y) * virtualScale + LINES - height;
-
-    init_color(COLOR_RED, 2550, 0, 0);
-    init_color(COLOR_GREEN, 0, 2550, 0);
-    init_color(COLOR_YELLOW, 2550, 2550, 0);
-    init_color(COLOR_BLUE, 0, 0, 2550);
-    init_color(COLOR_PINK, 2550, 200, 1470);
+    x = 1 + (x)*virtualScale * 2 + COLS / 2 - width / 2;
+    y = 1 + (y)*virtualScale + LINES - height;
 
     init_pair(Grid::red, -1, COLOR_RED);
     init_pair(Grid::green, -1, COLOR_GREEN);
     init_pair(Grid::yellow, -1, COLOR_YELLOW);
     init_pair(Grid::blue, -1, COLOR_BLUE);
-    init_pair(Grid::pink, -1, COLOR_PINK);
+    init_pair(Grid::pink, -1, COLOR_MAGENTA);
     init_pair(Grid::none, -1, -1);
 
     attron(COLOR_PAIR(puyo));
