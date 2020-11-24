@@ -51,12 +51,14 @@ bool ConsoleDisplay::start()
     wrefresh(gridScreen);
 
     //mvwprintw(stdscr, 0, 0, "aaaaaa");
-    setCell(1, 12, Grid::none);
-    setCell(2, 12, Grid::red);
-    setCell(3, 12, Grid::green);
-    setCell(4, 12, Grid::yellow);
-    setCell(5, 12, Grid::blue);
-    setCell(6, 12, Grid::pink);
+    for(int i = 0; i < 12; i++){
+        setCell((0 + i) % 6, i, Grid::none);
+        setCell((1 + i) % 6, i, Grid::red);
+        setCell((2 + i) % 6, i, Grid::green);
+        setCell((3 + i) % 6, i, Grid::yellow);
+        setCell((4 + i) % 6, i, Grid::blue);
+        setCell((5 + i) % 6, i, Grid::pink);
+    }
 
     return (COLS > 20 + 2 + 12 && virtualScale > 0);
 }
@@ -71,8 +73,8 @@ void ConsoleDisplay::setCell(int x,
                              int y,
                              Grid::PuyoType puyo)
 {
-    x = 1 + (x - 1) * virtualScale + COLS / 2 - width / 2;
-    y = 1 + (y - 1) * virtualScale + LINES - height - 5;
+    x = 1 + (x) * virtualScale * 2 + COLS / 2 - width / 2;
+    y = 1 + (y) * virtualScale + LINES - height;
 
     init_color(COLOR_PINK, 238, 66, 244);
     init_pair(Grid::red, -1, COLOR_RED);
