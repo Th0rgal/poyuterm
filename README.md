@@ -7,11 +7,11 @@
 <h4 align="center">👾 A retro game within terminal.</h4>
 
 <p align="center">
-    <a href="https://lgtm.com/projects/g/Th0rgal/poyuterm/alerts/">
-        <img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/Th0rgal/poyuterm.svg?logo=lgtm"/>
-    </a>
     <a href="https://lgtm.com/projects/g/Th0rgal/poyuterm/context:cpp">
         <img alt="Language grade: C/C++" src="https://img.shields.io/lgtm/grade/cpp/g/Th0rgal/poyuterm.svg?logo=lgtm"/>
+    </a>
+    <a href="https://lgtm.com/projects/g/Th0rgal/poyuterm/alerts/">
+        <img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/Th0rgal/poyuterm.svg?logo=lgtm"/>
     </a>
 </p>
 
