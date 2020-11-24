@@ -1,5 +1,6 @@
 
 #include <ncurses.h>
+#include <curses.h>
 #include "views/display.hpp"
 #include <string>
 
@@ -13,6 +14,15 @@ bool ConsoleDisplay::start()
     // to fix arrow keys detection
     intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
+
+    WINDOW *gridScreen;
+    int x = (6 * 6) + 2;
+    int y = (12 * 3) + 2;
+
+    gridScreen = subwin(stdscr, x, y, LINES - y - 5, COLS / 2 - x /2);
+    box(gridScreen, ACS_VLINE, ACS_HLINE);
+
+    wrefresh(gridScreen);
 
     // to make getch() not blocking
     nodelay(stdscr, TRUE);
@@ -53,11 +63,11 @@ void ConsoleDisplay::setCell(int x,
     default:
         break;
     }
-    move(x * virtualScale, y * virtualScale);
-    addch('#');
 }
 
 void ConsoleDisplay::close()
 {
     endwin();
+
+    free(gridScreen);
 }
