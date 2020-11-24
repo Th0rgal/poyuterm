@@ -2,6 +2,9 @@
 #include "domains/gameData.hpp"
 #include "controllers/inputsListener.hpp"
 #include <stdlib.h>
+#include <ncurses.h>
+#include <string>
+#include <iostream>
 
 GameManager::GameManager(GameData &gameDataRef,
                          Grid &gridRef,
@@ -43,12 +46,12 @@ void GameManager::loop(long delay)
         }
         else
         {
+            gameData.delaySinceGravity = 0;
             for (Puyo puyo : clone)
                 display.setCell(puyo.x, puyo.y, Grid::none);
             for (Puyo puyo : gameData.activePiece)
                 display.setCell(puyo.x, puyo.y, puyo.type);
         }
-        gameData.delaySinceGravity = 0;
     }
     else
         gameData.delaySinceGravity += delay;
