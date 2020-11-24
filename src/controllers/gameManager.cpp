@@ -34,6 +34,7 @@ void GameManager::loop(long delay)
     if (gameData.activePiece.empty())
         gameData.activePiece = createNewPiece();
 
+    
     if (gameData.delaySinceGravity > 1000) // in milliseconds
     {
         const std::vector<Puyo> clone = gameData.activePiece;

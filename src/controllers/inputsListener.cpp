@@ -69,9 +69,6 @@ void InputsListener::onKeyPressed(int code)
         shifted = rotate();
         break;
 
-    case '\n':
-        while (getch() != '\n');
-
     default:
         shifted = false;
         break;
