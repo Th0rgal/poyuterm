@@ -33,6 +33,9 @@ bool ConsoleDisplay::start()
     intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
 
+    // to disable the keystroke display
+    noecho();
+    
     // to make getch() not blocking
     nodelay(stdscr, TRUE);
 

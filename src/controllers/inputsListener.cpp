@@ -65,6 +65,10 @@ void InputsListener::onKeyPressed(int code)
         shifted = translateDown();
         break;
 
+    case ' ':
+        shifted = translateDown();
+        break;
+
     case '\n':
         while (getch() != '\n');
 
