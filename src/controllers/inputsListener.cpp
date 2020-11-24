@@ -105,7 +105,7 @@ bool InputsListener::translateDown()
 /**
  * to rotate the falling piece clockwisz
  **/
-void InputsListener::rotate()
+bool InputsListener::rotate()
 {
 
 }

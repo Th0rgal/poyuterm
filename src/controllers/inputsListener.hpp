@@ -17,4 +17,5 @@ private:
     bool translateLeft();
     bool translateRight();
     bool translateDown();
+    bool rotate();
 };
