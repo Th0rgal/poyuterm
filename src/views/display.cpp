@@ -54,15 +54,6 @@ bool ConsoleDisplay::start()
 
     wrefresh(gridScreen);
 
-    //mvwprintw(stdscr, 0, 0, "aaaaaa");
-    for(int i = 0; i < 12; i++){
-        setCell((0 + i) % 6, i, Grid::none);
-        setCell((1 + i) % 6, i, Grid::red);
-        setCell((2 + i) % 6, i, Grid::green);
-        setCell((3 + i) % 6, i, Grid::yellow);
-        setCell((4 + i) % 6, i, Grid::blue);
-        setCell((5 + i) % 6, i, Grid::pink);
-    }
 
     return (COLS > 20 + 2 + 12 && virtualScale > 0);
 }
