@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <ncurses.h>
 #include "domains/grid.hpp"
 
@@ -15,4 +16,7 @@ public:
 
 private:
     int virtualScale;
+    std::string puyoLine;
+    int width;
+	int height;
 };

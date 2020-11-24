@@ -22,7 +22,9 @@ bool ConsoleDisplay::start()
     int boxHeight = LINES - 2;
     // it must be superior to 0
     virtualScale = (boxHeight - boxHeight % 12) / 12;
-
+    for(int i = 0; i < virtualScale; i++){
+        puyoLine += "  ";
+    }
     // to fix arrow keys detection
     intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
@@ -40,10 +42,10 @@ bool ConsoleDisplay::start()
     start_color();
 
     WINDOW *gridScreen;
-    int x = (6 * virtualScale * 2) + 2;
-    int y = (12 * virtualScale) + 2;
+    width = (6 * virtualScale * 2) + 2;
+    height = (12 * virtualScale) + 2;
 
-    gridScreen = subwin(stdscr, x, y, LINES - y - 5, COLS / 2 - x / 2);
+    gridScreen = subwin(stdscr, width, height, LINES - height, COLS / 2 - width / 2);
     box(gridScreen, ACS_VLINE, ACS_HLINE);
 
     wrefresh(gridScreen);
@@ -69,8 +71,8 @@ void ConsoleDisplay::setCell(int x,
                              int y,
                              Grid::PuyoType puyo)
 {
-    x = 6 * x + COLS / 2 - 24;
-    y = 3 * y + LINES - 45;
+    x = 1 + (x - 1) * virtualScale + COLS / 2 - width / 2;
+    y = 1 + (y - 1) * virtualScale + LINES - height - 5;
 
     init_color(COLOR_PINK, 238, 66, 244);
     init_pair(Grid::red, -1, COLOR_RED);
@@ -81,9 +83,9 @@ void ConsoleDisplay::setCell(int x,
     init_pair(Grid::none, -1, -1);
 
     attron(COLOR_PAIR(puyo));
-    for (int i = y; i < y + 3; i++)
+    for (int i = y; i < y + virtualScale; i++)
     {
-        mvwprintw(stdscr, i, x, "      ");
+        mvwprintw(stdscr, i, x, puyoLine.c_str());
     }
     attroff(COLOR_PAIR(puyo));
 }
