@@ -2,7 +2,13 @@
 #include "controllers/inputsListener.hpp"
 #include <stdlib.h>
 
-GameManager::GameManager(GameData &gameDataRef, Grid &gridRef, ConsoleDisplay &displayRef) : gameData(gameDataRef), grid(gridRef), display(displayRef), rd(), gen(rd())
+GameManager::GameManager(GameData &gameDataRef,
+                         Grid &gridRef,
+                         ConsoleDisplay &displayRef) : gameData(gameDataRef),
+                                                       grid(gridRef),
+                                                       display(displayRef),
+                                                       rd(),
+                                                       gen(rd())
 {
 }
 
@@ -39,24 +45,22 @@ void GameManager::loop(long delay)
         gameData.delaySinceGravity += delay;
 }
 
-std::vector<std::pair<std::size_t, std::size_t>> GameManager::createNewPiece()
+std::vector<Puyo> GameManager::createNewPiece()
 {
     std::size_t base = random_index(0, grid.width() - 1);
-    std::vector<std::pair<std::size_t, std::size_t>> activePiece(2);
-    activePiece[0] = std::pair<std::size_t, std::size_t>(base, 0);
-    activePiece[1] = std::pair<std::size_t, std::size_t>(base + 1, 0);
-    grid.content[0][base] = Grid::PuyoType(random_index(1, 5));
-    grid.content[0][base + 1] = Grid::PuyoType(random_index(1, 5));
+    std::vector<Puyo> activePiece(2);
+    activePiece[0] = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
+    activePiece[1] = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
     return activePiece;
 }
 
 void GameManager::shiftActivePiece()
 {
-    std::vector<std::pair<std::size_t, std::size_t>> updatedPiece(2);
+    std::vector<Puyo> updatedPiece(2);
     for (std::size_t i = 0; i < gameData.activePiece.size(); i++)
     {
         updatedPiece[i] = gameData.activePiece[i];
-        updatedPiece[i].second -= 1;
+        updatedPiece[i].y -= 1;
     }
     gameData.activePiece = updatedPiece;
 }

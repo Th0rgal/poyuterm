@@ -26,7 +26,9 @@ void ConsoleDisplay::showError()
     close();
 }
 
-void ConsoleDisplay::setCell(int x, int y, Grid::PuyoType puyo)
+void ConsoleDisplay::setCell(int x,
+                             int y,
+                             Grid::PuyoType puyo)
 {
     switch (puyo)
     {

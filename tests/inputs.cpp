@@ -10,9 +10,9 @@ TEST_CASE("testing shift")
     content[1][0] = Grid::red;
     content[2][0] = Grid::green;
 
-    std::vector<std::pair<std::size_t, std::size_t>> activePiece = {
-        std::pair<std::size_t, std::size_t>(1, 0),
-        std::pair<std::size_t, std::size_t>(2, 0)};
+    std::vector<Puyo> activePiece = {
+        Puyo(Grid::red, 1, 0),
+        Puyo(Grid::red, 2, 0)};
 
     Grid grid = Grid(content);
     GameData gameData = GameData();
@@ -27,9 +27,13 @@ TEST_CASE("testing shift")
 
     for (std::size_t x = 0; x < expectedGrid.width(); x++)
         for (std::size_t y = 0; y < expectedGrid.height(); y++)
-        {
-            std::cout << x << "|" << y << ":" << expectedContent[x][y] << "|" << inputsListener.grid.content[x][y] << std::endl;
             CHECK(expectedContent[x][y] == inputsListener.grid.content[x][y]);
-            
+
+    inputsListener.shift(0, 0);
+    for (std::size_t x = 0; x < expectedGrid.width(); x++)
+        for (std::size_t y = 0; y < expectedGrid.height(); y++)
+        {
+            std::cout << x << ":" << y << std::endl;
+            CHECK(expectedContent[x][y] == inputsListener.grid.content[x][y]);
         }
 }

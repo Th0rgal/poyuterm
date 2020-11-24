@@ -12,7 +12,9 @@ using namespace std::chrono;
  * @param GameData gameDataRef the GameData instance
  * @param Grid gridRef the Grid instance
  **/
-InputsListener::InputsListener(GameData &gameDataRef, Grid &gridRef) : gameData(gameDataRef), grid(gridRef)
+InputsListener::InputsListener(GameData &gameDataRef,
+                               Grid &gridRef) : gameData(gameDataRef),
+                                                grid(gridRef)
 {
 }
 
@@ -95,35 +97,32 @@ void InputsListener::translateDown()
 void InputsListener::shift(int x, int y)
 {
     const size_t size = gameData.activePiece.size();
-    std::vector<std::vector<Grid::PuyoType>> clonedContent = grid.content;
-    std::vector<std::pair<size_t, size_t>> updatedPiece(size);
+    std::vector<Puyo> updatedPiece(size);
 
     for (size_t i = 0; i < size; i++)
     {
-        std::pair<size_t, size_t> piece = gameData.activePiece[i];
-        updatedPiece[i] = piece;
+        Puyo piecePart = gameData.activePiece[i];
 
         // avoid impossible x
-        if (piece.first < static_cast<unsigned int>(x) || static_cast<int>(piece.first) + x >= static_cast<int>(grid.width()))
+        if (piecePart.x < static_cast<unsigned int>(x) ||
+            static_cast<int>(piecePart.x) + x >= static_cast<int>(grid.width()))
             return;
-        piece.first += static_cast<unsigned int>(x);
 
         // avoid impossible y
-        if (piece.second < static_cast<unsigned int>(x) || static_cast<int>(piece.second) + y >= static_cast<int>(grid.height()))
+        if (piecePart.y < static_cast<unsigned int>(y) ||
+            static_cast<int>(piecePart.y) + y >= static_cast<int>(grid.height()))
             return;
-        piece.second += static_cast<unsigned int>(y);
+
+        std::size_t previousX = piecePart.x;
+        std::size_t previousY = piecePart.y;
+        piecePart.add(static_cast<unsigned int>(x), static_cast<unsigned int>(y));
 
         // avoid overwriting
-        if (grid.content[piece.first][piece.second] &&
-            std::find_if(gameData.activePiece.begin(), gameData.activePiece.end(), [&piece](auto &&element) {
-                return (element.first == piece.first && element.second == piece.second);
-            }) == gameData.activePiece.end())
+        if (grid.content[piecePart.x][piecePart.y])
             return;
-        Grid::PuyoType type = grid.content[gameData.activePiece[i].first][gameData.activePiece[i].second];
-        clonedContent[gameData.activePiece[i].first][gameData.activePiece[i].second] = Grid::none;
-        clonedContent[piece.first][piece.second] = type;
+
+        updatedPiece[i] = piecePart;
     }
 
     gameData.activePiece = updatedPiece;
-    grid.content = clonedContent;
 }
