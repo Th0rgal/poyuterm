@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="todo" alt="Poyuterm logo" width="256">
+  <img src="https://hackedserver.org/choucroute/triceratops.svg" alt="Poyuterm logo" width="256">
   <br>
 </h1>
 
