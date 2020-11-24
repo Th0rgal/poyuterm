@@ -51,7 +51,7 @@ bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
 }
 
 /**
- * Empty constructor for puyo. Will create an instance
+ * empty constructor for puyo. Will create an instance
  * of type none with (0,0) coordinates
  **/
 Puyo::Puyo() : type(Grid::none), x(0), y(0)
@@ -59,7 +59,7 @@ Puyo::Puyo() : type(Grid::none), x(0), y(0)
 }
 
 /**
- * Constructor of a Puyo
+ * constructor of a Puyo
  * @param Grid::PuyoType type the type of the Puyo
  * @param std::size_t x, position of the Puyo on the x axis
  * @param std::size_t y, position of the Puyo on the y axis
@@ -83,6 +83,11 @@ void Puyo::move(int xAdd,
     y += yAdd;
 }
 
+/**
+ * comparison operator overloading: to allow comparison between two Puyo
+ * @param const Puyo &other the other Puyo instance to compare this with
+ * @return bool true if Puyo are similar
+ **/
 bool Puyo::operator==(const Puyo &other) const
 {
     return type == other.type && x == other.x && y == other.y;
