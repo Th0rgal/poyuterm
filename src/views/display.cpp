@@ -3,17 +3,25 @@
 #include "views/display.hpp"
 #include <string>
 
+/**
+ * to intialize a display
+ **/
 ConsoleDisplay::ConsoleDisplay()
 {
 }
 
+/**
+ * to start the display
+ * @return bool true if startup was successful
+ **/
 bool ConsoleDisplay::start()
 {
     initscr();
 
     if (LINES < 12 + 2 or COLS < 6 * 2 + 2)
     {
-        showError();
+        printw("Error: your terminal is too small \nminimum cols: 44 \nminimum lines: 14");
+        getch();
         return false;
     }
 
@@ -60,15 +68,15 @@ bool ConsoleDisplay::start()
     return (COLS > 20 + 2 + 12 && virtualScale > 0);
 }
 
-void ConsoleDisplay::showError()
-{
-    printw("Error: your terminal is too small \nminimum cols: 44 \nminimum lines: 14");
-    getch();
-}
-
+/**
+ * to display a cell at a specific location with the right color
+ * @param int x position of the cell on the virtual x axis
+ * @param int y position of the cell on the virtual y axis
+ * @param Grid::PuyoType type of the Puyo (affects its color)
+ **/
 void ConsoleDisplay::setCell(int x,
                              int y,
-                             Grid::PuyoType puyo)
+                             Grid::PuyoType type)
 {
     x = 1 + (x)*virtualScale * 2 + COLS / 2 - width / 2;
     y = 1 + (y)*virtualScale + LINES - height;
@@ -80,17 +88,19 @@ void ConsoleDisplay::setCell(int x,
     init_pair(Grid::pink, -1, COLOR_MAGENTA);
     init_pair(Grid::none, -1, -1);
 
-    attron(COLOR_PAIR(puyo));
+    attron(COLOR_PAIR(type));
     for (int i = y; i < y + virtualScale; i++)
     {
         mvwprintw(stdscr, i, x, puyoLine.c_str());
     }
-    attroff(COLOR_PAIR(puyo));
+    attroff(COLOR_PAIR(type));
 }
 
+/**
+ * to close the display
+ **/
 void ConsoleDisplay::close()
 {
     endwin();
-
     free(gridScreen);
 }
