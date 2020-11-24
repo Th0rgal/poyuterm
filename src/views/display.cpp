@@ -1,4 +1,3 @@
-
 #include <ncurses.h>
 #include <curses.h>
 #include "views/display.hpp"
@@ -12,10 +11,7 @@
 
 ConsoleDisplay::ConsoleDisplay()
 {
-    init_color(COLOR_RED, 155, 0, 0);
-    init_color(COLOR_GREEN, 0, 255, 0);
-    init_color(COLOR_YELLOW, 255, 255, 0);
-    init_color(COLOR_PINK, 238, 66, 244);
+    
 }
 
 bool ConsoleDisplay::start()
@@ -84,7 +80,12 @@ void ConsoleDisplay::setCell(int x,
     x = 1 + (x) * virtualScale * 2 + COLS / 2 - width / 2;
     y = 1 + (y) * virtualScale + LINES - height;
 
-    init_color(COLOR_PINK, 238, 66, 244);
+    init_color(COLOR_RED, 2550, 0, 0);
+    init_color(COLOR_GREEN, 0, 2550, 0);
+    init_color(COLOR_YELLOW, 2550, 2550, 0);
+    init_color(COLOR_BLUE, 0, 0, 2550);
+    init_color(COLOR_PINK, 2550, 200, 1470);
+
     init_pair(Grid::red, -1, COLOR_RED);
     init_pair(Grid::green, -1, COLOR_GREEN);
     init_pair(Grid::yellow, -1, COLOR_YELLOW);
