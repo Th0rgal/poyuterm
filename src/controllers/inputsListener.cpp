@@ -72,8 +72,8 @@ void InputsListener::onKeyPressed(int code)
         shifted = translateDown();
         break;
 
-    case KEY_BACKSPACE:
-        shifted = rotate();
+    case ' ':
+        shifted = translateDown();
         break;
 
     default:
