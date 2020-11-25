@@ -162,12 +162,12 @@ void InputsListener::onMenuKeyPressed(int code)
 
 void InputsListener::menuUp()
 {
-    (*display.menu).next();
+    (*display.menu).previous();
 }
 
 void InputsListener::menuDown()
 {
-    (*display.menu).previous();
+    (*display.menu).next();
 }
 
 void InputsListener::menuEnter()
