@@ -73,6 +73,13 @@ void InputsListener::onTetrisKeyPressed(int code)
     bool shifted;
     switch (code)
     {
+
+    case 'P':
+    case 'p':
+        openMenu();
+        shifted = false;
+        break;
+
     case KEY_LEFT:
         shifted = translateLeft();
         break;
@@ -159,6 +166,12 @@ void InputsListener::onMenuKeyPressed(int code)
         menuEnter();
         break;
     };
+}
+
+void InputsListener::openMenu()
+{
+    gameData.mode = GameData::menu;
+    display.showMenu();
 }
 
 void InputsListener::menuUp()

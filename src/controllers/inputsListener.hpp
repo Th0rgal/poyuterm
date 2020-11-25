@@ -17,6 +17,7 @@ private:
     bool translateLeft();
     bool translateRight();
     bool translateDown();
+    void openMenu();
     void onMenuKeyPressed(int code);
     void menuUp();
     void menuDown();
