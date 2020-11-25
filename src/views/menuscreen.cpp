@@ -4,11 +4,11 @@
 #include "controllers/inputsListener.hpp"
 #include <iostream>
 
-#define WHITEONRED 1
-#define WHITEONBLUE 2
-#define WHITEONBLACK 3
-#define BLACKONWHITE 4
-#define REDONWHITE 5
+#define WHITEONRED 10
+#define WHITEONBLUE 20
+#define WHITEONBLACK 30
+#define BLACKONWHITE 40
+#define REDONWHITE 50
 
 MenuScreen::MenuScreen()
 {
