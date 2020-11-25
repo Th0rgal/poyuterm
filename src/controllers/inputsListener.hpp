@@ -13,15 +13,17 @@ public:
     Grid &grid;
 
 private:
-    void onTetrisKeyPressed(int code);
-    bool translateLeft();
-    bool translateRight();
-    bool translateDown();
-    void openMenu();
+    //menu related
     void onMenuKeyPressed(int code);
     void menuUp();
     void menuDown();
     void menuEnter();
 
+    // grid related
+    void onTetrisKeyPressed(int code);
+    bool translateLeft();
+    bool translateRight();
+    bool translateDown();
     bool rotate();
+    void openMenu();
 };

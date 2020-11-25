@@ -9,6 +9,8 @@ include(doctest)
 set(SRCS
     src/controllers/gameManager.cpp
     src/controllers/inputsListener.cpp
+    src/controllers/gridListener.cpp
+    src/controllers/menuListener.cpp
 
     src/domains/gameData.cpp
     src/domains/grid.cpp
