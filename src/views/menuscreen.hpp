@@ -10,6 +10,7 @@ public:
     void next();
     void previous();
     int select();
+    void close();
     
 private:
     int key;
