@@ -39,9 +39,6 @@ Display::Display()
     // to disable the keystroke display
     noecho();
 
-    // to make getch() not blocking
-    nodelay(stdscr, TRUE);
-
     use_default_colors();
     start_color();
 
