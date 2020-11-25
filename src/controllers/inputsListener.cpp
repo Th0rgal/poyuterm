@@ -38,8 +38,7 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
     {
         if (inputCode == ERR)
         {
-            if (gameData.state != GameData::paused)
-                loop(duration_cast<nanoseconds>(high_resolution_clock::now() - previousTime).count());
+            loop(duration_cast<nanoseconds>(high_resolution_clock::now() - previousTime).count());
             previousTime = high_resolution_clock::now();
         }
         else

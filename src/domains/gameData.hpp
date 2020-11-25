@@ -20,9 +20,8 @@ struct GameData
     enum GameState
     {
         running = 0,
-        paused = 1,
-        won = 2,
-        lost = 3
+        won = 1,
+        lost = 2
     };
 
     enum GameMode
