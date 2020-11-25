@@ -11,7 +11,11 @@
 #define BLACKONWHITE 4
 #define REDONWHITE 5
 
-void ManuManager::wCenterTitle(WINDOW *pwin, const char * title)
+MenuManager::MenuManager()
+{
+}
+
+void MenuManager::wCenterTitle(WINDOW *pwin, const char * title)
 {
     int x, maxy, maxx, stringsize;
     getmaxyx(pwin, maxy, maxx);
@@ -25,7 +29,7 @@ void ManuManager::wCenterTitle(WINDOW *pwin, const char * title)
 }
 
 
-void ManuManager::wclrscr(WINDOW * pwin)
+void MenuManager::wclrscr(WINDOW * pwin)
 {
     int y, x, maxy, maxx;
     getmaxyx(pwin, maxy, maxx);
@@ -34,7 +38,7 @@ void ManuManager::wclrscr(WINDOW * pwin)
             mvwaddch(pwin, y, x, ' ');
 }
 
-bool ManuManager::initColors()
+int MenuManager::runMenu()
 {
     if(has_colors())
     {
@@ -43,15 +47,7 @@ bool ManuManager::initColors()
         init_pair(WHITEONRED, COLOR_WHITE, COLOR_RED);
         init_pair(WHITEONBLUE, COLOR_WHITE, COLOR_BLUE);
         init_pair(REDONWHITE, COLOR_RED, COLOR_WHITE);
-        return(true);
     }
-    else
-        return(false);
-}
-
-
-int ManuManager::runMenu(WINDOW *wParent, int height, int width, int y, int x)
-{
 
     char *choices[] =           /* The menu choices */
             {
@@ -62,6 +58,7 @@ int ManuManager::runMenu(WINDOW *wParent, int height, int width, int y, int x)
                         (char*)"            Quitter           ",
             NULL
             };
+            
     /* Calculate nchoices */
     for(n_choices=0; choices[n_choices]; n_choices++);
 
@@ -79,19 +76,16 @@ int ManuManager::runMenu(WINDOW *wParent, int height, int width, int y, int x)
     set_menu_mark(my_menu, "> ");
 
     /* Windows Border cration */
-    wBorder = newwin(height, width, LINES / 2 - height / 2, COLS / 2 - width / 2);
+    wBorder = newwin(8, 40, LINES / 2 - 8 / 2, COLS / 2 - 40 / 2);
     wattrset(wBorder, COLOR_PAIR(WHITEONRED));
     wclrscr(wBorder); 
     box(wBorder, 0, 0);
     wCenterTitle(wBorder, "Option de jeu a choisir");
 
-    /* SET UP WINDOW FOR THE MENU'S USER INTERFACE */
-    wUI = derwin(wBorder, height-2, width-2, 2, 2);
+    wUI = derwin(wBorder, 8 - 2, 40 - 2, 2, 2);
 
-    /* ASSOCIATE THESE WINDOWS WITH THE MENU */
     set_menu_sub(my_menu, wUI);
 
-    /* MATCH MENU'S COLORS TO THAT OF ITS WINDOWS */
     set_menu_fore(my_menu, COLOR_PAIR(REDONWHITE));
     set_menu_back(my_menu, COLOR_PAIR(WHITEONRED));
 
@@ -110,8 +104,8 @@ int ManuManager::runMenu(WINDOW *wParent, int height, int width, int y, int x)
     {
         touchwin(wUI);
         wrefresh(wUI);
-        c = getch();
-        switch(c)
+        key = getch();
+        switch(key)
         {
             case KEY_DOWN:
                 menu_driver(my_menu, REQ_DOWN_ITEM);
@@ -126,7 +120,6 @@ int ManuManager::runMenu(WINDOW *wParent, int height, int width, int y, int x)
         }
     }   
 
-    /* FREE ALL ALLOCATED MENU AND ITEM RESOURCES */
     unpost_menu(my_menu);
     
     for(ssChoice = 0; ssChoice < n_choices; ++ssChoice)
@@ -137,9 +130,8 @@ int ManuManager::runMenu(WINDOW *wParent, int height, int width, int y, int x)
     delwin(wUI);
     delwin(wBorder);
     
-    /* REPAINT THE CALLING SCREEN IN PREPARATION FOR RETURN */
-    touchwin(wParent);
-    wrefresh(wParent);
+    touchwin(stdscr);
+    wrefresh(stdscr);
 
     /* return numbor of choice*/
     return(my_choice);

@@ -12,7 +12,6 @@ public:
     void showError();
     void setCell(int x, int y, Grid::PuyoType puyo);
     void close();
-    ConsoleDisplay();
     bool started = false;
 
 private:
