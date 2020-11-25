@@ -173,5 +173,7 @@ void InputsListener::menuDown()
 
 void InputsListener::menuEnter()
 {
-    (*display.menu).select();
+    GameData::GameMode newGameMode = GameData::GameMode((*display.menu).select());
+    gameData.mode = newGameMode;
+    display.showGame();
 }
