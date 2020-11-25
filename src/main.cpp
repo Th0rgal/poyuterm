@@ -2,6 +2,7 @@
 #include "domains/gameData.hpp"
 #include "domains/grid.hpp"
 #include "views/display.hpp"
+#include "views/menu.hpp"
 
 int main()
 {

@@ -14,6 +14,7 @@ set(SRCS
     src/domains/grid.cpp
 
     src/views/display.cpp
+    src/views/menu.cpp
     )
 
 set(HEADERS
@@ -24,6 +25,7 @@ set(HEADERS
     src/domains/grid.hpp
 
     src/views/display.hpp
+    src/views/menu.hpp
     )
 
 set(TESTS
@@ -35,6 +37,7 @@ set(TESTS
 set(LIBS
     ncurses
     pthread
+    menu
 )
 
 add_executable(poyuterm src/main.cpp ${SRCS} ${HEADERS})
