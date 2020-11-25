@@ -48,9 +48,9 @@ MenuScreen::MenuScreen()
     /* Windows Border cration */
     wBorder = newwin(8, 40, LINES / 2 - 8 / 2, COLS / 2 - 40 / 2);
     wattrset(wBorder, COLOR_PAIR(WHITEONRED));
-    wclrscr(wBorder);
+    windowsFilling(wBorder);
     box(wBorder, 0, 0);
-    wCenterTitle(wBorder, "Option de jeu a choisir");
+    windowsBorderTitle(wBorder, " option ");
 
     wUI = derwin(wBorder, 8 - 2, 40 - 2, 2, 2);
 
@@ -58,10 +58,6 @@ MenuScreen::MenuScreen()
 
     set_menu_fore(my_menu, COLOR_PAIR(REDONWHITE));
     set_menu_back(my_menu, COLOR_PAIR(WHITEONRED));
-
-    keypad(wUI, TRUE);
-    noecho();
-    curs_set(0);
 
     /* menu display */
     post_menu(my_menu);
@@ -107,12 +103,12 @@ MenuScreen::MenuScreen()
     //return (my_choice);
 }
 
-void MenuScreen::wCenterTitle(WINDOW *pwin, const char *title)
+void MenuScreen::windowsBorderTitle(WINDOW *pwin, const char *title)
 {
     int x, maxy, maxx, stringsize;
     getmaxyx(pwin, maxy, maxx);
     stringsize = 4 + strlen(title);
-    x = (maxx - stringsize) / 2;
+    x = (maxx - stringsize)/2;
     mvwaddch(pwin, 0, x, ACS_RTEE);
     waddch(pwin, ' ');
     waddstr(pwin, title);
@@ -120,7 +116,7 @@ void MenuScreen::wCenterTitle(WINDOW *pwin, const char *title)
     waddch(pwin, ACS_LTEE);
 }
 
-void MenuScreen::wclrscr(WINDOW *pwin)
+void MenuScreen::windowsFilling(WINDOW *pwin)
 {
     int y, x, maxy, maxx;
     getmaxyx(pwin, maxy, maxx);

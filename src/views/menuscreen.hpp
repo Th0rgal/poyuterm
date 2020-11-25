@@ -19,6 +19,6 @@ private:
     int n_choices;
     int ssChoice;
     int my_choice = -1;
-    void wCenterTitle(WINDOW *pwin, const char *title);
-    void wclrscr(WINDOW *pwin);
+    void windowsBorderTitle(WINDOW *pwin, const char *title);
+    void windowsFilling(WINDOW *pwin);
 };
