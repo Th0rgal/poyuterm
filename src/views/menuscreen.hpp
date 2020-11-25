@@ -1,17 +1,14 @@
 #pragma once
 
-#include <curses.h>
 #include <menu.h>
+#include "views/screen.hpp"
 
-
-class MenuManager
+class MenuScreen : public Screen
 {
 public:
-	MenuManager();
-	int runMenu();
+    MenuScreen();
 
 private:
-
     int key;
     ITEM **my_items;
     MENU *my_menu;
@@ -22,6 +19,6 @@ private:
     int n_choices;
     int ssChoice;
     int my_choice = -1;
-	void wCenterTitle(WINDOW *pwin, const char * title);
-	void wclrscr(WINDOW * pwin);
+    void wCenterTitle(WINDOW *pwin, const char *title);
+    void wclrscr(WINDOW *pwin);
 };

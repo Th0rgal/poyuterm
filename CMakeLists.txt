@@ -14,7 +14,9 @@ set(SRCS
     src/domains/grid.cpp
 
     src/views/display.cpp
-    src/views/menu.cpp
+    src/views/screen.cpp
+    src/views/gamescreen.cpp
+    src/views/menuscreen.cpp
     )
 
 set(HEADERS
@@ -25,7 +27,9 @@ set(HEADERS
     src/domains/grid.hpp
 
     src/views/display.hpp
-    src/views/menu.hpp
+    src/views/screen.hpp
+    src/views/gamescreen.hpp
+    src/views/menuscreen.hpp
     )
 
 set(TESTS

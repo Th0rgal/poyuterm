@@ -6,14 +6,13 @@
 #include <string>
 #include <iostream>
 #include "views/display.hpp"
-#include "views/menu.hpp"
 
 
 /**
  * to intialize a GameManager object
  * @param GameData &gameData GameData instance passed by reference
  * @param Grid &grid a Grid instance passed by reference
- * @param ConsoleDisplay &display a GameDisplay instance passed by reference
+ * @param Display &display a GameDisplay instance passed by reference
  * 
  * @author Thomas Marchand
  **/
@@ -33,7 +32,8 @@ GameManager::GameManager(GameData &gameData,
  **/
 void GameManager::start()
 {
-    int choices = menu.runMenu();
+    display.showMenu();
+    /*
     if (display.started)
     {
         InputsListener inputsListener(gameData, display, grid);
@@ -41,7 +41,7 @@ void GameManager::start()
             loop(delay);
         });
         (display).close();
-    }
+    }*/
 }
 
 /**
@@ -70,9 +70,9 @@ void GameManager::loop(long delay)
         {
             gameData.delaySinceGravity = 0;
             for (Puyo puyo : clone)
-                display.setCell(puyo.x, puyo.y, Grid::none);
+                display.game.setCell(puyo.x, puyo.y, Grid::none);
             for (Puyo puyo : gameData.activePiece)
-                display.setCell(puyo.x, puyo.y, puyo.type);
+                display.game.setCell(puyo.x, puyo.y, puyo.type);
         }
     }
     else
@@ -98,7 +98,7 @@ std::vector<Puyo> GameManager::createNewPiece()
         {
             // set gameState to lost
         }
-        display.setCell(puyo.x, puyo.y, puyo.type);
+        display.game.setCell(puyo.x, puyo.y, puyo.type);
     }
     return activePiece;
 }

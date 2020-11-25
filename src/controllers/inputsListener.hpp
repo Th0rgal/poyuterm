@@ -6,10 +6,10 @@
 class InputsListener
 {
 public:
-    InputsListener(GameData &gameDataRef, ConsoleDisplay &display, Grid &gridRef);
+    InputsListener(GameData &gameDataRef, Display &display, Grid &gridRef);
     void handleInputs(const std::function<void(long)> &loop);
     GameData &gameData;
-    ConsoleDisplay &display;
+    Display &display;
     Grid &grid;
 
 private:

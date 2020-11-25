@@ -11,13 +11,13 @@ using namespace std::chrono;
 /**
  * to intialize the InputsListener with game and grid domains
  * @param GameData &gameData the GameData instance
- * @param ConsoleDisplay display the ConsoleDisplay instance
+ * @param Display display the Display instance
  * @param Grid &grid the Grid instance
  * 
  * @author Thomas Marchand
  **/
 InputsListener::InputsListener(GameData &gameData,
-                               ConsoleDisplay &display,
+                               Display &display,
                                Grid &grid) : display(display),
                                              gameData(gameData),
                                              grid(grid)
@@ -83,9 +83,9 @@ void InputsListener::onKeyPressed(int code)
     if (shifted)
     {
         for (Puyo puyo : clone)
-            display.setCell(puyo.x, puyo.y, Grid::none);
+            display.game.setCell(puyo.x, puyo.y, Grid::none);
         for (Puyo puyo : gameData.activePiece)
-            display.setCell(puyo.x, puyo.y, puyo.type);
+            display.game.setCell(puyo.x, puyo.y, puyo.type);
     }
 }
 

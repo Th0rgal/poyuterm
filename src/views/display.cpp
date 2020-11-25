@@ -1,14 +1,16 @@
 #include <ncurses.h>
 #include <curses.h>
-#include "views/display.hpp"
 #include <string>
+#include "views/display.hpp"
+#include "views/menuscreen.hpp"
+#include "views/gamescreen.hpp"
 
 /**
  * to intialize a display
  * 
  * @author Valeran Maytié
  **/
-ConsoleDisplay::ConsoleDisplay()
+Display::Display()
 {
     initscr();
 
@@ -19,13 +21,12 @@ ConsoleDisplay::ConsoleDisplay()
         return;
     }
 
-    int boxHeight = LINES - 2;
-
-    // it must be superior to 0
-    virtualScale = (boxHeight - boxHeight % 12) / 12;
-    for (int i = 0; i < virtualScale; i++)
+    if (!has_colors())
     {
-        puyoLine += "  ";
+        endwin();
+        printf("Error: your terminal doesn't suport colors");
+
+        return;
     }
 
     // to disable cursor
@@ -41,56 +42,17 @@ ConsoleDisplay::ConsoleDisplay()
     // to make getch() not blocking
     nodelay(stdscr, TRUE);
 
-    if (!has_colors())
-    {
-        endwin();
-        printf("Error: your terminal doesn't suport colors");
-
-        return ;
-    }
     use_default_colors();
     start_color();
 
     started = true;
 }
 
-/**
- * to display a cell at a specific location with the right color
- * @param int x position of the cell on the virtual x axis
- * @param int y position of the cell on the virtual y axis
- * @param Grid::PuyoType type of the Puyo (affects its color)
- * 
- * @author Valeran Maytié
- **/
-void ConsoleDisplay::setCell(int x,
-                             int y,
-                             Grid::PuyoType type)
-{
-    x = 1 + (x)*virtualScale * 2 + COLS / 2 - width / 2;
-    y = 1 + (y)*virtualScale + LINES - height;
 
-    init_pair(Grid::red, -1, COLOR_RED);
-    init_pair(Grid::green, -1, COLOR_GREEN);
-    init_pair(Grid::yellow, -1, COLOR_YELLOW);
-    init_pair(Grid::blue, -1, COLOR_BLUE);
-    init_pair(Grid::pink, -1, COLOR_MAGENTA);
-    init_pair(Grid::none, -1, -1);
-
-    attron(COLOR_PAIR(type));
-    for (int i = y; i < y + virtualScale; i++)
-    {
-        mvwprintw(stdscr, i, x, puyoLine.c_str());
-    }
-    attroff(COLOR_PAIR(type));
+void Display::showMenu() {
+    MenuScreen();
 }
 
-/**
- * to close the display
- * 
- * @author Valeran Maytié
- **/
-void ConsoleDisplay::close()
-{
-    endwin();
-    free(gridScreen);
+void Display::showGame() {
+    GameScreen();
 }

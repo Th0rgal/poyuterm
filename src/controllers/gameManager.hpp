@@ -3,7 +3,6 @@
 #include "domains/gameData.hpp"
 #include "domains/grid.hpp"
 #include "views/display.hpp"
-#include "views/menu.hpp"
 #include <random>
 
 class GameManager
@@ -17,8 +16,7 @@ public:
 private:
     GameData &gameData;
     Grid &grid;
-    ConsoleDisplay display = ConsoleDisplay();
-    MenuManager menu = MenuManager();
+    Display display = Display();
     std::random_device rd;
     std::mt19937 gen;
 

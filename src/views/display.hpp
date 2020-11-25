@@ -1,23 +1,24 @@
 #pragma once
 
-#include <string>
 #include <ncurses.h>
-#include "domains/grid.hpp"
+#include "views/gamescreen.hpp"
+#include "views/menuscreen.hpp"
 
-class ConsoleDisplay
+class Display
 {
 public:
-    ConsoleDisplay();
-    WINDOW *gridScreen;
-    bool start();
-    void showError();
-    void setCell(int x, int y, Grid::PuyoType puyo);
-    void close();
+    Display();
+
     bool started = false;
+    bool start();
+    void close();
+    void showError();
+
+    void showMenu();
+    void showGame();
+
+    GameScreen game;
+    MenuScreen menu;
 
 private:
-    int virtualScale;
-    std::string puyoLine;
-    int width;
-    int height;
 };
