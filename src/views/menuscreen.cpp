@@ -1,6 +1,8 @@
 #include <stdlib.h> /* calloc() */
 #include <string.h> /* strlen() */
 #include "views/menuscreen.hpp"
+#include "controllers/inputsListener.hpp"
+#include <iostream>
 
 #define WHITEONRED 1
 #define WHITEONBLUE 2
@@ -62,45 +64,6 @@ MenuScreen::MenuScreen()
     /* menu display */
     post_menu(my_menu);
 
-    /* Key pressed */
-    while (my_choice == -1)
-    {
-        touchwin(wUI);
-        wrefresh(wUI);
-        touchwin(wBorder);
-        wrefresh(wBorder);
-        key = getch();
-
-        switch (key)
-        {
-        case KEY_DOWN:
-            menu_driver(my_menu, REQ_DOWN_ITEM);
-            break;
-        case KEY_UP:
-            menu_driver(my_menu, REQ_UP_ITEM);
-            break;
-        case '\n':
-            my_choice = item_index(current_item(my_menu));
-            pos_menu_cursor(my_menu);
-            break;
-        }
-    }
-
-    unpost_menu(my_menu);
-
-    for (ssChoice = 0; ssChoice < n_choices; ++ssChoice)
-        free_item(my_items[ssChoice]);
-
-    free_menu(my_menu);
-
-    delwin(wUI);
-    delwin(wBorder);
-
-    touchwin(stdscr);
-    wrefresh(stdscr);
-
-    /* return numbor of choice*/
-    //return (my_choice);
 }
 
 void MenuScreen::windowsBorderTitle(WINDOW *pwin, const char *title)
@@ -123,4 +86,49 @@ void MenuScreen::windowsFilling(WINDOW *pwin)
     for (y = 0; y < maxy; y++)
         for (x = 0; x < maxx; x++)
             mvwaddch(pwin, y, x, ' ');
+}
+
+void MenuScreen::next()
+{
+    update();
+    menu_driver(my_menu, REQ_DOWN_ITEM);
+    update();
+}
+
+void MenuScreen::previous()
+{
+    update();
+    menu_driver(my_menu, REQ_UP_ITEM);
+    update();
+}
+
+int MenuScreen::select()
+{
+    my_choice = item_index(current_item(my_menu));
+    pos_menu_cursor(my_menu);
+
+    unpost_menu(my_menu);
+
+    for (ssChoice = 0; ssChoice < n_choices; ++ssChoice)
+        free_item(my_items[ssChoice]);
+
+    free_menu(my_menu);
+
+    delwin(wUI);
+    delwin(wBorder);
+
+    touchwin(stdscr);
+    wrefresh(stdscr);
+
+    return my_choice;
+}
+
+void MenuScreen::update()
+{
+    std::cout << "proute";
+    printw("proute");
+    touchwin(wUI);
+    wrefresh(wUI);
+    touchwin(wBorder);
+    wrefresh(wBorder);
 }

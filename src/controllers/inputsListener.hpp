@@ -17,5 +17,10 @@ private:
     bool translateLeft();
     bool translateRight();
     bool translateDown();
+    void onMenuKeyPressed(int code);
+    void menuUp();
+    void menuDown();
+    void menuEnter();
+
     bool rotate();
 };

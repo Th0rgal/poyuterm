@@ -7,7 +7,10 @@ class MenuScreen : public Screen
 {
 public:
     MenuScreen();
-
+    void next();
+    void previous();
+    int select();
+    
 private:
     int key;
     ITEM **my_items;
@@ -21,4 +24,6 @@ private:
     int my_choice = -1;
     void windowsBorderTitle(WINDOW *pwin, const char *title);
     void windowsFilling(WINDOW *pwin);
+    void update();
+
 };

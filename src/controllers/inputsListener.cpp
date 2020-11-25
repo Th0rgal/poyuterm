@@ -2,6 +2,7 @@
 #include <functional>
 #include "controllers/inputsListener.hpp"
 #include "views/display.hpp"
+#include "views/menuscreen.hpp"
 #include <chrono>
 #include <algorithm>
 #include <iostream>
@@ -45,6 +46,9 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
         {
             switch (gameData.mode)
             {
+            case GameData::menu:
+                onMenuKeyPressed(inputCode);
+                break;
             case GameData::solo:
                 break;
             case GameData::tetris:
@@ -136,4 +140,39 @@ bool InputsListener::translateDown()
 bool InputsListener::rotate()
 {
     return true;
+}
+
+
+void InputsListener::onMenuKeyPressed(int code)
+{
+    switch (code)
+    {
+
+        case KEY_UP:
+            menuUp();
+            break;
+        case KEY_DOWN:
+            menuDown();
+            break;
+
+        case '\n':
+            menuEnter();
+            break;
+    };
+}
+
+
+void InputsListener::menuUp()
+{
+    (*display.menu).next();
+}
+
+void InputsListener::menuDown()
+{
+    (*display.menu).previous();
+}
+
+void InputsListener::menuEnter()
+{
+    (*display.menu).select();
 }
