@@ -12,8 +12,6 @@ int main()
     GameData gameData = GameData();
     Grid grid = Grid(content);
 
-    // load views
-
     // load controllers
     GameManager(gameData, grid).start();
 
