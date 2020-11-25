@@ -45,6 +45,7 @@ set(LIBS
 )
 
 add_executable(poyuterm src/main.cpp ${SRCS} ${HEADERS})
+target_compile_features(poyuterm PRIVATE cxx_std_17)
 target_include_directories(poyuterm PUBLIC src/)
 target_link_libraries(poyuterm ${LIBS})
 

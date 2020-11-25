@@ -83,9 +83,9 @@ void InputsListener::onKeyPressed(int code)
     if (shifted)
     {
         for (Puyo puyo : clone)
-            display.game.setCell(puyo.x, puyo.y, Grid::none);
+            (*display.game).setCell(puyo.x, puyo.y, Grid::none);
         for (Puyo puyo : gameData.activePiece)
-            display.game.setCell(puyo.x, puyo.y, puyo.type);
+            (*display.game).setCell(puyo.x, puyo.y, puyo.type);
     }
 }
 

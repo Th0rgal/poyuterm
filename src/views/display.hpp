@@ -3,10 +3,10 @@
 #include <ncurses.h>
 #include "views/gamescreen.hpp"
 #include "views/menuscreen.hpp"
+#include <optional>
 
-class Display
+struct Display
 {
-public:
     Display();
 
     bool started = false;
@@ -17,8 +17,6 @@ public:
     void showMenu();
     void showGame();
 
-    GameScreen game;
-    MenuScreen menu;
-
-private:
+    std::optional<GameScreen> game = std::nullopt;
+    std::optional<MenuScreen> menu = std::nullopt;
 };

@@ -50,9 +50,9 @@ Display::Display()
 
 
 void Display::showMenu() {
-    MenuScreen();
+    menu = MenuScreen();
 }
 
 void Display::showGame() {
-    GameScreen();
+    game = GameScreen();
 }

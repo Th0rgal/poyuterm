@@ -70,9 +70,9 @@ void GameManager::loop(long delay)
         {
             gameData.delaySinceGravity = 0;
             for (Puyo puyo : clone)
-                display.game.setCell(puyo.x, puyo.y, Grid::none);
+                (*display.game).setCell(puyo.x, puyo.y, Grid::none);
             for (Puyo puyo : gameData.activePiece)
-                display.game.setCell(puyo.x, puyo.y, puyo.type);
+                (*display.game).setCell(puyo.x, puyo.y, puyo.type);
         }
     }
     else
@@ -98,7 +98,7 @@ std::vector<Puyo> GameManager::createNewPiece()
         {
             // set gameState to lost
         }
-        display.game.setCell(puyo.x, puyo.y, puyo.type);
+        (*display.game).setCell(puyo.x, puyo.y, puyo.type);
     }
     return activePiece;
 }
