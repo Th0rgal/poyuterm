@@ -55,27 +55,6 @@ ConsoleDisplay::ConsoleDisplay()
 }
 
 /**
- * to start the display
- * @return bool true if startup was successful
- * 
- * @author Thomas Marchand and Valeran Maytié
- **/
-bool ConsoleDisplay::start()
-{
-
-    WINDOW *gridScreen;
-    width = (6 * virtualScale * 2) + 2;
-    height = (12 * virtualScale) + 2;
-
-    gridScreen = subwin(stdscr, width, height, LINES - height, COLS / 2 - width / 2);
-    box(gridScreen, ACS_VLINE, ACS_HLINE);
-
-    wrefresh(gridScreen);
-
-    return (COLS > 20 + 2 + 12 && virtualScale > 0);
-}
-
-/**
  * to display a cell at a specific location with the right color
  * @param int x position of the cell on the virtual x axis
  * @param int y position of the cell on the virtual y axis

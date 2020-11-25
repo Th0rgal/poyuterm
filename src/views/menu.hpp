@@ -4,15 +4,15 @@
 #include <menu.h>
 
 
-class ManuManager
+class MenuManager
 {
 public:
-	ManuManager();
-	int runMenu(WINDOW *wParent, int height, int width, int y, int x);
+	MenuManager();
+	int runMenu();
 
 private:
-	
-    int c;
+
+    int key;
     ITEM **my_items;
     MENU *my_menu;
 
@@ -24,5 +24,4 @@ private:
     int my_choice = -1;
 	void wCenterTitle(WINDOW *pwin, const char * title);
 	void wclrscr(WINDOW * pwin);
-	bool initColors();
 };

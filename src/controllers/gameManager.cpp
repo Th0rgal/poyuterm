@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "views/display.hpp"
+#include "views/menu.hpp"
 
 
 /**
@@ -32,8 +33,8 @@ GameManager::GameManager(GameData &gameData,
  **/
 void GameManager::start()
 {
-    bool succeeded = (display).start();
-    if (succeeded)
+    int choices = menu.runMenu();
+    if (display.started)
     {
         InputsListener inputsListener(gameData, display, grid);
         inputsListener.handleInputs([&](int delay) {
