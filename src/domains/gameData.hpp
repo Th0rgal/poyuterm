@@ -23,15 +23,18 @@ struct GameData
         paused = 1,
         won = 2,
         lost = 3
-
     };
 
     enum GameMode
     {
-        solo = 0,
+        menu = 0,
         simulation = 1,
-        tetris = 2
+        solo = 2,
+        tetris = 3
     };
+
+    GameMode mode = menu;
+    GameState state = running;
 
     GameData();
     std::vector<Puyo> activePiece;

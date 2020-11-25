@@ -43,7 +43,16 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
         }
         else
         {
-            onKeyPressed(inputCode);
+            switch (gameData.mode)
+            {
+            case GameData::solo:
+                break;
+            case GameData::tetris:
+                onTetrisKeyPressed(inputCode);
+                break;
+            default:
+                break;
+            }
         }
     }
 }
@@ -54,7 +63,7 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
  * 
  * @author Thomas Marchand and Valeran Maytié
  **/
-void InputsListener::onKeyPressed(int code)
+void InputsListener::onTetrisKeyPressed(int code)
 {
     const std::vector<Puyo> clone = gameData.activePiece;
     bool shifted;

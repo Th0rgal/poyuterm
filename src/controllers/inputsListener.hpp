@@ -13,7 +13,7 @@ public:
     Grid &grid;
 
 private:
-    void onKeyPressed(int code);
+    void onTetrisKeyPressed(int code);
     bool translateLeft();
     bool translateRight();
     bool translateDown();

@@ -29,7 +29,8 @@ MenuScreen::MenuScreen()
             NULL};
 
     /* Calculate nchoices */
-    for (n_choices = 0; choices[n_choices]; n_choices++);
+    for (n_choices = 0; choices[n_choices]; n_choices++)
+        ;
 
     /* alloction of an iteam array for the menu */
     my_items = (ITEM **)calloc(n_choices + 1, sizeof(ITEM *));
@@ -106,7 +107,7 @@ void MenuScreen::windowsBorderTitle(WINDOW *pwin, const char *title)
     int x, maxy, maxx, stringsize;
     getmaxyx(pwin, maxy, maxx);
     stringsize = 4 + strlen(title);
-    x = (maxx - stringsize)/2;
+    x = (maxx - stringsize) / 2;
     mvwaddch(pwin, 0, x, ACS_RTEE);
     waddch(pwin, ' ');
     waddstr(pwin, title);
