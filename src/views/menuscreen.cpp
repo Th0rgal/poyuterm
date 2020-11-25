@@ -61,16 +61,13 @@ MenuScreen::MenuScreen()
     /* menu display */
     post_menu(my_menu);
 
-    touchwin(wBorder);
-    wrefresh(wBorder);
-
     /* Key pressed */
     while (my_choice == -1)
     {
         touchwin(wUI);
         wrefresh(wUI);
         touchwin(wBorder);
-        //wrefresh(wBorder);
+        wrefresh(wBorder);
         key = getch();
         switch (key)
         {
