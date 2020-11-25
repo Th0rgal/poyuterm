@@ -7,7 +7,6 @@
 #include <iostream>
 #include "views/display.hpp"
 
-
 /**
  * to intialize a GameManager object
  * @param GameData &gameData GameData instance passed by reference
@@ -17,10 +16,10 @@
  * @author Thomas Marchand
  **/
 GameManager::GameManager(GameData &gameData,
-                         Grid &grid)             : gameData(gameData),
-                                                    grid(grid),
-                                                    rd(),
-                                                    gen(rd())
+                         Grid &grid) : gameData(gameData),
+                                       grid(grid),
+                                       rd(),
+                                       gen(rd())
 {
 }
 
@@ -51,31 +50,35 @@ void GameManager::start()
  **/
 void GameManager::loop(long delay)
 {
-    if (gameData.activePiece.empty())
-        gameData.activePiece = createNewPiece();
-
-    if (gameData.delaySinceGravity > 500000000l) // in nanoseconds
+    if (gameData.mode == GameData::tetris)
     {
-        const std::vector<Puyo> clone = gameData.activePiece;
-        bool shifted = shift(gameData.activePiece, grid, 0, 1);
-        if (!shifted)
-        { // if we were already on the ground
-            for (Puyo puyo : gameData.activePiece)
-                grid.content[puyo.x][puyo.y] = puyo.type;
-            gameData.activePiece = {};
-            //grid.removeAdjacents();
+
+        if (gameData.activePiece.empty())
+            gameData.activePiece = createNewPiece();
+
+        if (gameData.delaySinceGravity > 500000000l) // in nanoseconds
+        {
+            const std::vector<Puyo> clone = gameData.activePiece;
+            bool shifted = shift(gameData.activePiece, grid, 0, 1);
+            if (!shifted)
+            { // if we were already on the ground
+                for (Puyo puyo : gameData.activePiece)
+                    grid.content[puyo.x][puyo.y] = puyo.type;
+                gameData.activePiece = {};
+                //grid.removeAdjacents();
+            }
+            else
+            {
+                gameData.delaySinceGravity = 0;
+                for (Puyo puyo : clone)
+                    (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+                for (Puyo puyo : gameData.activePiece)
+                    (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+            }
         }
         else
-        {
-            gameData.delaySinceGravity = 0;
-            for (Puyo puyo : clone)
-                (*display.game).setCell(puyo.x, puyo.y, Grid::none);
-            for (Puyo puyo : gameData.activePiece)
-                (*display.game).setCell(puyo.x, puyo.y, puyo.type);
-        }
+            gameData.delaySinceGravity += delay;
     }
-    else
-        gameData.delaySinceGravity += delay;
 }
 
 /**
