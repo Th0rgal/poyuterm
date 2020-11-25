@@ -24,7 +24,6 @@ MenuScreen::MenuScreen()
     char *choices[] = /* The menu choices */
         {
             (char *)"            Solo              ",
-            (char *)"            Duo               ",
             (char *)"            Bot               ",
             (char *)"            Tetris            ",
             (char *)"            Quitter           ",
@@ -107,7 +106,7 @@ int MenuScreen::select()
 {
     my_choice = item_index(current_item(my_menu));
     pos_menu_cursor(my_menu);
-
+    printf("%d", my_choice);
     unpost_menu(my_menu);
 
     for (ssChoice = 0; ssChoice < n_choices; ++ssChoice)
@@ -121,7 +120,7 @@ int MenuScreen::select()
     touchwin(stdscr);
     wrefresh(stdscr);
 
-    return my_choice;
+    return my_choice + 1;
 }
 
 void MenuScreen::update()
