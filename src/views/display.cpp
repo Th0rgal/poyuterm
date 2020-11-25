@@ -10,23 +10,13 @@
  **/
 ConsoleDisplay::ConsoleDisplay()
 {
-}
-
-/**
- * to start the display
- * @return bool true if startup was successful
- * 
- * @author Thomas Marchand and Valeran Maytié
- **/
-bool ConsoleDisplay::start()
-{
     initscr();
 
     if (LINES < 12 + 2 or COLS < 6 * 2 + 2)
     {
         printw("Error: your terminal is too small \nminimum cols: 44 \nminimum lines: 14");
         getch();
-        return false;
+        return;
     }
 
     int boxHeight = LINES - 2;
@@ -55,10 +45,23 @@ bool ConsoleDisplay::start()
     {
         endwin();
         printf("Error: your terminal doesn't suport colors");
-        return false;
+
+        return ;
     }
     use_default_colors();
     start_color();
+
+    started = true;
+}
+
+/**
+ * to start the display
+ * @return bool true if startup was successful
+ * 
+ * @author Thomas Marchand and Valeran Maytié
+ **/
+bool ConsoleDisplay::start()
+{
 
     WINDOW *gridScreen;
     width = (6 * virtualScale * 2) + 2;

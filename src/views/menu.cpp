@@ -3,7 +3,7 @@
 #include <stdlib.h> /* calloc() */
 #include <string.h> /* strlen() */
 
-#include "menu.hpp"
+#include "views/menu.hpp"
 
 #define WHITEONRED 1
 #define WHITEONBLUE 2
@@ -52,6 +52,7 @@ bool ManuManager::initColors()
 
 int ManuManager::runMenu(WINDOW *wParent, int height, int width, int y, int x)
 {
+
     char *choices[] =           /* The menu choices */
             {
                         (char*)"            Solo              ",
