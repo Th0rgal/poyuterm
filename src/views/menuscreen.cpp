@@ -70,7 +70,7 @@ MenuScreen::MenuScreen()
         touchwin(wUI);
         wrefresh(wUI);
         touchwin(wBorder);
-        wrefresh(wBorder);
+        //wrefresh(wBorder);
         key = getch();
         switch (key)
         {
