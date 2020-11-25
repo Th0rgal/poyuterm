@@ -5,6 +5,8 @@
 #include <ncurses.h>
 #include <string>
 #include <iostream>
+#include "views/display.hpp"
+
 
 /**
  * to intialize a GameManager object
@@ -15,10 +17,8 @@
  * @author Thomas Marchand
  **/
 GameManager::GameManager(GameData &gameData,
-                         Grid &grid,
-                         ConsoleDisplay &display) : gameData(gameData),
+                         Grid &grid)             : gameData(gameData),
                                                     grid(grid),
-                                                    display(display),
                                                     rd(),
                                                     gen(rd())
 {

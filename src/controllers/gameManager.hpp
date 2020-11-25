@@ -9,15 +9,14 @@ class GameManager
 {
 public:
     GameManager(GameData &gameData,
-                Grid &grid,
-                ConsoleDisplay &display);
+                Grid &grid);
     void start();
     void loop(long delay);
 
 private:
     GameData &gameData;
     Grid &grid;
-    ConsoleDisplay &display;
+    ConsoleDisplay display = ConsoleDisplay();
     std::random_device rd;
     std::mt19937 gen;
 

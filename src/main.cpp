@@ -1,7 +1,6 @@
 #include "controllers/gameManager.hpp"
 #include "domains/gameData.hpp"
 #include "domains/grid.hpp"
-#include "views/display.hpp"
 #include "views/menu.hpp"
 
 int main()
@@ -14,10 +13,9 @@ int main()
     Grid grid = Grid(content);
 
     // load views
-    ConsoleDisplay display = ConsoleDisplay();
 
     // load controllers
-    GameManager(gameData, grid, display).start();
+    GameManager(gameData, grid).start();
 
     return 0;
 }
