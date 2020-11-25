@@ -7,7 +7,8 @@
 class ConsoleDisplay
 {
 public:
-	WINDOW * gridScreen;
+    ConsoleDisplay();
+    WINDOW *gridScreen;
     bool start();
     void showError();
     void setCell(int x, int y, Grid::PuyoType puyo);
@@ -18,5 +19,5 @@ private:
     int virtualScale;
     std::string puyoLine;
     int width;
-	int height;
+    int height;
 };
