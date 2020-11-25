@@ -70,6 +70,7 @@ MenuScreen::MenuScreen()
         touchwin(wBorder);
         wrefresh(wBorder);
         key = getch();
+
         switch (key)
         {
         case KEY_DOWN:
