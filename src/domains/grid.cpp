@@ -1,4 +1,5 @@
 #include "domains/grid.hpp"
+#include "domains/gameData.hpp"
 #include <iostream>
 
 /**
@@ -31,15 +32,4 @@ std::size_t Grid::width()
 std::size_t Grid::height()
 {
     return content.size() ? content[0].size() : 0;
-}
-
-/**
- * to delete all combinations of linked puyos with 
- * a minimum size of 4
- * 
- * @author unknown
- **/
-void Grid::removeAdjectives()
-{
-    return;
 }

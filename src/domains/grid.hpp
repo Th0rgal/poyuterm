@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
 
-struct Grid
+class Grid
 {
+public:
     enum PuyoType
     {
         none = 0,
@@ -15,6 +16,5 @@ struct Grid
     std::size_t width();
     std::size_t height();
     Grid(std::vector<std::vector<PuyoType>> initialGrid);
-    void removeAdjectives();
     std::vector<std::vector<PuyoType>> content;
 };

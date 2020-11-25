@@ -63,6 +63,7 @@ void GameManager::loop(long delay)
             for (Puyo puyo : gameData.activePiece)
                 grid.content[puyo.x][puyo.y] = puyo.type;
             gameData.activePiece = {};
+            //grid.removeAdjacents();
         }
         else
         {
