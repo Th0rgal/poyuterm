@@ -16,6 +16,23 @@ struct Puyo
 
 struct GameData
 {
+
+    enum GameState
+    {
+        running = 0,
+        paused = 1,
+        won = 2,
+        lost = 3
+
+    };
+
+    enum GameMode
+    {
+        solo = 0,
+        simulation = 1,
+        tetris = 2
+    };
+
     GameData();
     std::vector<Puyo> activePiece;
     long delaySinceGravity;
