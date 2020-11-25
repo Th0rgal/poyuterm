@@ -33,15 +33,14 @@ GameManager::GameManager(GameData &gameData,
 void GameManager::start()
 {
     display.showMenu();
-    /*
     if (display.started)
     {
         InputsListener inputsListener(gameData, display, grid);
         inputsListener.handleInputs([&](int delay) {
             loop(delay);
         });
-        (display).close();
-    }*/
+        display.close();
+    }
 }
 
 /**

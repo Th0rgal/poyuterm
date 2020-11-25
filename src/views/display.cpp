@@ -45,11 +45,21 @@ Display::Display()
     started = true;
 }
 
-
-void Display::showMenu() {
+void Display::showMenu()
+{
     menu = MenuScreen();
 }
 
-void Display::showGame() {
+void Display::showGame()
+{
     game = GameScreen();
+}
+
+void Display::close()
+{
+    if (menu.has_value())
+        (*menu).close();
+
+    if (game.has_value())
+        (*menu).close();
 }

@@ -1,4 +1,3 @@
-#include <ncurses.h>
 #include <functional>
 #include "controllers/inputsListener.hpp"
 #include "views/display.hpp"
@@ -142,25 +141,24 @@ bool InputsListener::rotate()
     return true;
 }
 
-
 void InputsListener::onMenuKeyPressed(int code)
 {
     switch (code)
     {
 
-        case KEY_UP:
-            menuUp();
-            break;
-        case KEY_DOWN:
-            menuDown();
-            break;
+    case KEY_UP:
+        menuUp();
+        break;
 
-        case '\n':
-            menuEnter();
-            break;
+    case KEY_DOWN:
+        menuDown();
+        break;
+
+    case '\n':
+        menuEnter();
+        break;
     };
 }
-
 
 void InputsListener::menuUp()
 {

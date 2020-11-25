@@ -63,7 +63,6 @@ MenuScreen::MenuScreen()
 
     /* menu display */
     post_menu(my_menu);
-
 }
 
 void MenuScreen::windowsBorderTitle(WINDOW *pwin, const char *title)
@@ -125,8 +124,6 @@ int MenuScreen::select()
 
 void MenuScreen::update()
 {
-    std::cout << "proute";
-    printw("proute");
     touchwin(wUI);
     wrefresh(wUI);
     touchwin(wBorder);
