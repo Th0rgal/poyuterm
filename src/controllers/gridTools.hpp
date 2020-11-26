@@ -22,3 +22,4 @@ void extractGroup(std::vector<Puyo> &group,
                   const Coordinates coordinates);
 
 bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y);
+bool rotate(std::vector<Puyo> &activePiece, Grid constraint);

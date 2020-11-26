@@ -87,6 +87,38 @@ bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
     return true;
 }
 
+bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
+{
+    const size_t size = activePiece.size();
+    std::vector<Puyo> updatedPiece(size);
+    int sens = (activePiece[0].x - activePiece[1].x) + 2 * (activePiece[0].y - activePiece[1].y);
+
+    for (size_t i = 1; i < size; i++)
+    {
+        Puyo puyo = activePiece[i];
+        switch (sens)
+        {
+            case -1:
+                puyo.move(-1, -1);
+                break;
+            case 2:
+                puyo.move(-1, 1);
+                break;
+            case 1:
+                puyo.move(1, 1);
+                break;
+            case -2:
+                puyo.move(1, -1);
+                break;
+        }
+        updatedPiece[i] = puyo;
+    }
+
+    for (std::size_t i = 1; i < updatedPiece.size(); i++)
+        activePiece[i] = updatedPiece[i];
+    return true;
+}
+
 Coordinates::Coordinates(std::size_t x, std::size_t y) : x(x), y(y)
 {
 }

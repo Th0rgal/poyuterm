@@ -34,7 +34,7 @@ void InputsListener::onTetrisKeyPressed(int code)
         break;
 
     case ' ':
-        shifted = translateDown();
+        shifted = rotatePiece();
         break;
 
     default:
@@ -85,9 +85,9 @@ bool InputsListener::translateDown()
  * 
  * @author Valeran Maytié
  **/
-bool InputsListener::rotate()
+bool InputsListener::rotatePiece()
 {
-    return true;
+    return rotate(gameData.activePiece, grid);
 }
 
 void InputsListener::onMenuKeyPressed(int code)

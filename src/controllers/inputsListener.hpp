@@ -24,6 +24,6 @@ private:
     bool translateLeft();
     bool translateRight();
     bool translateDown();
-    bool rotate();
+    bool rotatePiece();
     void openMenu();
 };
