@@ -71,6 +71,15 @@ void GameManager::loop(long delay)
                 }
                 gameData.activePiece = {};
                 std::vector<std::vector<Puyo>> groupsToDelete = runDetection(grid, starts);
+                for (std::vector<Puyo> group : groupsToDelete)
+                    for (Puyo puyo : group)
+                    {
+                        if (!puyo.type)
+                            break;
+
+                        grid.content[puyo.x][puyo.y] = Grid::none;
+                        (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+                    }
 
                 //grid.removeAdjacents();
             }

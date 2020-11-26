@@ -15,10 +15,10 @@ struct Coordinates
     Coordinates operator+(Coordinates coordinate);
 };
 
-std::vector<std::vector<Puyo>> runDetection(Grid &grid, std::vector<Coordinates> &starts);
+std::vector<std::vector<Puyo>> runDetection(const Grid &grid, std::vector<Coordinates> &starts);
 
 void extractGroup(std::vector<Puyo> &group,
-                  std::vector<std::vector<Grid::PuyoType>> &clonedContent,
-                  Coordinates Coordinates);
+                  Grid &clonedGrid,
+                  const Coordinates coordinates);
 
 bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y);

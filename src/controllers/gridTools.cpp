@@ -5,42 +5,42 @@
  * 
  * 
  **/
-std::vector<std::vector<Puyo>> runDetection(Grid &grid, std::vector<Coordinates> &starts)
+std::vector<std::vector<Puyo>> runDetection(const Grid &grid, std::vector<Coordinates> &starts)
 {
-
     std::vector<std::vector<Puyo>> groups;
     for (Coordinates coordinates : starts)
     {
         Grid::PuyoType type = grid.content[coordinates.x][coordinates.y];
-        std::vector<std::vector<Grid::PuyoType>> clonedContent = grid.content;
+        Grid clonedGrid = grid;
         std::vector<Puyo> group;
-        extractGroup(group, clonedContent, coordinates);
-        groups.push_back(group);
+        extractGroup(group, clonedGrid, coordinates);
+        if (group.size() >= 4)
+            groups.push_back(group);
     }
     return groups;
 }
 
 void extractGroup(std::vector<Puyo> &group,
-                  std::vector<std::vector<Grid::PuyoType>> &clonedContent,
-                  Coordinates coordinates)
+                  Grid &grid,
+                  const Coordinates coordinates)
 {
-    Puyo puyo = Puyo(clonedContent[coordinates.x][coordinates.y],
+    Puyo puyo = Puyo(grid.content[coordinates.x][coordinates.y],
                      coordinates.x,
                      coordinates.y);
-    clonedContent[puyo.x][puyo.y] = Grid::none;
+    grid.content[puyo.x][puyo.y] = Grid::none;
     group.push_back(puyo);
 
-    if (puyo.x > 0 && clonedContent[puyo.x - 1][puyo.y] == puyo.type)
-        extractGroup(group, clonedContent, Coordinates(puyo.x - 1, puyo.y));
+    if (puyo.x > 0 && grid.content[puyo.x - 1][puyo.y] == puyo.type)
+        extractGroup(group, grid, Coordinates(puyo.x - 1, puyo.y));
 
-    if (puyo.y > 0 && clonedContent[puyo.x][puyo.y - 1] == puyo.type)
-        extractGroup(group, clonedContent, Coordinates(puyo.x, puyo.y - 1));
+    if (puyo.y > 0 && grid.content[puyo.x][puyo.y - 1] == puyo.type)
+        extractGroup(group, grid, Coordinates(puyo.x, puyo.y - 1));
 
-    if (puyo.x < 0 && clonedContent[puyo.x + 1][puyo.y] == puyo.type)
-        extractGroup(group, clonedContent, Coordinates(puyo.x + 1, puyo.y));
+    if (puyo.x + 1 < grid.width() && grid.content[puyo.x + 1][puyo.y] == puyo.type)
+        extractGroup(group, grid, Coordinates(puyo.x + 1, puyo.y));
 
-    if (puyo.y < 0 && clonedContent[puyo.x][puyo.y + 1] == puyo.type)
-        extractGroup(group, clonedContent, Coordinates(puyo.x, puyo.y + 1));
+    if (puyo.y + 1 < grid.height() && grid.content[puyo.x][puyo.y + 1] == puyo.type)
+        extractGroup(group, grid, Coordinates(puyo.x, puyo.y + 1));
 }
 
 /**
