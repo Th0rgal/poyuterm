@@ -90,14 +90,12 @@ void MenuScreen::windowsFilling(WINDOW *pwin)
 
 void MenuScreen::next()
 {
-    update();
     menu_driver(my_menu, REQ_DOWN_ITEM);
     update();
 }
 
 void MenuScreen::previous()
 {
-    update();
     menu_driver(my_menu, REQ_UP_ITEM);
     update();
 }

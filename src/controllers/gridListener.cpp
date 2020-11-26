@@ -94,7 +94,6 @@ void InputsListener::onMenuKeyPressed(int code)
 {
     switch (code)
     {
-
     case KEY_UP:
         menuUp();
         break;
