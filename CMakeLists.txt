@@ -8,6 +8,7 @@ include(doctest)
 
 set(SRCS
     src/controllers/gameManager.cpp
+    src/controllers/gridTools.cpp
     src/controllers/inputsListener.cpp
     src/controllers/gridListener.cpp
     src/controllers/menuListener.cpp
@@ -23,6 +24,7 @@ set(SRCS
 
 set(HEADERS
     src/controllers/gameManager.hpp
+    src/controllers/gridTools.hpp
     src/controllers/inputsListener.hpp
 
     src/domains/gameData.hpp

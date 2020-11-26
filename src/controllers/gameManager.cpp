@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "views/display.hpp"
+#include "controllers/gridTools.hpp"
 
 /**
  * to intialize a GameManager object
@@ -62,9 +63,15 @@ void GameManager::loop(long delay)
             bool shifted = shift(gameData.activePiece, grid, 0, 1);
             if (!shifted)
             { // if we were already on the ground
+                std::vector<Coordinates> starts;
                 for (Puyo puyo : gameData.activePiece)
+                {
                     grid.content[puyo.x][puyo.y] = puyo.type;
+                    starts.emplace_back(puyo.x, puyo.y);
+                }
                 gameData.activePiece = {};
+                std::vector<std::vector<Puyo>> groupsToDelete = runDetection(grid, starts);
+
                 //grid.removeAdjacents();
             }
             else
