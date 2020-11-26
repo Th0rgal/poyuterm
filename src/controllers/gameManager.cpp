@@ -70,6 +70,7 @@ void GameManager::loop(long delay)
                     starts.emplace_back(puyo.x, puyo.y);
                 }
                 gameData.activePiece = {};
+                // delete groups
                 std::vector<std::vector<Puyo>> groupsToDelete = runDetection(grid, starts);
                 for (std::vector<Puyo> group : groupsToDelete)
                     for (Puyo puyo : group)
@@ -80,6 +81,8 @@ void GameManager::loop(long delay)
                         grid.content[puyo.x][puyo.y] = Grid::none;
                         (*display.game).setCell(puyo.x, puyo.y, Grid::none);
                     }
+               /* if (groupsToDelete.size() > 0)
+                    runGravity(grid);*/
             }
             else
             {

@@ -43,6 +43,25 @@ void extractGroup(std::vector<Puyo> &group,
         extractGroup(group, grid, Coordinates(puyo.x, puyo.y + 1));
 }
 
+bool runGravity(Grid &grid)
+{
+
+    for (std::size_t x = 0; x < grid.width(); x++)
+        for (std::size_t y = grid.height() - 2; y >= 0; y--)
+            if (grid.content[x][y] && !grid.content[x][y + 1])
+            {
+                grid.content[x][y + 1] = grid.content[x][y];
+                grid.content[x][y] = Grid::none;
+            }
+
+    for (std::size_t x = 0; x < grid.width(); x++)
+        for (std::size_t y = 0; y < grid.height(); y++)
+            if (grid.content[x][y] && !grid.content[x][y + 1])
+                return true;
+
+    return false;
+}
+
 /**
  * to shift the falling piece in gameData and on the grid
  * @param std::vector<Puyo> &activePiece the falling piece to shift
@@ -98,18 +117,18 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
         Puyo puyo = activePiece[i];
         switch (sens)
         {
-            case -1:
-                puyo.move(-1, -1);
-                break;
-            case 2:
-                puyo.move(-1, 1);
-                break;
-            case 1:
-                puyo.move(1, 1);
-                break;
-            case -2:
-                puyo.move(1, -1);
-                break;
+        case -1:
+            puyo.move(-1, -1);
+            break;
+        case 2:
+            puyo.move(-1, 1);
+            break;
+        case 1:
+            puyo.move(1, 1);
+            break;
+        case -2:
+            puyo.move(1, -1);
+            break;
         }
         updatedPiece[i] = puyo;
     }

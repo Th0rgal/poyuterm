@@ -21,5 +21,6 @@ void extractGroup(std::vector<Puyo> &group,
                   Grid &clonedGrid,
                   const Coordinates coordinates);
 
+bool runGravity(Grid &grid);
 bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y);
 bool rotate(std::vector<Puyo> &activePiece, Grid constraint);
