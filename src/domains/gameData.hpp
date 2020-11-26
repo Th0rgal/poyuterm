@@ -27,8 +27,8 @@ struct GameData
     enum GameMode
     {
         menu = 0,
-        simulation = 1,
-        solo = 2,
+        solo = 1,
+        simulation = 2,
         tetris = 3
     };
 

@@ -104,7 +104,6 @@ int MenuScreen::select()
 {
     my_choice = item_index(current_item(my_menu));
     pos_menu_cursor(my_menu);
-    printf("%d", my_choice);
     unpost_menu(my_menu);
 
     for (ssChoice = 0; ssChoice < n_choices; ++ssChoice)

@@ -19,7 +19,14 @@ void InputsListener::menuDown()
 
 void InputsListener::menuEnter()
 {
-    GameData::GameMode newGameMode = GameData::GameMode((*display.menu).select());
+    unsigned int selected = (*display.menu).select();
+    if (selected == 4)
+    {
+        display.close();
+        return;
+    }
+
+    GameData::GameMode newGameMode = GameData::GameMode(selected);
     gameData.mode = newGameMode;
     display.showGame();
 }
