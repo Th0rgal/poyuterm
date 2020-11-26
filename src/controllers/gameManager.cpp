@@ -51,7 +51,7 @@ void GameManager::start()
  **/
 void GameManager::loop(long delay)
 {
-    if (gameData.mode == GameData::tetris)
+    if (gameData.mode == GameData::tetris && gameData.state == GameData::running)
     {
 
         if (gameData.activePiece.empty())
@@ -80,8 +80,6 @@ void GameManager::loop(long delay)
                         grid.content[puyo.x][puyo.y] = Grid::none;
                         (*display.game).setCell(puyo.x, puyo.y, Grid::none);
                     }
-
-                //grid.removeAdjacents();
             }
             else
             {
@@ -114,7 +112,8 @@ std::vector<Puyo> GameManager::createNewPiece()
     {
         if (grid.content[puyo.x][puyo.y])
         {
-            // set gameState to lost
+            gameData.state = GameData::lost;
+            return {};
         }
         (*display.game).setCell(puyo.x, puyo.y, puyo.type);
     }
