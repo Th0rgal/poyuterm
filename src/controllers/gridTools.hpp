@@ -16,7 +16,9 @@ struct Coordinates
 };
 
 std::vector<std::vector<Puyo>> runDetection(Grid &grid, std::vector<Coordinates> &starts);
+
 void extractGroup(std::vector<Puyo> &group,
                   std::vector<std::vector<Grid::PuyoType>> &clonedContent,
                   Coordinates Coordinates);
 
+bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y);

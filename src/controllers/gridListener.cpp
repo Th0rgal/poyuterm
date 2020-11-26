@@ -1,5 +1,6 @@
 #include "controllers/inputsListener.hpp"
 #include "views/display.hpp"
+#include "controllers/gridTools.hpp"
 
 /**
  * to translate user inputs to actions (e.g. movements on the grid)

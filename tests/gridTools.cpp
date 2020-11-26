@@ -1,6 +1,6 @@
 #include <doctest/doctest.h>
 #include "domains/grid.hpp"
-#include "domains/gameData.hpp"
+#include "controllers/gridTools.hpp"
 
 #include <iostream>
 

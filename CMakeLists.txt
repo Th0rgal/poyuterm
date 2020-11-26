@@ -39,7 +39,7 @@ set(HEADERS
 set(TESTS
     tests/tests.cpp
     tests/grid.cpp
-    tests/gameData.cpp
+    tests/gridTools.cpp
     )
 
 set(LIBS
