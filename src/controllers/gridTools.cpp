@@ -144,15 +144,15 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
             break;
 
         case 1:
-            if (constraint.content[puyo.x + i][puyo.y + (size - 1) + i] != Grid::none ||
-                puyo.y + size + i > 12)
-                return false;
+            xTranslation = i - 1;
+            yTranslation = size - 2 + i;
+            break;
 
-            puyo.move(i - 1, size - 2 + i);
-            break;
         case -2:
-            puyo.move(i + 2 - size, -i);
+            xTranslation = i + 2 - size;
+            yTranslation = -i;
             break;
+
         }
         if (puyo.y + yTranslation > 11 ||
             puyo.x + xTranslation > 5)
