@@ -57,7 +57,7 @@ void GameManager::loop(long delay)
         if (gameData.activePiece.empty())
             gameData.activePiece = createNewPiece();
 
-        if (gameData.delaySinceGravity > 200000000l) // in nanoseconds
+        if (gameData.delaySinceGravity > 500000000l) // in nanoseconds
         {
 
             std::vector<std::vector<Grid::PuyoType>> contentSnapshot = grid.content;
