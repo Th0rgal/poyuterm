@@ -53,15 +53,17 @@ void GameManager::loop(long delay)
 {
     if (gameData.mode == GameData::tetris && gameData.state == GameData::running)
     {
-        std::vector<std::vector<Grid::PuyoType>> contentSnapshot = grid.content;
-        runGravity(grid);
-        (*display.game).refreshDiff(contentSnapshot, grid);
 
         if (gameData.activePiece.empty())
             gameData.activePiece = createNewPiece();
 
         if (gameData.delaySinceGravity > 200000000l) // in nanoseconds
         {
+
+            std::vector<std::vector<Grid::PuyoType>> contentSnapshot = grid.content;
+            runGravity(grid);
+            (*display.game).refreshDiff(contentSnapshot, grid);
+
             const std::vector<Puyo> clone = gameData.activePiece;
             bool shifted = shift(gameData.activePiece, grid, 0, 1);
             if (!shifted)
