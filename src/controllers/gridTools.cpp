@@ -125,7 +125,7 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
         {
         case -1:
             if (constraint.content[puyo.x - i][puyo.y + (size - 1) - i] != Grid::none ||
-                puyo.y + size - i > 12)
+                puyo.y + size - i - 1 > 12)
             {
                 return false;
             }
