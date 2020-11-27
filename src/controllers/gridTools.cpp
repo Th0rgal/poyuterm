@@ -112,28 +112,35 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
     std::vector<Puyo> updatedPiece(size);
     int sens = (activePiece[0].x - activePiece[1].x) + 2 * (activePiece[0].y - activePiece[1].y);
 
-    for (size_t i = 1; i < size; i++)
+    for (size_t i = 0; i < size; i++)
     {
         Puyo puyo = activePiece[i];
         switch (sens)
         {
         case -1:
-            puyo.move(-1, -1);
+            if(constraint.content[puyo.x -i][puyo.y + (size - 1) - i] != Grid::none || 
+                puyo.y + size - i > 12){
+                return false;
+            }
+            puyo.move(-1 * i, (size - 1) - i);
             break;
         case 2:
-            puyo.move(-1, 1);
+            if(puyo.x ){
+
+            }
+            puyo.move(-i, 1 * i);
             break;
         case 1:
-            puyo.move(1, 1);
+            puyo.move(1 * i, 1 * i);
             break;
         case -2:
-            puyo.move(1, -1);
+            puyo.move(1 * i, -1 * i);
             break;
         }
         updatedPiece[i] = puyo;
     }
 
-    for (std::size_t i = 1; i < updatedPiece.size(); i++)
+    for (std::size_t i = 0; i < updatedPiece.size(); i++)
         activePiece[i] = updatedPiece[i];
     return true;
 }
