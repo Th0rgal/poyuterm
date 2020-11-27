@@ -45,20 +45,19 @@ void extractGroup(std::vector<Puyo> &group,
 
 bool runGravity(Grid &grid)
 {
-    /*
     for (std::size_t x = 0; x < grid.width(); x++)
-        for (std::size_t y = grid.height() - 2; y >= 0; y--)
-            if (grid.content[x][y] && !grid.content[x][y + 1])
+        for (std::size_t y = grid.height() - 1; y >= 1; y--)
+            if (grid.content[x][y - 1] && !grid.content[x][y])
             {
-                grid.content[x][y + 1] = grid.content[x][y];
-                grid.content[x][y] = Grid::none;
+                grid.content[x][y] = grid.content[x][y - 1];
+                grid.content[x][y - 1] = Grid::none;
             }
 
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = 0; y < grid.height(); y++)
             if (grid.content[x][y] && !grid.content[x][y + 1])
                 return true;
-*/
+
     return false;
 }
 
@@ -118,15 +117,16 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
         switch (sens)
         {
         case -1:
-            if(constraint.content[puyo.x -i][puyo.y + (size - 1) - i] != Grid::none || 
-                puyo.y + size - i > 12){
+            if (constraint.content[puyo.x - i][puyo.y + (size - 1) - i] != Grid::none ||
+                puyo.y + size - i > 12)
+            {
                 return false;
             }
             puyo.move(-1 * i, (size - 1) - i);
             break;
         case 2:
-            if(puyo.x ){
-
+            if (puyo.x)
+            {
             }
             puyo.move(-i, 1 * i);
             break;

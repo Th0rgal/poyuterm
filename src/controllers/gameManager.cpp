@@ -53,7 +53,7 @@ void GameManager::loop(long delay)
 {
     if (gameData.mode == GameData::tetris && gameData.state == GameData::running)
     {
-
+        runGravity(grid);
         if (gameData.activePiece.empty())
             gameData.activePiece = createNewPiece();
 
@@ -81,8 +81,6 @@ void GameManager::loop(long delay)
                         grid.content[puyo.x][puyo.y] = Grid::none;
                         (*display.game).setCell(puyo.x, puyo.y, Grid::none);
                     }
-               /* if (groupsToDelete.size() > 0)
-                    runGravity(grid);*/
             }
             else
             {
