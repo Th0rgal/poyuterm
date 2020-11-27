@@ -45,7 +45,7 @@ void extractGroup(std::vector<Puyo> &group,
 
 bool runGravity(Grid &grid)
 {
-
+    /*
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = grid.height() - 2; y >= 0; y--)
             if (grid.content[x][y] && !grid.content[x][y + 1])
@@ -58,7 +58,7 @@ bool runGravity(Grid &grid)
         for (std::size_t y = 0; y < grid.height(); y++)
             if (grid.content[x][y] && !grid.content[x][y + 1])
                 return true;
-
+*/
     return false;
 }
 

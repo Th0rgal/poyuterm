@@ -51,3 +51,24 @@ TEST_CASE("testing detection")
         for (std::size_t y; y < grid.height(); y++)
             CHECK(grid.content[x][y] == content[x][y]);
 }
+
+TEST_CASE("testing gravity")
+{
+    std::vector<std::vector<Grid::PuyoType>> content(6, std::vector<Grid::PuyoType>(12));
+    content[1][0] = Grid::blue;
+    content[1][1] = Grid::yellow;
+    content[3][10] = Grid::pink;
+    content[3][11] = Grid::red;
+
+    std::vector<std::vector<Grid::PuyoType>> expectedContent(6, std::vector<Grid::PuyoType>(12));
+    content[1][1] = Grid::blue;
+    content[1][2] = Grid::yellow;
+    content[3][10] = Grid::pink;
+    content[3][11] = Grid::red;
+
+    Grid grid = Grid(content);
+    runGravity(grid);
+    for (std::size_t x = 0; x < grid.width(); x++)
+        for (std::size_t y = 0; y < grid.width(); y++)
+            CHECK(grid.content[x][y] == expectedContent[x][y]);
+}
