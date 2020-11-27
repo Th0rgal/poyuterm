@@ -53,7 +53,10 @@ void GameManager::loop(long delay)
 {
     if (gameData.mode == GameData::tetris && gameData.state == GameData::running)
     {
+        std::vector<std::vector<Grid::PuyoType>> contentSnapshot = grid.content;
         runGravity(grid);
+        (*display.game).refreshDiff(contentSnapshot, grid);
+
         if (gameData.activePiece.empty())
             gameData.activePiece = createNewPiece();
 
