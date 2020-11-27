@@ -1,6 +1,5 @@
 #include "views/gamescreen.hpp"
 
-
 GameScreen::GameScreen()
 {
     // to make getch() not blocking
@@ -30,8 +29,8 @@ GameScreen::GameScreen()
  * @author Valeran Maytié
  **/
 void GameScreen::setCell(int x,
-                                   int y,
-                                   Grid::PuyoType type)
+                         int y,
+                         Grid::PuyoType type)
 {
     x = 1 + (x)*virtualScale * 2 + COLS / 2 - gridWidth / 2;
     y = 1 + (y)*virtualScale + LINES - gridHeight;
@@ -49,4 +48,15 @@ void GameScreen::setCell(int x,
         mvwprintw(stdscr, i, x, puyoLine.c_str());
     }
     attroff(COLOR_PAIR(type));
+}
+
+void GameScreen::refreshDiff(std::vector<std::vector<Grid::PuyoType>> &snapshot,
+                             Grid &grid)
+{
+    for (std::size_t x = 0; x < grid.width(); x++)
+        for (std::size_t y = 0; y < grid.height(); y++)
+        {
+            if (snapshot[x][y] != grid.content[x][y])
+                setCell(x, y, grid.content[x][y]);
+        }
 }

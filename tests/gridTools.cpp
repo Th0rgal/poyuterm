@@ -70,5 +70,5 @@ TEST_CASE("testing gravity")
     runGravity(grid);
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = 0; y < grid.width(); y++)
-            CHECK((int)grid.content[x][y] == (int)expectedContent[x][y]);
+            CHECK(grid.content[x][y] == expectedContent[x][y]);
 }
