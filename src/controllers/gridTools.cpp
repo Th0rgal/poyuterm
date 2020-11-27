@@ -112,6 +112,7 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
     int sens = (activePiece[0].x - activePiece[1].x) + 2 * (activePiece[0].y - activePiece[1].y);
     int leftColision = activePiece[size - 1].x - (size - 1);
     int xTranslation = 0;
+    int yTranslation = 0;
 
     if(leftColision < 0){
         xTranslation = -leftColision;
@@ -124,31 +125,38 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
         switch (sens)
         {
         case -1:
-            if (constraint.content[puyo.x - i][puyo.y + (size - 1) - i] != Grid::none ||
-                puyo.y + size - i - 1 > 12)
-            {
-                return false;
-            }
-            puyo.move(-1 * i, (size - 1) - i);
+            xTranslation = -i;
+            yTranslation = size - 1 - i;
+ 
             break;
         
         case 2:
+            xTranslation = size - i -1;
+            yTranslation = i - 1;
 
-            puyo.move(size - i - 1, i - 1);
             break;
         
         case 1:
-            if(constraint.content[puyo.x + i][puyo.y + (size - 1) + i] != Grid::none || 
-               puyo.y + size + i > 12){ 
-                return false;
-            }
-            
-            puyo.move(i - 1, size - 2 + i);
+            xTranslation = i - 1;
+            yTranslation = size - 2 + i;
+
             break;
         case -2:
-            puyo.move(i + 2 -size , -i);
+            xTranslation = i + 1 - (size - 1);
+            yTranslation = - i;
+            
             break;
         }
+        if(puyo.y + yTranslation > 11  ||
+            puyo.x + xTranslation > 5){ 
+            return false;
+        }
+        if(constraint.content[puyo.x + xTranslation][puyo.y + yTranslation] != Grid::none){
+            return false;
+        }
+
+        puyo.move(xTranslation, yTranslation);
+
         updatedPiece[i] = puyo;
     }
 
