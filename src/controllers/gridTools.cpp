@@ -45,13 +45,23 @@ void extractGroup(std::vector<Puyo> &group,
 
 bool runGravity(Grid &grid)
 {
+    std::vector<Coordinates> starts;
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = grid.height() - 1; y >= 1; y--)
             if (grid.content[x][y - 1] && !grid.content[x][y])
             {
                 grid.content[x][y] = grid.content[x][y - 1];
                 grid.content[x][y - 1] = Grid::none;
+                starts.emplace_back(x, y);
             }
+
+    for (std::vector<Puyo> puyoList : runDetection(grid, starts))
+        for (Puyo puyo : puyoList)
+        {
+            if (!grid.content[puyo.x][puyo.y])
+                break;
+            grid.content[puyo.x][puyo.y] = Grid::none;
+        }
 
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = 0; y < grid.height(); y++)
@@ -114,7 +124,8 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
     int xTranslation = 0;
     int yTranslation = 0;
 
-    if(leftColision < 0){
+    if (leftColision < 0)
+    {
         xTranslation = -leftColision;
     }
 
@@ -127,31 +138,35 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
         case -1:
             xTranslation = -i;
             yTranslation = size - 1 - i;
- 
+
             break;
-        
+
         case 2:
-            xTranslation = size - i -1;
+            xTranslation = size - i - 1;
             yTranslation = i - 1;
 
             break;
-        
-        case 1:
-            xTranslation = i - 1;
-            yTranslation = size - 2 + i;
 
+        case 1:
+            if (constraint.content[puyo.x + i][puyo.y + (size - 1) + i] != Grid::none ||
+                puyo.y + size + i > 12)
+            {
+                return false;
+            }
+
+            puyo.move(i - 1, size - 2 + i);
             break;
         case -2:
-            xTranslation = i + 1 - (size - 1);
-            yTranslation = - i;
-            
+            puyo.move(i + 2 - size, -i);
             break;
         }
-        if(puyo.y + yTranslation > 11  ||
-            puyo.x + xTranslation > 5){ 
+        if (puyo.y + yTranslation > 11 ||
+            puyo.x + xTranslation > 5)
+        {
             return false;
         }
-        if(constraint.content[puyo.x + xTranslation][puyo.y + yTranslation] != Grid::none){
+        if (constraint.content[puyo.x + xTranslation][puyo.y + yTranslation] != Grid::none)
+        {
             return false;
         }
 
