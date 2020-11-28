@@ -1,6 +1,6 @@
 #pragma once
 
-#include "domains/grid.hpp"
+#include "models/grid.hpp"
 #include "views/screen.hpp"
 
 class GameScreen : public Screen

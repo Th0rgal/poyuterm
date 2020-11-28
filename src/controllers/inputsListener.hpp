@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
-#include "domains/gameData.hpp"
-#include "domains/grid.hpp"
+#include "models/gameData.hpp"
+#include "models/grid.hpp"
 
 class InputsListener
 {

@@ -1,5 +1,5 @@
 #include <doctest/doctest.h>
-#include "domains/grid.hpp"
+#include "models/grid.hpp"
 #include "controllers/gridTools.hpp"
 
 TEST_CASE("testing shift")

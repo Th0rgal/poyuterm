@@ -1,5 +1,5 @@
 #include "controllers/gameManager.hpp"
-#include "domains/gameData.hpp"
+#include "models/gameData.hpp"
 #include "controllers/inputsListener.hpp"
 #include <stdlib.h>
 #include <ncurses.h>

@@ -1,5 +1,5 @@
 #include "controllers/gridTools.hpp"
-#include "domains/grid.hpp"
+#include "models/grid.hpp"
 
 /**
  * 

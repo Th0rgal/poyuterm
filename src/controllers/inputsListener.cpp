@@ -5,7 +5,7 @@
 using namespace std::chrono;
 
 /**
- * to intialize the InputsListener with game and grid domains
+ * to intialize the InputsListener with game and grid models
  * @param GameData &gameData the GameData instance
  * @param Display display the Display instance
  * @param Grid &grid the Grid instance

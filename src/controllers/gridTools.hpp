@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "domains/grid.hpp"
-#include "domains/gameData.hpp"
+#include "models/grid.hpp"
+#include "models/gameData.hpp"
 
 struct Coordinates
 {

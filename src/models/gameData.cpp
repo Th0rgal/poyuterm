@@ -1,4 +1,4 @@
-#include "domains/gameData.hpp"
+#include "models/gameData.hpp"
 #include "views/display.hpp"
 
 /**

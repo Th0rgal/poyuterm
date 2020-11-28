@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "domains/grid.hpp"
+#include "models/grid.hpp"
 #include "views/display.hpp"
 
 struct Puyo

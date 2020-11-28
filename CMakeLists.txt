@@ -13,8 +13,8 @@ set(SRCS
     src/controllers/gridListener.cpp
     src/controllers/menuListener.cpp
 
-    src/domains/gameData.cpp
-    src/domains/grid.cpp
+    src/models/gameData.cpp
+    src/models/grid.cpp
 
     src/views/display.cpp
     src/views/screen.cpp
@@ -27,8 +27,8 @@ set(HEADERS
     src/controllers/gridTools.hpp
     src/controllers/inputsListener.hpp
 
-    src/domains/gameData.hpp
-    src/domains/grid.hpp
+    src/models/gameData.hpp
+    src/models/grid.hpp
 
     src/views/display.hpp
     src/views/screen.hpp

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "domains/gameData.hpp"
-#include "domains/grid.hpp"
+#include "models/gameData.hpp"
+#include "models/grid.hpp"
 #include "views/display.hpp"
 #include <random>
 
