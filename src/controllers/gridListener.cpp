@@ -158,7 +158,7 @@ void InputsListener::teleportDown()
     for (std::vector<Puyo> group : detected)
         for (Puyo puyo : group)
         {
-            if (grid.content[puyo.x][puyo.y])
+            if (!grid.content[puyo.x][puyo.y])
                 break;
             grid.content[puyo.x][puyo.y] = Grid::none;
         }
