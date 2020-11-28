@@ -106,6 +106,9 @@ int MenuScreen::select()
     pos_menu_cursor(my_menu);
     unpost_menu(my_menu);
 
+    for (ssChoice = 0; ssChoice < n_choices; ++ssChoice)
+        free_item(my_items[ssChoice]);
+
     delwin(wUI);
     delwin(wBorder);
 
