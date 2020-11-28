@@ -6,7 +6,7 @@
 class InputsListener
 {
 public:
-    InputsListener(GameData &gameDataRef, Display &display, Grid &gridRef);
+    InputsListener(GameData &gameData, Display &display, Grid &grid);
     void handleInputs(const std::function<void(long)> &loop);
     GameData &gameData;
     Display &display;

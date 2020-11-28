@@ -33,3 +33,8 @@ std::size_t Grid::height()
 {
     return content.size() ? content[0].size() : 0;
 }
+
+void Grid::reset()
+{
+    content = std::vector(6, std::vector(12, PuyoType::none));
+}

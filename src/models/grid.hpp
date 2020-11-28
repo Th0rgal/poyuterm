@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 
-class Grid
+struct Grid
 {
-public:
+
     enum PuyoType
     {
         none = 0,
@@ -17,4 +17,5 @@ public:
     std::size_t height();
     Grid(std::vector<std::vector<PuyoType>> initialGrid);
     std::vector<std::vector<PuyoType>> content;
+    void reset();
 };

@@ -26,9 +26,17 @@ void InputsListener::menuEnter()
         exit(0);
         return;
     }
-
     GameData::GameMode newGameMode = GameData::GameMode(selected);
-    gameData.mode = newGameMode;
+    auto contentSnapshot = grid.content;
     gameData.state = GameData::running;
     display.showGame();
+    if (gameData.mode != newGameMode)
+    {
+        gameData.mode = newGameMode;
+        grid.reset();
+        for (Puyo puyo : gameData.activePiece)
+            (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+        gameData.activePiece = {};
+        (*display.game).refreshDiff(contentSnapshot, grid);
+    }
 }
