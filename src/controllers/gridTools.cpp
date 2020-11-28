@@ -64,11 +64,11 @@ bool runGravity(Grid &grid)
         }
 
     for (std::size_t x = 0; x < grid.width(); x++)
-        for (std::size_t y = 0; y < grid.height(); y++)
+        for (std::size_t y = 0; y < grid.height()-1; y++)
             if (grid.content[x][y] && !grid.content[x][y + 1])
-                return true;
+                return false;
 
-    return false;
+    return true;
 }
 
 /**
@@ -152,7 +152,6 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
             xTranslation = i + 2 - size;
             yTranslation = -i;
             break;
-
         }
         if (puyo.y + yTranslation > 11 ||
             puyo.x + xTranslation > 5)

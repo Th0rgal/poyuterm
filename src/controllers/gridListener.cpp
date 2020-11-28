@@ -163,6 +163,10 @@ void InputsListener::teleportDown()
             grid.content[puyo.x][puyo.y] = Grid::none;
         }
 
+    bool finished = false;
+    while (!finished)
+        finished = runGravity(grid);
+
     // refresh display
     (*display.game).refreshDiff(contentSnapshot, grid);
 }

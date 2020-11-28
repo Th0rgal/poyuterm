@@ -71,4 +71,18 @@ TEST_CASE("testing gravity")
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = 0; y < grid.width(); y++)
             CHECK(grid.content[x][y] == expectedContent[x][y]);
+
+    expectedContent = std::vector<std::vector<Grid::PuyoType>>(6, std::vector<Grid::PuyoType>(12));
+    expectedContent[1][10] = Grid::blue;
+    expectedContent[1][11] = Grid::yellow;
+    expectedContent[3][10] = Grid::pink;
+    expectedContent[3][11] = Grid::red;
+
+    bool finished;
+    for (std::size_t i = 0; i < 9; i++)
+        finished = runGravity(grid);
+    CHECK(finished == true);
+    for (std::size_t x = 0; x < grid.width(); x++)
+        for (std::size_t y = 0; y < grid.width(); y++)
+            CHECK(grid.content[x][y] == expectedContent[x][y]);
 }
