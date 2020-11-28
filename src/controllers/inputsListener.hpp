@@ -20,10 +20,12 @@ private:
     void menuEnter();
 
     // grid related
+    void onPuyoKeyPressed(int code);
     void onTetrixKeyPressed(int code);
     bool translateLeft();
     bool translateRight();
     bool translateDown();
+    void teleportDown();
     bool rotatePiece();
     void openMenu();
 };

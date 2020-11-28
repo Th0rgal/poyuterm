@@ -45,6 +45,7 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
                 onMenuKeyPressed(inputCode);
                 break;
             case GameData::solo:
+                onPuyoKeyPressed(inputCode);
                 break;
             case GameData::tetrix:
                 onTetrixKeyPressed(inputCode);

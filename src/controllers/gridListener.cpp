@@ -2,6 +2,46 @@
 #include "views/display.hpp"
 #include "controllers/gridTools.hpp"
 
+void InputsListener::onPuyoKeyPressed(int code)
+{
+    const std::vector<Puyo> clone = gameData.activePiece;
+    bool shifted = false;
+    switch (code)
+    {
+
+    case 'P':
+    case 'p':
+        openMenu();
+        break;
+
+    case KEY_LEFT:
+        shifted = translateLeft();
+        break;
+
+    case KEY_RIGHT:
+        shifted = translateRight();
+        break;
+
+    case KEY_DOWN:
+        teleportDown();
+        break;
+
+    case ' ':
+        shifted = rotatePiece();
+        break;
+
+    default:
+        break;
+    };
+    if (shifted)
+    {
+        for (Puyo puyo : clone)
+            (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+        for (Puyo puyo : gameData.activePiece)
+            (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+    }
+}
+
 /**
  * to translate user inputs to actions (e.g. movements on the grid)
  * @param int code the key code
@@ -78,6 +118,29 @@ bool InputsListener::translateRight()
 bool InputsListener::translateDown()
 {
     return shift(gameData.activePiece, grid, 0, 1);
+}
+
+/**
+ * to teleport the active piece to the bottom if it is possible
+ * 
+ * @author Thomas Marchand
+ **/
+void InputsListener::teleportDown()
+{
+    for (Puyo puyo : gameData.activePiece)
+        (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+    bool teleport;
+    do
+    {
+        teleport = shift(gameData.activePiece, grid, 0, 1);
+    } while (teleport);
+
+    for (Puyo puyo : gameData.activePiece)
+    {
+        grid.content[puyo.x][puyo.y] = puyo.type;
+        (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+    }
+    gameData.activePiece = {};
 }
 
 /**
