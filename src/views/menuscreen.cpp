@@ -63,7 +63,9 @@ MenuScreen::MenuScreen()
     set_menu_back(my_menu, COLOR_PAIR(WHITEONRED));
 
     /* menu display */
+    refresh();
     post_menu(my_menu);
+    update();
 }
 
 void MenuScreen::windowsBorderTitle(WINDOW *pwin, const char *title)
