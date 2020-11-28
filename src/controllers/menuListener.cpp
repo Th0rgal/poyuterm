@@ -3,7 +3,7 @@
 
 void InputsListener::openMenu()
 {
-    gameData.mode = GameData::menu;
+    gameData.state = GameData::menu;
     display.showMenu();
 }
 
@@ -20,7 +20,7 @@ void InputsListener::menuDown()
 void InputsListener::menuEnter()
 {
     unsigned int selected = (*display.menu).select();
-    if (selected == 4)
+    if (selected == 3)
     {
         display.close();
         exit(0);
@@ -29,5 +29,6 @@ void InputsListener::menuEnter()
 
     GameData::GameMode newGameMode = GameData::GameMode(selected);
     gameData.mode = newGameMode;
+    gameData.state = GameData::running;
     display.showGame();
 }

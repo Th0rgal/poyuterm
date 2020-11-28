@@ -115,7 +115,7 @@ int MenuScreen::select()
     touchwin(stdscr);
     wrefresh(stdscr);
 
-    return my_choice + 1;
+    return my_choice;
 }
 
 void MenuScreen::update()

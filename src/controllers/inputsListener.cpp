@@ -39,20 +39,20 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
         }
         else
         {
-            switch (gameData.mode)
-            {
-            case GameData::menu:
+            if (gameData.state == GameData::menu)
                 onMenuKeyPressed(inputCode);
-                break;
-            case GameData::solo:
-                onPuyoKeyPressed(inputCode);
-                break;
-            case GameData::tetrix:
-                onTetrixKeyPressed(inputCode);
-                break;
-            default:
-                break;
-            }
+            else
+                switch (gameData.mode)
+                {
+                case GameData::solo:
+                    onPuyoKeyPressed(inputCode);
+                    break;
+                case GameData::tetrix:
+                    onTetrixKeyPressed(inputCode);
+                    break;
+                default:
+                    break;
+                }
         }
     }
 }

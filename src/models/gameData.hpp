@@ -21,19 +21,19 @@ struct GameData
     {
         running = 0,
         won = 1,
-        lost = 2
+        lost = 2,
+        menu = 3
     };
 
     enum GameMode
     {
-        menu = 0,
-        solo = 1,
-        simulation = 2,
-        tetrix = 3
+        solo = 0,
+        simulation = 1,
+        tetrix = 2
     };
 
-    GameMode mode = menu;
-    GameState state = running;
+    GameMode mode;
+    GameState state = menu;
 
     GameData();
     std::vector<Puyo> activePiece;
