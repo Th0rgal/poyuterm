@@ -12,6 +12,8 @@ set(SRCS
     src/controllers/inputsListener.cpp
     src/controllers/gridListener.cpp
     src/controllers/menuListener.cpp
+    src/controllers/puyo.cpp
+    src/controllers/tetrix.cpp
 
     src/models/gameData.cpp
     src/models/grid.cpp

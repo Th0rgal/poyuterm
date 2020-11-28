@@ -20,6 +20,9 @@ private:
     std::random_device rd;
     std::mt19937 gen;
 
+    void puyoLoop(long delay);
+    void tetrixLoop(long delay);
+
     std::vector<Puyo> createNewPiece();
     void shiftActivePiece();
     std::size_t random_index(std::size_t lower,
