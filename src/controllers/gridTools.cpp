@@ -64,7 +64,7 @@ bool runGravity(Grid &grid)
         }
 
     for (std::size_t x = 0; x < grid.width(); x++)
-        for (std::size_t y = 0; y < grid.height()-1; y++)
+        for (std::size_t y = 0; y < grid.height() - 1; y++)
             if (grid.content[x][y] && !grid.content[x][y + 1])
                 return false;
 
