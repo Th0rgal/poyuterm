@@ -1,4 +1,4 @@
-#include "controllers/inputsListener.hpp"
+#include "controllers/listeners/inputsListener.hpp"
 #include "views/display.hpp"
 
 void InputsListener::openMenu()

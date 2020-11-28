@@ -1,6 +1,6 @@
 #include "controllers/gameManager.hpp"
 #include "models/gameData.hpp"
-#include "controllers/inputsListener.hpp"
+#include "controllers/listeners/inputsListener.hpp"
 #include <stdlib.h>
 #include <ncurses.h>
 #include <string>
@@ -15,8 +15,8 @@
  * 
  * @author Thomas Marchand
  **/
-GameManager::GameManager(GameData &gameData,
-                         Grid &grid) : gameData(gameData),
+GameManager::GameManager(GameData gameData,
+                         Grid grid) : gameData(gameData),
                                        grid(grid),
                                        rd(),
                                        gen(rd())

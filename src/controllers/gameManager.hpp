@@ -8,8 +8,8 @@
 class GameManager
 {
 public:
-    GameManager(GameData &gameData,
-                Grid &grid);
+    GameManager(GameData gameData,
+                Grid grid);
     void start();
     void loop(long delay);
 

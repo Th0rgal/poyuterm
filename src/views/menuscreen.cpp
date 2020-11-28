@@ -1,7 +1,6 @@
 #include <stdlib.h> /* calloc() */
 #include <string.h> /* strlen() */
 #include "views/menuscreen.hpp"
-#include "controllers/inputsListener.hpp"
 #include <iostream>
 
 #define WHITEONRED 10

@@ -9,11 +9,11 @@ include(doctest)
 set(SRCS
     src/controllers/gameManager.cpp
     src/controllers/gridTools.cpp
-    src/controllers/inputsListener.cpp
-    src/controllers/gridListener.cpp
-    src/controllers/menuListener.cpp
     src/controllers/puyo.cpp
     src/controllers/tetrix.cpp
+    src/controllers/listeners/inputsListener.cpp
+    src/controllers/listeners/gridListener.cpp
+    src/controllers/listeners/menuListener.cpp
 
     src/models/gameData.cpp
     src/models/grid.cpp
@@ -26,7 +26,7 @@ set(SRCS
 set(HEADERS
     src/controllers/gameManager.hpp
     src/controllers/gridTools.hpp
-    src/controllers/inputsListener.hpp
+    src/controllers/listeners/inputsListener.hpp
 
     src/models/gameData.hpp
     src/models/grid.hpp
