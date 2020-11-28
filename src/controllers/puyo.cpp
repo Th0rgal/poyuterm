@@ -1,5 +1,5 @@
 #include "controllers/gameManager.hpp"
 
-void puyoLoop(long delay)
+void GameManager::puyoLoop(long delay)
 {
 }

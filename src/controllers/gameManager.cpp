@@ -56,6 +56,17 @@ void GameManager::loop(long delay)
         case GameData::tetrix:
             tetrixLoop(delay);
             break;
+
+        case GameData::solo:
+            puyoLoop(delay);
+            break;
+
+        case GameData::simulation:
+            puyoLoop(delay);
+            break;
+
+        default:
+            break;
         }
 }
 
