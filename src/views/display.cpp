@@ -61,5 +61,5 @@ void Display::close()
         (*menu).close();
 
     if (game.has_value())
-        (*menu).close();
+        (*game).close();
 }

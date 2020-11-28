@@ -103,19 +103,6 @@ void MenuScreen::previous()
 int MenuScreen::select()
 {
     my_choice = item_index(current_item(my_menu));
-    pos_menu_cursor(my_menu);
-    unpost_menu(my_menu);
-
-    for (ssChoice = 0; ssChoice < n_choices; ++ssChoice)
-        free_item(my_items[ssChoice]);
-
-    free_menu(my_menu);
-
-    delwin(wUI);
-    delwin(wBorder);
-
-    touchwin(stdscr);
-    wrefresh(stdscr);
 
     return my_choice + 1;
 }

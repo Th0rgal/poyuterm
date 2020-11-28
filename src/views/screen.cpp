@@ -1,4 +1,5 @@
 #include "views/screen.hpp"
+#include <iostream>
 
 /**
  * to close the display
@@ -19,5 +20,7 @@ void Screen::close()
 {
     endwin();
     for (WINDOW *window : windows)
+    {
         free(window);
+    }
 }
