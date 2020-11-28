@@ -25,7 +25,7 @@ MenuScreen::MenuScreen()
         {
             (char *)"            Solo              ",
             (char *)"            Bot               ",
-            (char *)"            Tetris            ",
+            (char *)"            Tetrix            ",
             (char *)"            Quitter           ",
             NULL};
 

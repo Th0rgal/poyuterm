@@ -16,7 +16,7 @@
 </p>
 
 ## Why Poyuterm?
-Poyuterm was produced as a duo as a project for the University of Paris Saclay. We had to make a game of PuyoPuyo (a kind of tetris) and since we didn't want to compete with the beautiful games made with graphic designers, we decided to try to do it in the terminal only.
+Poyuterm was produced as a duo as a project for the University of Paris Saclay. We had to make a game of PuyoPuyo (a kind of tetrix) and since we didn't want to compete with the beautiful games made with graphic designers, we decided to try to do it in the terminal only.
 
 ## Get Poyuterm
 Todo

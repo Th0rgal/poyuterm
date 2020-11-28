@@ -29,7 +29,7 @@ struct GameData
         menu = 0,
         solo = 1,
         simulation = 2,
-        tetris = 3
+        tetrix = 3
     };
 
     GameMode mode = menu;

@@ -46,8 +46,8 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
                 break;
             case GameData::solo:
                 break;
-            case GameData::tetris:
-                onTetrisKeyPressed(inputCode);
+            case GameData::tetrix:
+                onTetrixKeyPressed(inputCode);
                 break;
             default:
                 break;

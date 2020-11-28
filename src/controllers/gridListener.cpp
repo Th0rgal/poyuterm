@@ -8,7 +8,7 @@
  * 
  * @author Thomas Marchand and Valeran Maytié
  **/
-void InputsListener::onTetrisKeyPressed(int code)
+void InputsListener::onTetrixKeyPressed(int code)
 {
     const std::vector<Puyo> clone = gameData.activePiece;
     bool shifted;

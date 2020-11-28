@@ -51,7 +51,7 @@ void GameManager::start()
  **/
 void GameManager::loop(long delay)
 {
-    if (gameData.mode == GameData::tetris && gameData.state == GameData::running)
+    if (gameData.mode == GameData::tetrix && gameData.state == GameData::running)
     {
 
         if (gameData.activePiece.empty())

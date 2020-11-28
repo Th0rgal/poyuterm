@@ -20,7 +20,7 @@ private:
     void menuEnter();
 
     // grid related
-    void onTetrisKeyPressed(int code);
+    void onTetrixKeyPressed(int code);
     bool translateLeft();
     bool translateRight();
     bool translateDown();
