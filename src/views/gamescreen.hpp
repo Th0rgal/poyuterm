@@ -1,9 +1,9 @@
 #pragma once
 
 #include "models/grid.hpp"
-#include "views/screen.hpp"
+#include <string>
 
-class GameScreen : public Screen
+class GameScreen
 {
 public:
     GameScreen();
@@ -11,6 +11,7 @@ public:
     void refreshDiff(
         std::vector<std::vector<Grid::PuyoType>> &snapshot,
         Grid &grid);
+    void close();
 
 private:
     int virtualScale;

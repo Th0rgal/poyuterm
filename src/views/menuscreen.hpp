@@ -1,16 +1,16 @@
 #pragma once
 
 #include <menu.h>
-#include "views/screen.hpp"
 
-class MenuScreen : public Screen
+class MenuScreen
 {
 public:
     MenuScreen();
     void next();
     void previous();
     int select();
-    
+    void close();
+
 private:
     int key;
     ITEM **my_items;
@@ -25,5 +25,4 @@ private:
     void windowsBorderTitle(WINDOW *pwin, const char *title);
     void windowsFilling(WINDOW *pwin);
     void update();
-
 };

@@ -19,7 +19,6 @@ set(SRCS
     src/models/grid.cpp
 
     src/views/display.cpp
-    src/views/screen.cpp
     src/views/gamescreen.cpp
     src/views/menuscreen.cpp
     )
@@ -33,7 +32,6 @@ set(HEADERS
     src/models/grid.hpp
 
     src/views/display.hpp
-    src/views/screen.hpp
     src/views/gamescreen.hpp
     src/views/menuscreen.hpp
     )

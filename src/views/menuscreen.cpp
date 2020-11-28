@@ -48,14 +48,12 @@ MenuScreen::MenuScreen()
 
     /* Windows Border cration */
     wBorder = newwin(8, 40, LINES / 2 - 8 / 2, COLS / 2 - 40 / 2);
-    registerWindow(wBorder);
     wattrset(wBorder, COLOR_PAIR(WHITEONRED));
     windowsFilling(wBorder);
     box(wBorder, 0, 0);
     windowsBorderTitle(wBorder, " option ");
 
     wUI = derwin(wBorder, 8 - 2, 40 - 2, 2, 2);
-    registerWindow(wUI);
 
     set_menu_sub(my_menu, wUI);
 
@@ -123,4 +121,10 @@ void MenuScreen::update()
     wrefresh(wUI);
     touchwin(wBorder);
     wrefresh(wBorder);
+}
+
+void MenuScreen::close()
+{
+    endwin();
+    free(my_menu);
 }

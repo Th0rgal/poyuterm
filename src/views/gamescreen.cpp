@@ -1,4 +1,5 @@
 #include "views/gamescreen.hpp"
+#include <ncurses.h>
 
 GameScreen::GameScreen()
 {
@@ -15,7 +16,6 @@ GameScreen::GameScreen()
     gridHeight = (12 * virtualScale) + 2;
     WINDOW *gridScreen = subwin(stdscr, gridWidth, gridHeight,
                                 LINES - gridHeight, COLS / 2 - gridWidth / 2);
-    registerWindow(gridScreen);
     box(gridScreen, ACS_VLINE, ACS_HLINE);
     wrefresh(gridScreen);
 }
@@ -59,4 +59,9 @@ void GameScreen::refreshDiff(std::vector<std::vector<Grid::PuyoType>> &snapshot,
             if (snapshot[x][y] != grid.content[x][y])
                 setCell(x, y, grid.content[x][y]);
         }
+}
+
+void GameScreen::close()
+{
+    endwin();
 }

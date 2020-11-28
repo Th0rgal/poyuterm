@@ -23,6 +23,7 @@ void InputsListener::menuEnter()
     if (selected == 4)
     {
         display.close();
+        exit(0);
         return;
     }
 
