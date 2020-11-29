@@ -1,6 +1,25 @@
 #include "controllers/listeners/inputsListener.hpp"
 #include "views/display.hpp"
 
+
+void InputsListener::onMenuKeyPressed(int code)
+{
+    switch (code)
+    {
+    case KEY_UP:
+        menuUp();
+        break;
+
+    case KEY_DOWN:
+        menuDown();
+        break;
+
+    case '\n':
+        menuEnter();
+        break;
+    };
+}
+
 void InputsListener::openMenu()
 {
     gameData.state = GameData::menu;

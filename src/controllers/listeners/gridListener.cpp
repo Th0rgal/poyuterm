@@ -180,21 +180,3 @@ bool InputsListener::rotatePiece()
 {
     return rotate(gameData.activePiece, grid);
 }
-
-void InputsListener::onMenuKeyPressed(int code)
-{
-    switch (code)
-    {
-    case KEY_UP:
-        menuUp();
-        break;
-
-    case KEY_DOWN:
-        menuDown();
-        break;
-
-    case '\n':
-        menuEnter();
-        break;
-    };
-}
