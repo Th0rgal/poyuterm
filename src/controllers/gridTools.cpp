@@ -126,24 +126,6 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
     int xColision = 0;
     int yTranslation = 0;
 
-    if(sens == -1 || sens == 1){
-        for(size_t i = 0; i < size; i++){
-            Puyo puyo = activePiece[i];
-            switch (sens)
-            {
-                case -1:
-                    if (constraint.content[puyo.x - i][puyo.y + size - 1 - i] != Grid::none)
-                        xColision = 1;
-                    break;
-
-                case 1:
-                    if (constraint.content[puyo.x + i - 1][puyo.y + size - 2  + 1] != Grid::none)
-                        xColision = 1;
-                    break;
-            }
-        }
-    }
-
     for (size_t i = 0; i < size; i++)
     {
         Puyo puyo = activePiece[i];
@@ -174,7 +156,19 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
             puyo.x + xTranslation > 5)
             return false;
         if (constraint.content[puyo.x + xTranslation][puyo.y + yTranslation] != Grid::none)
-            return false;
+        {
+            if(sens == -1 || sens == 1){
+                for(int iColsion = 0; iColsion < i; iColsion++){
+                    Puyo puyoX = updatedPiece[iColsion];
+                    puyoX.move(1, 0);
+                    updatedPiece[iColsion] = puyoX;
+                }
+                xTranslation++;
+                xColision = 1;
+            } else {
+                return false;
+            }
+        }
 
         puyo.move(xTranslation, yTranslation);
         updatedPiece[i] = puyo;
