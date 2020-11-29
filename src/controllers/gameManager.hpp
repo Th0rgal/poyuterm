@@ -24,6 +24,7 @@ private:
     std::mt19937 gen;
 
     void puyoLoop(long delay);
+    void simulationLoop(long delay);
     void tetrixLoop(long delay);
 
     std::vector<Puyo> createNewPiece();

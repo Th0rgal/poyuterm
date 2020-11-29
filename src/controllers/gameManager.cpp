@@ -64,7 +64,7 @@ void GameManager::loop(long delay)
             break;
 
         case GameData::simulation:
-            puyoLoop(delay);
+            simulationLoop(delay);
             break;
 
         default:
