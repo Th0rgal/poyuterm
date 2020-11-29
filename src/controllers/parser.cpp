@@ -9,7 +9,7 @@ Parser::Parser()
 
 Parser::Parser(char *fileName)
 {
-    std::ifstream file(fileName);
+    file = std::ifstream(fileName);
     if (!file)
         throw "Poyuterm was unable to open this file!";
     std::string data;
@@ -19,11 +19,11 @@ Parser::Parser(char *fileName)
 
     file >> data;
     if (data == "SIMULATION")
-        gameMode == GameData::simulation;
+        gameMode = GameData::simulation;
     else if (data == "SOLO")
-        gameMode == GameData::solo;
+        gameMode = GameData::solo;
     else if (data == "IA")
-        gameMode == GameData::ia;
+        gameMode = GameData::ia;
     else
         throw "Invalid game mode";
     enabled = true;

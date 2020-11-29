@@ -15,6 +15,7 @@ struct Coordinates
     Coordinates operator+(Coordinates coordinate);
 };
 
+void teleportDown(Grid &grid, GameData &gameData, Display &display);
 std::vector<std::vector<Puyo>> runDetection(const Grid &grid, std::vector<Coordinates> &starts);
 
 void extractGroup(std::vector<Puyo> &group,

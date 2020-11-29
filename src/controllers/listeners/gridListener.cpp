@@ -24,7 +24,7 @@ void InputsListener::onPuyoKeyPressed(int code)
         break;
 
     case KEY_DOWN:
-        teleportDown();
+        teleportDown(grid, gameData, display);
         break;
 
     case ' ':
@@ -121,55 +121,6 @@ bool InputsListener::translateDown()
     return shift(gameData.activePiece, grid, 0, 1);
 }
 
-/**
- * to teleport the active piece to the bottom if it is possible
- * 
- * @author Thomas Marchand
- **/
-void InputsListener::teleportDown()
-{
-    // erase active Piece from displau
-    for (Puyo puyo : gameData.activePiece)
-        (*display.game).setCell(puyo.x, puyo.y, Grid::none);
-    // snapshot grid content
-    auto contentSnapshot = grid.content;
-
-    // virtually move active Piece
-    bool teleport;
-    do
-    {
-        teleport = shift(gameData.activePiece, grid, 0, 1);
-    } while (teleport);
-
-    // write active piece to the grid and save coordinates
-    std::vector<Coordinates> starts;
-    for (Puyo puyo : gameData.activePiece)
-    {
-        grid.content[puyo.x][puyo.y] = puyo.type;
-        starts.emplace_back(puyo.x, puyo.y);
-    }
-
-    // reset activePiece
-    gameData.activePiece = {};
-
-    // recursively find "destroyable" groups of Puyo and
-    // remove them from the grid
-    auto detected = runDetection(grid, starts);
-    for (std::vector<Puyo> group : detected)
-        for (Puyo puyo : group)
-        {
-            if (!grid.content[puyo.x][puyo.y])
-                break;
-            grid.content[puyo.x][puyo.y] = Grid::none;
-        }
-
-    bool finished = false;
-    while (!finished)
-        finished = runGravity(grid);
-
-    // refresh display
-    (*display.game).refreshDiff(contentSnapshot, grid);
-}
 
 /**
  * to rotate the falling piece clockwisely

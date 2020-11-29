@@ -2,6 +2,56 @@
 #include "models/grid.hpp"
 
 /**
+ * to teleport the active piece to the bottom if it is possible
+ * 
+ * @author Thomas Marchand
+ **/
+void teleportDown(Grid &grid, GameData &gameData, Display &display)
+{
+    // erase active Piece from displau
+    for (Puyo puyo : gameData.activePiece)
+        (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+    // snapshot grid content
+    auto contentSnapshot = grid.content;
+
+    // virtually move active Piece
+    bool teleport;
+    do
+    {
+        teleport = shift(gameData.activePiece, grid, 0, 1);
+    } while (teleport);
+
+    // write active piece to the grid and save coordinates
+    std::vector<Coordinates> starts;
+    for (Puyo puyo : gameData.activePiece)
+    {
+        grid.content[puyo.x][puyo.y] = puyo.type;
+        starts.emplace_back(puyo.x, puyo.y);
+    }
+
+    // reset activePiece
+    gameData.activePiece = {};
+
+    // recursively find "destroyable" groups of Puyo and
+    // remove them from the grid
+    auto detected = runDetection(grid, starts);
+    for (std::vector<Puyo> group : detected)
+        for (Puyo puyo : group)
+        {
+            if (!grid.content[puyo.x][puyo.y])
+                break;
+            grid.content[puyo.x][puyo.y] = Grid::none;
+        }
+
+    bool finished = false;
+    while (!finished)
+        finished = runGravity(grid);
+
+    // refresh display
+    (*display.game).refreshDiff(contentSnapshot, grid);
+}
+
+/**
  * 
  * 
  **/
@@ -130,7 +180,8 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
     {
         Puyo puyo = activePiece[i];
 
-        if(puyo.x == 5 && (sens == 2 || sens == -2)){
+        if (puyo.x == 5 && (sens == 2 || sens == -2))
+        {
             xColision = -1;
         }
 
@@ -161,15 +212,19 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
             return false;
         if (constraint.content[puyo.x + xTranslation][puyo.y + yTranslation] != Grid::none)
         {
-            if(sens == -1 || sens == 1){
-                for(int iColsion = 0; iColsion < i; iColsion++){
+            if (sens == -1 || sens == 1)
+            {
+                for (int iColsion = 0; iColsion < i; iColsion++)
+                {
                     Puyo puyoX = updatedPiece[iColsion];
                     puyoX.move(1, 0);
                     updatedPiece[iColsion] = puyoX;
                 }
                 xTranslation++;
                 xColision = 1;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
