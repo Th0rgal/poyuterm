@@ -2,6 +2,10 @@
 #include "controllers/gridTools.hpp"
 #include <string>
 
+Parser::Parser() {
+    enabled = false;
+}
+
 Parser::Parser(char *fileName)
 {
     std::ifstream file(fileName);
@@ -21,6 +25,7 @@ Parser::Parser(char *fileName)
         gameMode == GameData::ia;
     else
         throw "Invalid game mode";
+    enabled = true;
 }
 
 bool Parser::next(Grid &constraint)

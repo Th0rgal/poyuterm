@@ -7,9 +7,12 @@
 class Parser
 {
 public:
+    Parser();
     Parser(char *fileName);
-    GameData::GameMode gameMode;
     bool next(Grid &constraint);
+
+    bool enabled;
+    GameData::GameMode gameMode;
     std::vector<Puyo> activePiece;
 
 private:

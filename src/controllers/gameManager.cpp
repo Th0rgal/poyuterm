@@ -16,10 +16,12 @@
  * @author Thomas Marchand
  **/
 GameManager::GameManager(GameData gameData,
-                         Grid grid) : gameData(gameData),
-                                       grid(grid),
-                                       rd(),
-                                       gen(rd())
+                         Grid grid,
+                         Parser &parser) : gameData(gameData),
+                                          grid(grid),
+                                          parser(parser),
+                                          rd(),
+                                          gen(rd())
 {
 }
 
