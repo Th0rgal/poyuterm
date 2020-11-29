@@ -2,7 +2,8 @@
 #include "controllers/gridTools.hpp"
 #include <string>
 
-Parser::Parser() {
+Parser::Parser()
+{
     enabled = false;
 }
 
@@ -64,10 +65,12 @@ bool Parser::next(Grid &constraint)
                 rotate(activePiece, constraint);
             return true;
         }
-
         else
-        {
             return false;
-        }
+    }
+    else
+    {
+        // temp code
+        return false;
     }
 }
