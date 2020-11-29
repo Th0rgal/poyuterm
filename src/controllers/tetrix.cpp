@@ -1,5 +1,6 @@
 #include "controllers/gameManager.hpp"
 #include "controllers/gridTools.hpp"
+#include <bits/stdc++.h>
 
 void GameManager::tetrixLoop(long delay)
 {
@@ -17,11 +18,11 @@ void GameManager::tetrixLoop(long delay)
         bool shifted = shift(gameData.activePiece, grid, 0, 1);
         if (!shifted)
         { // if we were already on the ground
-            std::vector<Coordinates> starts;
+            std::unordered_set<Coordinates> starts;
             for (Puyo puyo : gameData.activePiece)
             {
                 grid.content[puyo.x][puyo.y] = puyo.type;
-                starts.emplace_back(puyo.x, puyo.y);
+                starts.emplace(puyo.x, puyo.y);
             }
             gameData.activePiece = {};
             // delete groups
@@ -29,9 +30,6 @@ void GameManager::tetrixLoop(long delay)
             for (std::vector<Puyo> group : groupsToDelete)
                 for (Puyo puyo : group)
                 {
-                    if (!puyo.type)
-                        break;
-
                     grid.content[puyo.x][puyo.y] = Grid::none;
                     (*display.game).setCell(puyo.x, puyo.y, Grid::none);
                 }

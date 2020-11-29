@@ -1,5 +1,7 @@
 #include "controllers/gridTools.hpp"
 #include "models/grid.hpp"
+#include <bits/stdc++.h>
+#include <ncurses.h>
 
 /**
  * to teleport the active piece to the bottom if it is possible
@@ -14,38 +16,62 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
     // snapshot grid content
     auto contentSnapshot = grid.content;
 
-    // virtually move active Piece
-    bool teleport;
+    // move activePiece to the ground
+    bool finished;
     do
     {
-        teleport = shift(gameData.activePiece, grid, 0, 1);
-    } while (teleport);
+        finished = true;
+        for (Puyo &puyo : gameData.activePiece)
+            if (puyo.y < grid.height() - 1 && grid.content[puyo.x][puyo.y - 1] && !grid.content[puyo.x][puyo.y])
+            {
+                finished = false;
+                puyo.y += 1;
+            }
+    } while (not finished);
 
-    // write active piece to the grid and save coordinates
-    std::vector<Coordinates> starts;
+    // write activePiece on the grid and remember coordinates
+    std::unordered_set<Coordinates> starts;
     for (Puyo puyo : gameData.activePiece)
     {
         grid.content[puyo.x][puyo.y] = puyo.type;
-        starts.emplace_back(puyo.x, puyo.y);
+        starts.emplace(puyo.x, puyo.y);
+    }
+
+    unsigned int combosIndex = 0;
+    while (!starts.empty())
+    {
+        // detect 4+ groups and destroy them
+        auto detected = runDetection(grid, starts);
+        if (detected.size() > 0)
+            combosIndex++;
+        for (std::vector<Puyo> puyoList : detected)
+        {
+            for (Puyo puyo : puyoList)
+                grid.content[puyo.x][puyo.y] = Grid::none;
+            gameData.addScore(puyoList.size(), combosIndex, puyoList.size());
+        }
+
+        // move everything to the ground
+        bool finished;
+        starts = {};
+        do
+        {
+            finished = true;
+            for (std::size_t x = 0; x < grid.width(); x++)
+                for (std::size_t y = grid.height() - 1; y >= 1; y--)
+                    if (grid.content[x][y - 1] && !grid.content[x][y])
+                    {
+                        grid.content[x][y] = grid.content[x][y - 1];
+                        grid.content[x][y - 1] = Grid::none;
+                        starts.erase(Coordinates(x, y - 1));
+                        starts.emplace(x, y);
+                        finished = false;
+                    }
+        } while (not finished);
     }
 
     // reset activePiece
     gameData.activePiece = {};
-
-    // recursively find "destroyable" groups of Puyo and
-    // remove them from the grid
-    auto detected = runDetection(grid, starts);
-    for (std::vector<Puyo> group : detected)
-        for (Puyo puyo : group)
-        {
-            if (!grid.content[puyo.x][puyo.y])
-                break;
-            grid.content[puyo.x][puyo.y] = Grid::none;
-        }
-
-    bool finished = false;
-    while (!finished)
-        finished = runGravity(grid);
 
     // refresh display
     (*display.game).refreshDiff(contentSnapshot, grid);
@@ -55,16 +81,31 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
  * 
  * 
  **/
-std::vector<std::vector<Puyo>> runDetection(const Grid &grid, std::vector<Coordinates> &starts)
+std::vector<std::vector<Puyo>> runDetection(Grid &grid, std::unordered_set<Coordinates> &starts)
 {
     std::vector<std::vector<Puyo>> groups;
+    std::vector<std::vector<Grid::PuyoType>> contentSample(grid.width(),
+                                                           std::vector<Grid::PuyoType>(grid.height(), Grid::none));
     for (Coordinates coordinates : starts)
     {
         Grid::PuyoType type = grid.content[coordinates.x][coordinates.y];
         Grid clonedGrid = grid;
         std::vector<Puyo> group;
         extractGroup(group, clonedGrid, coordinates);
-        if (group.size() >= 4)
+        bool duplicate = false;
+        for (Puyo puyo : group)
+        {
+            if (contentSample[puyo.x][puyo.y])
+            {
+                duplicate = true;
+                break;
+            }
+            else
+            {
+                contentSample[puyo.x][puyo.y] = puyo.type;
+            }
+        }
+        if (!duplicate && group.size() >= 4)
             groups.push_back(group);
     }
     return groups;
@@ -93,32 +134,23 @@ void extractGroup(std::vector<Puyo> &group,
         extractGroup(group, grid, Coordinates(puyo.x, puyo.y + 1));
 }
 
-bool runGravity(Grid &grid)
+void runGravity(Grid &grid)
 {
-    std::vector<Coordinates> starts;
+    // find starting points
+    std::unordered_set<Coordinates> starts;
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = grid.height() - 1; y >= 1; y--)
             if (grid.content[x][y - 1] && !grid.content[x][y])
             {
                 grid.content[x][y] = grid.content[x][y - 1];
                 grid.content[x][y - 1] = Grid::none;
-                starts.emplace_back(x, y);
+                starts.emplace(x, y);
             }
 
+    // run detections
     for (std::vector<Puyo> puyoList : runDetection(grid, starts))
         for (Puyo puyo : puyoList)
-        {
-            if (!grid.content[puyo.x][puyo.y])
-                break;
             grid.content[puyo.x][puyo.y] = Grid::none;
-        }
-
-    for (std::size_t x = 0; x < grid.width(); x++)
-        for (std::size_t y = 0; y < grid.height() - 1; y++)
-            if (grid.content[x][y] && !grid.content[x][y + 1])
-                return false;
-
-    return true;
 }
 
 /**
@@ -238,23 +270,17 @@ bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
     return true;
 }
 
+std::size_t std::hash<Coordinates>::operator()(const Coordinates &coordinates) const noexcept
+{
+    std::hash<std::size_t> size_t_hash;
+    return size_t_hash(coordinates.x) ^ size_t_hash(coordinates.y);
+}
+
 Coordinates::Coordinates(std::size_t x, std::size_t y) : x(x), y(y)
 {
 }
 
-void Coordinates::add(std::size_t xAdd, std::size_t yAdd)
+bool Coordinates::operator==(const Coordinates &other) const
 {
-    x += xAdd;
-    y += yAdd;
-}
-
-Coordinates Coordinates::operator+=(const Coordinates &coordinate)
-{
-    add(coordinate.x, coordinate.y);
-    return *this;
-}
-
-Coordinates Coordinates::operator+(Coordinates coordinate)
-{
-    return coordinate += *this;
+    return x == other.x && y == other.y;
 }

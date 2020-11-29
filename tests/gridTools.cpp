@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 #include "models/grid.hpp"
 #include "controllers/gridTools.hpp"
+#include <bits/stdc++.h>
 
 TEST_CASE("testing shift")
 {
@@ -42,7 +43,7 @@ TEST_CASE("testing detection")
     content[3][0] = Grid::red;
 
     Grid grid = Grid(content);
-    std::vector<Coordinates> starts{Coordinates(2, 0)};
+    std::unordered_set<Coordinates> starts{Coordinates(2, 0)};
     std::vector<std::vector<Puyo>> detected = runDetection(grid, starts);
 
     // to ensure grid.content has not been altered
@@ -78,10 +79,9 @@ TEST_CASE("testing gravity")
     expectedContent[3][10] = Grid::pink;
     expectedContent[3][11] = Grid::red;
 
-    bool finished;
     for (std::size_t i = 0; i < 9; i++)
-        finished = runGravity(grid);
-    CHECK(finished == true);
+        runGravity(grid);
+
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = 0; y < grid.width(); y++)
             CHECK(grid.content[x][y] == expectedContent[x][y]);
