@@ -25,42 +25,44 @@ Parser::Parser(char *fileName)
 
 bool Parser::next(Grid &constraint)
 {
-
-    activePiece = std::vector<Puyo>();
-    std::string activePieceData;
-    unsigned int rotations;
-    unsigned int column;
-    if (file >> activePieceData && file >> rotations && file >> column)
+    if (gameMode == GameData::simulation)
     {
-        for (char letter : activePieceData)
+        activePiece = std::vector<Puyo>();
+        std::string activePieceData;
+        unsigned int rotations;
+        unsigned int column;
+        if (file >> activePieceData && file >> rotations && file >> column)
         {
-            switch (letter)
+            for (char letter : activePieceData)
             {
-            case 'R':
-                activePiece.emplace_back(Grid::red, column - 1, 0);
-                break;
-            case 'V':
-                activePiece.emplace_back(Grid::green, column - 1, 0);
-                break;
-            case 'J':
-                activePiece.emplace_back(Grid::yellow, column - 1, 0);
-                break;
-            case 'B':
-                activePiece.emplace_back(Grid::blue, column - 1, 0);
-                break;
-            case 'M':
-                activePiece.emplace_back(Grid::pink, column - 1, 0);
-                break;
+                switch (letter)
+                {
+                case 'R':
+                    activePiece.emplace_back(Grid::red, column - 1, 0);
+                    break;
+                case 'V':
+                    activePiece.emplace_back(Grid::green, column - 1, 0);
+                    break;
+                case 'J':
+                    activePiece.emplace_back(Grid::yellow, column - 1, 0);
+                    break;
+                case 'B':
+                    activePiece.emplace_back(Grid::blue, column - 1, 0);
+                    break;
+                case 'M':
+                    activePiece.emplace_back(Grid::pink, column - 1, 0);
+                    break;
+                }
+                column++;
             }
-            column++;
+            for (; rotations != 0; rotations--)
+                rotate(activePiece, constraint);
+            return true;
         }
-        for (; rotations != 0; rotations--)
-            rotate(activePiece, constraint);
-        return true;
-    }
 
-    else
-    {
-        return false;
+        else
+        {
+            return false;
+        }
     }
 }
