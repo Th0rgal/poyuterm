@@ -23,7 +23,7 @@ MenuScreen::MenuScreen()
     char *choices[] = /* The menu choices */
         {
             (char *)"            Solo              ",
-            (char *)"            Bot               ",
+            (char *)"            Replay            ",
             (char *)"            Tetrix            ",
             (char *)"            Quitter           ",
             NULL};
