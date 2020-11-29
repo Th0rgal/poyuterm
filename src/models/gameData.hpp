@@ -29,7 +29,8 @@ struct GameData
     {
         solo = 0,
         simulation = 1,
-        tetrix = 2
+        tetrix = 2,
+        ia = 3
     };
 
     GameMode mode;
