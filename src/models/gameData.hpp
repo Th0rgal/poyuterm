@@ -38,5 +38,5 @@ struct GameData
 
     GameData();
     std::vector<Puyo> activePiece;
-    long delaySinceGravity;
+    long delaySinceTick;
 };

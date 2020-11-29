@@ -6,7 +6,7 @@
  * 
  * @author Thomas Marchand
  **/
-GameData::GameData() : activePiece({}), delaySinceGravity(0)
+GameData::GameData() : activePiece({}), delaySinceTick(0)
 {
 }
 

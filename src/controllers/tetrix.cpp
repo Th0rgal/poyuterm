@@ -6,7 +6,7 @@ void GameManager::tetrixLoop(long delay)
     if (gameData.activePiece.empty())
         gameData.activePiece = createNewPiece();
 
-    if (gameData.delaySinceGravity > 300000000l) // in nanoseconds
+    if (gameData.delaySinceTick > 300000000l) // in nanoseconds
     {
 
         std::vector<std::vector<Grid::PuyoType>> contentSnapshot = grid.content;
@@ -38,7 +38,7 @@ void GameManager::tetrixLoop(long delay)
         }
         else
         {
-            gameData.delaySinceGravity = 0;
+            gameData.delaySinceTick = 0;
             for (Puyo puyo : clone)
                 (*display.game).setCell(puyo.x, puyo.y, Grid::none);
             for (Puyo puyo : gameData.activePiece)
@@ -46,5 +46,5 @@ void GameManager::tetrixLoop(long delay)
         }
     }
     else
-        gameData.delaySinceGravity += delay;
+        gameData.delaySinceTick += delay;
 }

@@ -2,6 +2,16 @@
 
 void GameManager::puyoLoop(long delay)
 {
-    if (gameData.activePiece.empty())
-        gameData.activePiece = createNewPiece();
+    switch (gameData.mode)
+    {
+    case GameData::solo:
+        if (gameData.activePiece.empty())
+            gameData.activePiece = createNewPiece();
+
+    case GameData::simulation:
+        break;
+
+    default:
+        break;
+    }
 }
