@@ -1,4 +1,5 @@
 #include "controllers/activePiece.hpp"
+#include <iostream>
 
 ActivePiece::ActivePiece() : empty(true)
 {
@@ -47,9 +48,8 @@ bool ActivePiece::shift(Grid &grid, int x, int y)
 {
 
     std::vector<Puyo> piece = {center, side};
-    for (Puyo puyo : piece)
+    for (Puyo &puyo : piece)
     {
-
         // avoid impossible x
         if (static_cast<int>(puyo.x) + x < 0 ||
             static_cast<int>(puyo.x) + x >= static_cast<int>(grid.width()))
