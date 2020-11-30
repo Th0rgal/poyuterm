@@ -2,6 +2,7 @@
 #include <functional>
 #include "models/gameData.hpp"
 #include "models/grid.hpp"
+#include "views/display.hpp"
 
 class InputsListener
 {

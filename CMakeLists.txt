@@ -10,6 +10,7 @@ set(SRCS
     src/controllers/gameManager.cpp
     src/controllers/gridTools.cpp
     src/controllers/puyo.cpp
+    src/controllers/activePiece.cpp
     src/controllers/tetrix.cpp
     src/controllers/listeners/inputsListener.cpp
     src/controllers/listeners/gridListener.cpp
@@ -19,6 +20,7 @@ set(SRCS
 
     src/models/gameData.cpp
     src/models/grid.cpp
+    src/models/puyo.cpp
 
     src/views/display.cpp
     src/views/gamescreen.cpp
@@ -28,12 +30,14 @@ set(SRCS
 set(HEADERS
     src/controllers/gameManager.hpp
     src/controllers/gridTools.hpp
+    src/controllers/activePiece.hpp
     src/controllers/listeners/inputsListener.hpp
     src/controllers/io/parser.hpp
     src/controllers/io/serializer.hpp
 
     src/models/gameData.hpp
     src/models/grid.hpp
+    src/models/puyo.hpp
 
     src/views/display.hpp
     src/views/gamescreen.hpp
