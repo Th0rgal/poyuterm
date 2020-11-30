@@ -18,10 +18,10 @@
 GameManager::GameManager(GameData gameData,
                          Grid grid,
                          Parser &parser) : gameData(gameData),
-                                          grid(grid),
-                                          parser(parser),
-                                          rd(),
-                                          gen(rd())
+                                           grid(grid),
+                                           parser(parser),
+                                           rd(),
+                                           gen(rd())
 {
 }
 
@@ -79,21 +79,21 @@ void GameManager::loop(long delay)
  * 
  * @author Thomas Marchand
  **/
-std::vector<Puyo> GameManager::createNewPiece()
+ActivePiece GameManager::createNewPiece()
 {
     std::size_t base = random_index(0, grid.width() - 2);
-    std::vector<Puyo> activePiece(2);
-    activePiece[0] = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
-    activePiece[1] = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
-    for (Puyo puyo : activePiece)
-    {
+    Puyo center = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
+    Puyo side = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
+    ActivePiece activePiece(center, side, 0);
+    activePiece.map([&](Puyo puyo) {
         if (grid.content[puyo.x][puyo.y])
         {
             gameData.state = GameData::ended;
-            return {};
+            activePiece.setEmpty();
+            return;
         }
         (*display.game).setCell(puyo.x, puyo.y, puyo.type);
-    }
+    });
     return activePiece;
 }
 

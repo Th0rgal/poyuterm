@@ -30,5 +30,3 @@ void extractGroup(std::vector<Puyo> &group,
 
 void runGravity(Grid &grid);
 void runPuyoGravity(Grid &grid, GameData &gameData);
-bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y);
-bool rotate(std::vector<Puyo> &activePiece, Grid constraint);

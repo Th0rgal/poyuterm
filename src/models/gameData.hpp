@@ -2,6 +2,7 @@
 #include <vector>
 #include "models/grid.hpp"
 #include "models/puyo.hpp"
+#include "controllers/activePiece.hpp"
 
 struct GameData
 {
@@ -28,6 +29,6 @@ struct GameData
     bool loaded = false;
     GameData();
     unsigned int addScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber);
-    std::vector<Puyo> activePiece;
+    ActivePiece activePiece;
     long delaySinceTick;
 };

@@ -14,8 +14,10 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
 {
     int score = 0;
     // erase active Piece from displau
-    for (Puyo puyo : gameData.activePiece)
+    gameData.activePiece.map([&](Puyo puyo) {
         (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+    });
+
     // snapshot grid content
     auto contentSnapshot = grid.content;
 
@@ -24,21 +26,22 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
     do
     {
         finished = true;
-        for (Puyo &puyo : gameData.activePiece)
+        gameData.activePiece.map([&](Puyo puyo) {
             if (puyo.y < grid.height() - 1 && grid.content[puyo.x][puyo.y - 1] && !grid.content[puyo.x][puyo.y])
             {
                 finished = false;
                 puyo.y += 1;
             }
+        });
+
     } while (not finished);
 
     // write activePiece on the grid and remember coordinates
     std::unordered_set<Coordinates> starts;
-    for (Puyo puyo : gameData.activePiece)
-    {
+    gameData.activePiece.map([&](Puyo puyo) {
         grid.content[puyo.x][puyo.y] = puyo.type;
         starts.emplace(puyo.x, puyo.y);
-    }
+    });
 
     unsigned int combosIndex = 0;
     while (!starts.empty())
@@ -75,7 +78,7 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
     }
 
     // reset activePiece
-    gameData.activePiece = {};
+    gameData.activePiece.setEmpty();
 
     // refresh display
     (*display.game).refreshDiff(contentSnapshot, grid);
@@ -155,123 +158,6 @@ void runGravity(Grid &grid)
     for (std::vector<Puyo> puyoList : runDetection(grid, starts))
         for (Puyo puyo : puyoList)
             grid.content[puyo.x][puyo.y] = Grid::none;
-}
-
-/**
- * to shift the falling piece in gameData and on the grid
- * @param std::vector<Puyo> &activePiece the falling piece to shift
- * @param Grid::Grid constraint the grid to compare to
- * @param int x, -1 <= x <= 1, the shift on the x axis
- * @param int y, -1 <= y <= 1, the shift on the y axis
- * @return bool true if the piece has been shifted
- * 
- * @author Thomas Marchand
- **/
-bool shift(std::vector<Puyo> &activePiece, Grid constraint, int x, int y)
-{
-    const size_t size = activePiece.size();
-    std::vector<Puyo> updatedPiece(size);
-
-    for (size_t i = 0; i < size; i++)
-    {
-        Puyo puyo = activePiece[i];
-
-        // avoid impossible x
-        if (static_cast<int>(puyo.x) + x < 0 ||
-            static_cast<int>(puyo.x) + x >= static_cast<int>(constraint.width()))
-            return false;
-
-        // avoid impossible y
-        if (static_cast<int>(puyo.y) + y < 0 ||
-            static_cast<int>(puyo.y) + y >= static_cast<int>(constraint.height()))
-            return false;
-
-        puyo.move(x, y);
-
-        // avoid overwriting
-        if (constraint.content[puyo.x][puyo.y])
-            return false;
-
-        updatedPiece[i] = puyo;
-    }
-
-    for (std::size_t i = 0; i < updatedPiece.size(); i++)
-        activePiece[i] = updatedPiece[i];
-
-    return true;
-}
-
-bool rotate(std::vector<Puyo> &activePiece, Grid constraint)
-{
-    const size_t size = activePiece.size();
-    std::vector<Puyo> updatedPiece(size);
-    int sens = (activePiece[0].x - activePiece[1].x) + 2 * (activePiece[0].y - activePiece[1].y);
-    int leftColision = activePiece[size - 1].x - (size - 1);
-    int xTranslation = 0;
-    bool xColoneColision = false;
-    int xColision = 0;
-    int yTranslation = 0;
-
-    for (size_t i = 0; i < size; i++)
-    {
-        Puyo puyo = activePiece[i];
-
-        if (puyo.x == 5 && (sens == 2 || sens == -2))
-        {
-            xColision = -1;
-        }
-
-        switch (sens)
-        {
-        case -1:
-            xTranslation = -i + xColision;
-            yTranslation = size - 1 - i;
-            break;
-
-        case 2:
-            xTranslation = size - i - 1 + xColision;
-            yTranslation = i - 1;
-            break;
-
-        case 1:
-            xTranslation = i - 1 + xColision;
-            yTranslation = size - 2 + i;
-            break;
-
-        case -2:
-            xTranslation = i + 2 - size + xColision;
-            yTranslation = -i;
-            break;
-        }
-        if (puyo.y + yTranslation > 11 ||
-            puyo.x + xTranslation > 5)
-            return false;
-        if (constraint.content[puyo.x + xTranslation][puyo.y + yTranslation] != Grid::none)
-        {
-            if (sens == -1 || sens == 1)
-            {
-                for (int iColsion = 0; iColsion < i; iColsion++)
-                {
-                    Puyo puyoX = updatedPiece[iColsion];
-                    puyoX.move(1, 0);
-                    updatedPiece[iColsion] = puyoX;
-                }
-                xTranslation++;
-                xColision = 1;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        puyo.move(xTranslation, yTranslation);
-        updatedPiece[i] = puyo;
-    }
-
-    for (std::size_t i = 0; i < updatedPiece.size(); i++)
-        activePiece[i] = updatedPiece[i];
-    return true;
 }
 
 std::size_t std::hash<Coordinates>::operator()(const Coordinates &coordinates) const noexcept

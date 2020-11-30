@@ -8,7 +8,7 @@
  * 
  * @author Thomas Marchand
  **/
-GameData::GameData() : activePiece({}), delaySinceTick(0)
+GameData::GameData()
 {
     loaded = true;
 }

@@ -4,7 +4,7 @@
 
 void GameManager::tetrixLoop(long delay)
 {
-    if (gameData.activePiece.empty())
+    if (gameData.activePiece.isEmpty())
         gameData.activePiece = createNewPiece();
 
     if (gameData.delaySinceTick > 300000000l) // in nanoseconds
@@ -14,17 +14,16 @@ void GameManager::tetrixLoop(long delay)
         runGravity(grid);
         (*display.game).refreshDiff(contentSnapshot, grid);
 
-        const std::vector<Puyo> clone = gameData.activePiece;
-        bool shifted = shift(gameData.activePiece, grid, 0, 1);
+        ActivePiece clone = gameData.activePiece;
+        bool shifted = gameData.activePiece.shift(grid, 0, 1);
         if (!shifted)
         { // if we were already on the ground
             std::unordered_set<Coordinates> starts;
-            for (Puyo puyo : gameData.activePiece)
-            {
+            gameData.activePiece.map([&](Puyo &puyo) {
                 grid.content[puyo.x][puyo.y] = puyo.type;
                 starts.emplace(puyo.x, puyo.y);
-            }
-            gameData.activePiece = {};
+            });
+            gameData.activePiece.setEmpty();
             // delete groups
             std::vector<std::vector<Puyo>> groupsToDelete = runDetection(grid, starts);
             for (std::vector<Puyo> group : groupsToDelete)
@@ -37,10 +36,13 @@ void GameManager::tetrixLoop(long delay)
         else
         {
             gameData.delaySinceTick = 0;
-            for (Puyo puyo : clone)
+            clone.map([&](Puyo &puyo) {
                 (*display.game).setCell(puyo.x, puyo.y, Grid::none);
-            for (Puyo puyo : gameData.activePiece)
+            });
+
+            gameData.activePiece.map([&](Puyo &puyo) {
                 (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+            });
         }
     }
     else

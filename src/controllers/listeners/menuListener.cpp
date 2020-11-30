@@ -52,9 +52,11 @@ void InputsListener::menuEnter()
     {
         gameData.mode = newGameMode;
         grid.reset();
-        for (Puyo puyo : gameData.activePiece)
+
+        gameData.activePiece.map([&](Puyo &puyo) {
             (*display.game).setCell(puyo.x, puyo.y, Grid::none);
-        gameData.activePiece = {};
+        });
+        gameData.activePiece.setEmpty();
         (*display.game).refreshDiff(contentSnapshot, grid);
     }
 }

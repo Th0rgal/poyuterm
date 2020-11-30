@@ -1,11 +1,12 @@
 #include "controllers/listeners/inputsListener.hpp"
 #include "views/display.hpp"
 #include "controllers/gridTools.hpp"
+#include "controllers/activePiece.hpp"
 #include <ncurses.h>
 
 void InputsListener::onPuyoKeyPressed(int code)
 {
-    const std::vector<Puyo> clone = gameData.activePiece;
+    ActivePiece clone = gameData.activePiece;
     bool shifted = false;
     switch (code)
     {
@@ -36,10 +37,13 @@ void InputsListener::onPuyoKeyPressed(int code)
     };
     if (shifted)
     {
-        for (Puyo puyo : clone)
+        clone.map([&](Puyo &puyo) {
             (*display.game).setCell(puyo.x, puyo.y, Grid::none);
-        for (Puyo puyo : gameData.activePiece)
+        });
+
+        gameData.activePiece.map([&](Puyo &puyo) {
             (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+        });
     }
 }
 
@@ -51,7 +55,7 @@ void InputsListener::onPuyoKeyPressed(int code)
  **/
 void InputsListener::onTetrixKeyPressed(int code)
 {
-    const std::vector<Puyo> clone = gameData.activePiece;
+    ActivePiece clone = gameData.activePiece;
     bool shifted;
     switch (code)
     {
@@ -84,10 +88,13 @@ void InputsListener::onTetrixKeyPressed(int code)
     };
     if (shifted)
     {
-        for (Puyo puyo : clone)
+        clone.map([&](Puyo &puyo) {
             (*display.game).setCell(puyo.x, puyo.y, Grid::none);
-        for (Puyo puyo : gameData.activePiece)
+        });
+
+        gameData.activePiece.map([&](Puyo &puyo) {
             (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+        });
     }
 }
 
@@ -98,7 +105,7 @@ void InputsListener::onTetrixKeyPressed(int code)
  **/
 bool InputsListener::translateLeft()
 {
-    return shift(gameData.activePiece, grid, -1, 0);
+    return gameData.activePiece.shift(grid, -1, 0);
 }
 
 /**
@@ -108,7 +115,7 @@ bool InputsListener::translateLeft()
  **/
 bool InputsListener::translateRight()
 {
-    return shift(gameData.activePiece, grid, 1, 0);
+    return gameData.activePiece.shift(grid, 1, 0);
 }
 
 /**
@@ -118,9 +125,8 @@ bool InputsListener::translateRight()
  **/
 bool InputsListener::translateDown()
 {
-    return shift(gameData.activePiece, grid, 0, 1);
+    return gameData.activePiece.shift(grid, 0, 1);
 }
-
 
 /**
  * to rotate the falling piece clockwisely
@@ -129,5 +135,5 @@ bool InputsListener::translateDown()
  **/
 bool InputsListener::rotatePiece()
 {
-    return rotate(gameData.activePiece, grid);
+    return gameData.activePiece.rotate(grid);
 }

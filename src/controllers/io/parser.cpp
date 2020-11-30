@@ -1,5 +1,6 @@
 #include "controllers/io/parser.hpp"
 #include "controllers/gridTools.hpp"
+#include "controllers/activePiece.hpp"
 #include <string>
 
 Parser::Parser()
@@ -29,48 +30,42 @@ Parser::Parser(char *fileName) : fileName(fileName)
     enabled = true;
 }
 
+Grid::PuyoType Parser::toPuyoType(char letter)
+{
+    switch (letter)
+    {
+    case 'R':
+        return Grid::red;
+    case 'V':
+        return Grid::green;
+    case 'J':
+        return Grid::yellow;
+    case 'B':
+        return Grid::blue;
+    case 'M':
+        return Grid::pink;
+    default:
+        return Grid::none;
+    }
+}
+
 bool Parser::next(Grid &constraint)
 {
     if (gameMode == GameData::simulation)
     {
-        activePiece = std::vector<Puyo>();
         std::string activePieceData;
         unsigned int rotations;
         unsigned int column;
         if (file >> activePieceData && file >> rotations && file >> column)
         {
-            for (char letter : activePieceData)
-            {
-                switch (letter)
-                {
-                case 'R':
-                    activePiece.emplace_back(Grid::red, column - 1, 0);
-                    break;
-                case 'V':
-                    activePiece.emplace_back(Grid::green, column - 1, 0);
-                    break;
-                case 'J':
-                    activePiece.emplace_back(Grid::yellow, column - 1, 0);
-                    break;
-                case 'B':
-                    activePiece.emplace_back(Grid::blue, column - 1, 0);
-                    break;
-                case 'M':
-                    activePiece.emplace_back(Grid::pink, column - 1, 0);
-                    break;
-                }
-                column++;
-            }
+            Puyo center = Puyo(toPuyoType(activePieceData[0]), column, 0);
+            Puyo side = Puyo(toPuyoType(activePieceData[1]), column + 1, 0);
+            activePiece = ActivePiece(center, side, 0);
+
             for (; rotations != 0; rotations--)
-                rotate(activePiece, constraint);
+                activePiece.rotate(constraint);
             return true;
         }
-        else
-            return false;
     }
-    else
-    {
-        // temp code
-        return false;
-    }
+    return false;
 }

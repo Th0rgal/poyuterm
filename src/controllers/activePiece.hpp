@@ -1,3 +1,4 @@
+#pragma once
 #include <functional>
 #include "models/puyo.hpp"
 
@@ -5,11 +6,15 @@ class ActivePiece
 {
 
 public:
+    ActivePiece();
     ActivePiece(Puyo center, Puyo side, unsigned int orientation);
     Puyo center;
     Puyo side;
     bool rotate(Grid &grid);
-    void map(const std::function<void(Puyo)> &function);
+    bool shift(Grid &grid, int x, int y);
+    void map(const std::function<void(Puyo &puyo)> &function);
+    void setEmpty();
+    bool isEmpty();
 
 private:
     enum Orientation
@@ -19,5 +24,6 @@ private:
         east = 2,
         north = 3
     };
+    bool empty;
     Orientation orientation;
 };

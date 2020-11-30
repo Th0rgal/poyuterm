@@ -5,7 +5,7 @@
 
 void GameManager::puyoLoop(long delay)
 {
-    if (gameData.activePiece.empty())
+    if (gameData.activePiece.isEmpty())
         gameData.activePiece = createNewPiece();
 }
 
@@ -16,7 +16,7 @@ void GameManager::simulationLoop(long delay)
 
     if (gameData.delaySinceTick > 300000000l)
     {
-        if (gameData.activePiece.empty())
+        if (gameData.activePiece.isEmpty())
         {
             if (!parser.next(grid))
             {
@@ -27,13 +27,11 @@ void GameManager::simulationLoop(long delay)
                 return;
             }
             gameData.activePiece = parser.activePiece;
-            for (Puyo puyo : gameData.activePiece)
-                (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+            gameData.activePiece.map([&](Puyo &puyo) { (*display.game).setCell(puyo.x, puyo.y, puyo.type); });
         }
         else
         {
-            for (Puyo puyo : gameData.activePiece)
-                (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+            gameData.activePiece.map([&](Puyo &puyo) { (*display.game).setCell(puyo.x, puyo.y, Grid::none); });
             teleportDown(grid, gameData, display);
         }
 

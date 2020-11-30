@@ -27,7 +27,7 @@ private:
     void simulationLoop(long delay);
     void tetrixLoop(long delay);
 
-    std::vector<Puyo> createNewPiece();
+    ActivePiece createNewPiece();
     void shiftActivePiece();
     std::size_t random_index(std::size_t lower,
                              std::size_t higher);
