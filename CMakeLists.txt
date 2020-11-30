@@ -48,6 +48,7 @@ set(TESTS
     tests/tests.cpp
     tests/grid.cpp
     tests/gridTools.cpp
+    tests/activePiece.cpp
     )
 
 set(LIBS

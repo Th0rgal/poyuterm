@@ -78,8 +78,8 @@ void GameManager::loop(long delay)
 ActivePiece GameManager::createNewPiece()
 {
     std::size_t base = random_index(0, _grid.width() - 2);
-    Puyo center = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
-    Puyo side = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
+    Puyo side = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
+    Puyo center = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
     ActivePiece activePiece(center, side, 0);
     activePiece.map([&](Puyo puyo) {
         if (_grid.content[puyo.x][puyo.y])

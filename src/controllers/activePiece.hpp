@@ -23,5 +23,5 @@ private:
         east = 2,
         north = 3
     };
-    Orientation orientation;
+    Orientation _orientation;
 };
