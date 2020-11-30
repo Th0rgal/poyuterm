@@ -9,17 +9,15 @@
 class GameManager
 {
 public:
-    GameManager(GameData gameData,
-                Grid grid,
-                Parser &parser);
+    GameManager(Parser &parser);
     void start();
     void loop(long delay);
 
 private:
-    GameData &gameData;
-    Grid &grid;
+    GameData _gameData{};
+    Display _display{};
+    Grid _grid{std::vector<std::vector<Grid::PuyoType>>(6, std::vector<Grid::PuyoType>(12))};
     Parser &parser;
-    Display display = Display();
     std::random_device rd;
     std::mt19937 gen;
 

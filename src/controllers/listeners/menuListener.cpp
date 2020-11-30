@@ -21,42 +21,42 @@ void InputsListener::onMenuKeyPressed(int code)
 
 void InputsListener::openMenu()
 {
-    gameData.state = GameData::menu;
-    display.showMenu();
+    _gameData.state = GameData::menu;
+    _display.showMenu();
 }
 
 void InputsListener::menuUp()
 {
-    (*display.menu).previous();
+    (*_display.menu).previous();
 }
 
 void InputsListener::menuDown()
 {
-    (*display.menu).next();
+    (*_display.menu).next();
 }
 
 void InputsListener::menuEnter()
 {
-    unsigned int selected = (*display.menu).select();
+    unsigned int selected = (*_display.menu).select();
     if (selected == 3)
     {
-        display.close();
+        _display.close();
         exit(0);
         return;
     }
     GameData::GameMode newGameMode = GameData::GameMode(selected);
-    auto contentSnapshot = grid.content;
-    gameData.state = GameData::running;
-    display.showGame();
-    if (gameData.mode != newGameMode)
+    auto contentSnapshot = _grid.content;
+    _gameData.state = GameData::running;
+    _display.showGame();
+    if (_gameData.mode != newGameMode)
     {
-        gameData.mode = newGameMode;
-        grid.reset();
+        _gameData.mode = newGameMode;
+        _grid.reset();
 
-        gameData.activePiece.map([&](Puyo &puyo) {
-            (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+        _gameData.activePiece.map([&](Puyo &puyo) {
+            (*_display.game).setCell(puyo.x, puyo.y, Grid::none);
         });
-        gameData.activePiece.setEmpty();
-        (*display.game).refreshDiff(contentSnapshot, grid);
+        _gameData.activePiece.setEmpty();
+        (*_display.game).refreshDiff(contentSnapshot, _grid);
     }
 }

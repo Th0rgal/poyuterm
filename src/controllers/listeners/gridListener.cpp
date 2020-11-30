@@ -6,7 +6,7 @@
 
 void InputsListener::onPuyoKeyPressed(int code)
 {
-    ActivePiece clone = gameData.activePiece;
+    ActivePiece clone = _gameData.activePiece;
     bool shifted = false;
     switch (code)
     {
@@ -25,7 +25,7 @@ void InputsListener::onPuyoKeyPressed(int code)
         break;
 
     case KEY_DOWN:
-        teleportDown(grid, gameData, display);
+        teleportDown(_grid, _gameData, _display);
         break;
 
     case ' ':
@@ -38,11 +38,11 @@ void InputsListener::onPuyoKeyPressed(int code)
     if (shifted)
     {
         clone.map([&](Puyo &puyo) {
-            (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+            (*_display.game).setCell(puyo.x, puyo.y, Grid::none);
         });
 
-        gameData.activePiece.map([&](Puyo &puyo) {
-            (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+        _gameData.activePiece.map([&](Puyo &puyo) {
+            (*_display.game).setCell(puyo.x, puyo.y, puyo.type);
         });
     }
 }
@@ -55,7 +55,7 @@ void InputsListener::onPuyoKeyPressed(int code)
  **/
 void InputsListener::onTetrixKeyPressed(int code)
 {
-    ActivePiece clone = gameData.activePiece;
+    ActivePiece clone = _gameData.activePiece;
     bool shifted;
     switch (code)
     {
@@ -89,11 +89,11 @@ void InputsListener::onTetrixKeyPressed(int code)
     if (shifted)
     {
         clone.map([&](Puyo &puyo) {
-            (*display.game).setCell(puyo.x, puyo.y, Grid::none);
+            (*_display.game).setCell(puyo.x, puyo.y, Grid::none);
         });
 
-        gameData.activePiece.map([&](Puyo &puyo) {
-            (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+        _gameData.activePiece.map([&](Puyo &puyo) {
+            (*_display.game).setCell(puyo.x, puyo.y, puyo.type);
         });
     }
 }
@@ -105,7 +105,7 @@ void InputsListener::onTetrixKeyPressed(int code)
  **/
 bool InputsListener::translateLeft()
 {
-    return gameData.activePiece.shift(grid, -1, 0);
+    return _gameData.activePiece.shift(_grid, -1, 0);
 }
 
 /**
@@ -115,7 +115,7 @@ bool InputsListener::translateLeft()
  **/
 bool InputsListener::translateRight()
 {
-    return gameData.activePiece.shift(grid, 1, 0);
+    return _gameData.activePiece.shift(_grid, 1, 0);
 }
 
 /**
@@ -125,7 +125,7 @@ bool InputsListener::translateRight()
  **/
 bool InputsListener::translateDown()
 {
-    return gameData.activePiece.shift(grid, 0, 1);
+    return _gameData.activePiece.shift(_grid, 0, 1);
 }
 
 /**
@@ -135,5 +135,5 @@ bool InputsListener::translateDown()
  **/
 bool InputsListener::rotatePiece()
 {
-    return gameData.activePiece.rotate(grid);
+    return _gameData.activePiece.rotate(_grid);
 }

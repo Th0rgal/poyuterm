@@ -5,8 +5,8 @@
 
 void GameManager::puyoLoop(long delay)
 {
-    if (gameData.activePiece.isEmpty())
-        gameData.activePiece = createNewPiece();
+    if (_gameData.activePiece.isEmpty())
+        _gameData.activePiece = createNewPiece();
 }
 
 void GameManager::simulationLoop(long delay)
@@ -14,29 +14,29 @@ void GameManager::simulationLoop(long delay)
     if (!parser.enabled)
         return;
 
-    if (gameData.delaySinceTick > 300000000l)
+    if (_gameData.delaySinceTick > 300000000l)
     {
-        if (gameData.activePiece.isEmpty())
+        if (_gameData.activePiece.isEmpty())
         {
-            if (!parser.next(grid))
+            if (!parser.next(_grid))
             {
-                gameData.state = GameData::ended;
+                _gameData.state = GameData::ended;
                 Serializer serializer("sortie.txt");
-                serializer.writeGrid(grid);
-                serializer.writeScore(gameData.score);
+                serializer.writeGrid(_grid);
+                serializer.writeScore(_gameData.score);
                 return;
             }
-            gameData.activePiece = parser.activePiece;
-            gameData.activePiece.map([&](Puyo &puyo) { (*display.game).setCell(puyo.x, puyo.y, puyo.type); });
+            _gameData.activePiece = parser.activePiece;
+            _gameData.activePiece.map([&](Puyo &puyo) { (*_display.game).setCell(puyo.x, puyo.y, puyo.type); });
         }
         else
         {
-            gameData.activePiece.map([&](Puyo &puyo) { (*display.game).setCell(puyo.x, puyo.y, Grid::none); });
-            teleportDown(grid, gameData, display);
+            _gameData.activePiece.map([&](Puyo &puyo) { (*_display.game).setCell(puyo.x, puyo.y, Grid::none); });
+            teleportDown(_grid, _gameData, _display);
         }
 
-        gameData.delaySinceTick = 0;
+        _gameData.delaySinceTick = 0;
     }
     else
-        gameData.delaySinceTick += delay;
+        _gameData.delaySinceTick += delay;
 }

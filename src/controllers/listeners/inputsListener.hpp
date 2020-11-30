@@ -9,9 +9,9 @@ class InputsListener
 public:
     InputsListener(GameData &gameData, Display &display, Grid &grid);
     void handleInputs(const std::function<void(long)> &loop);
-    GameData &gameData;
-    Display &display;
-    Grid &grid;
+    GameData &_gameData;
+    Display &_display;
+    Grid &_grid;
 
 private:
     //menu related

@@ -14,9 +14,9 @@ using namespace std::chrono;
  **/
 InputsListener::InputsListener(GameData &gameData,
                                Display &display,
-                               Grid &grid) : display(display),
-                                             gameData(gameData),
-                                             grid(grid)
+                               Grid &grid) : _gameData(gameData),
+                                             _display(display),
+                                             _grid(grid)
 {
 }
 
@@ -39,10 +39,10 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
         }
         else
         {
-            if (gameData.state == GameData::menu)
+            if (_gameData.state == GameData::menu)
                 onMenuKeyPressed(inputCode);
             else
-                switch (gameData.mode)
+                switch (_gameData.mode)
                 {
                 case GameData::solo:
                     onPuyoKeyPressed(inputCode);

@@ -15,11 +15,7 @@
  * 
  * @author Thomas Marchand
  **/
-GameManager::GameManager(GameData gameData,
-                         Grid grid,
-                         Parser &parser) : gameData(gameData),
-                                           grid(grid),
-                                           parser(parser),
+GameManager::GameManager(Parser &parser) : parser(parser),
                                            rd(),
                                            gen(rd())
 {
@@ -33,14 +29,14 @@ GameManager::GameManager(GameData gameData,
  **/
 void GameManager::start()
 {
-    display.showMenu();
-    if (display.started)
+    _display.showMenu();
+    if (_display.started)
     {
-        InputsListener inputsListener(gameData, display, grid);
+        InputsListener inputsListener(_gameData, _display, _grid);
         inputsListener.handleInputs([&](int delay) {
             loop(delay);
         });
-        display.close();
+        _display.close();
     }
 }
 
@@ -52,8 +48,8 @@ void GameManager::start()
  **/
 void GameManager::loop(long delay)
 {
-    if (gameData.state == GameData::running)
-        switch (gameData.mode)
+    if (_gameData.state == GameData::running)
+        switch (_gameData.mode)
         {
         case GameData::tetrix:
             tetrixLoop(delay);
@@ -81,18 +77,18 @@ void GameManager::loop(long delay)
  **/
 ActivePiece GameManager::createNewPiece()
 {
-    std::size_t base = random_index(0, grid.width() - 2);
+    std::size_t base = random_index(0, _grid.width() - 2);
     Puyo center = Puyo(Grid::PuyoType(random_index(1, 5)), base, 0);
     Puyo side = Puyo(Grid::PuyoType(random_index(1, 5)), base + 1, 0);
     ActivePiece activePiece(center, side, 0);
     activePiece.map([&](Puyo puyo) {
-        if (grid.content[puyo.x][puyo.y])
+        if (_grid.content[puyo.x][puyo.y])
         {
-            gameData.state = GameData::ended;
+            _gameData.state = GameData::ended;
             activePiece.setEmpty();
             return;
         }
-        (*display.game).setCell(puyo.x, puyo.y, puyo.type);
+        (*_display.game).setCell(puyo.x, puyo.y, puyo.type);
     });
     return activePiece;
 }
