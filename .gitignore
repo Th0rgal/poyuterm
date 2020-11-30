@@ -62,5 +62,6 @@ build
 build/*
 
 ### project files ###
+exemples
 input_*
 sortie.txt
