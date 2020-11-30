@@ -50,10 +50,9 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
         {
             for (Puyo puyo : puyoList)
                 grid.content[puyo.x][puyo.y] = Grid::none;
-            score = gameData.addScore(puyoList.size(), combosIndex, puyoList.size());
+            score = gameData.addScore(puyoList.size(), combosIndex, detected.size());
         }
         (*display.game).displayScore(score);
-
 
         // move everything to the ground
         bool finished;
