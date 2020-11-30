@@ -27,9 +27,15 @@ void GameManager::simulationLoop(long delay)
                 return;
             }
             gameData.activePiece = parser.activePiece;
+            for (Puyo puyo : gameData.activePiece)
+                (*display.game).setCell(puyo.x, puyo.y, puyo.type);
         }
         else
+        {
+            for (Puyo puyo : gameData.activePiece)
+                (*display.game).setCell(puyo.x, puyo.y, Grid::none);
             teleportDown(grid, gameData, display);
+        }
 
         gameData.delaySinceTick = 0;
     }
