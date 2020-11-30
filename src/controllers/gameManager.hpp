@@ -3,7 +3,7 @@
 #include "models/gameData.hpp"
 #include "models/grid.hpp"
 #include "views/display.hpp"
-#include "controllers/parser.hpp"
+#include "controllers/io/parser.hpp"
 #include <random>
 
 class GameManager

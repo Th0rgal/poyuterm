@@ -1,5 +1,5 @@
 #include "controllers/gameManager.hpp"
-#include "controllers/parser.hpp"
+#include "controllers/io/parser.hpp"
 #include "models/gameData.hpp"
 #include "models/grid.hpp"
 
