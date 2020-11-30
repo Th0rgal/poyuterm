@@ -1,5 +1,6 @@
 #include "views/gamescreen.hpp"
 #include <ncurses.h>
+#include <string>
 
 GameScreen::GameScreen()
 {
@@ -18,6 +19,10 @@ GameScreen::GameScreen()
                                 LINES - gridHeight, COLS / 2 - gridWidth / 2);
     box(gridScreen, ACS_VLINE, ACS_HLINE);
     wrefresh(gridScreen);
+    scoreWin = subwin(stdscr, 4, 30, LINES - gridHeight, COLS / 2 + gridWidth / 2);
+    box(scoreWin, ACS_VLINE, ACS_HLINE);
+    //displayScore(0);
+
 }
 
 /**
@@ -64,4 +69,14 @@ void GameScreen::refreshDiff(std::vector<std::vector<Grid::PuyoType>> &snapshot,
 void GameScreen::close()
 {
     endwin();
+}
+
+void GameScreen::displayScore(unsigned int score)
+{
+    
+    const char *string = std::to_string(score).c_str();
+    mvwprintw(scoreWin, 1, 1, "score : ");
+    mvwprintw(scoreWin, 2, 1, string);
+
+    wrefresh(scoreWin);
 }

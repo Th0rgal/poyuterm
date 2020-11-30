@@ -1,5 +1,6 @@
 #include "controllers/gridTools.hpp"
 #include "models/grid.hpp"
+#include "models/gameData.hpp"
 #include <bits/stdc++.h>
 #include <ncurses.h>
 
@@ -10,6 +11,7 @@
  **/
 void teleportDown(Grid &grid, GameData &gameData, Display &display)
 {
+    int score = 0;
     // erase active Piece from displau
     for (Puyo puyo : gameData.activePiece)
         (*display.game).setCell(puyo.x, puyo.y, Grid::none);
@@ -48,8 +50,10 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
         {
             for (Puyo puyo : puyoList)
                 grid.content[puyo.x][puyo.y] = Grid::none;
-            gameData.addScore(puyoList.size(), combosIndex, puyoList.size());
+            score = gameData.addScore(puyoList.size(), combosIndex, puyoList.size());
         }
+        (*display.game).displayScore(score);
+
 
         // move everything to the ground
         bool finished;

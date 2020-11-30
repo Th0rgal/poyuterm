@@ -1,5 +1,6 @@
 #include "models/gameData.hpp"
 #include "views/display.hpp"
+#include "views/gamescreen.hpp"
 #include <math.h>
 
 /**
@@ -12,11 +13,12 @@ GameData::GameData() : activePiece({}), delaySinceTick(0)
     loaded = true;
 }
 
-void GameData::addScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber)
+unsigned int GameData::addScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber)
 {
     score = score + 10 * groupSize * (pow(4, combosIndex) + pow(3, groupsNumber));
     if (score > 999999)
         score = 999999;
+    return score;
 }
 
 /**

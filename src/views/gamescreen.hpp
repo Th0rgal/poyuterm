@@ -2,6 +2,7 @@
 
 #include "models/grid.hpp"
 #include <string>
+#include <ncurses.h>
 
 class GameScreen
 {
@@ -12,8 +13,10 @@ public:
         std::vector<std::vector<Grid::PuyoType>> &snapshot,
         Grid &grid);
     void close();
+    void displayScore(unsigned int score);
 
 private:
+    WINDOW *scoreWin;
     int virtualScale;
     std::string puyoLine;
     int gridWidth;

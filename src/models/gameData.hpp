@@ -39,7 +39,7 @@ struct GameData
     unsigned int score = 0;
     bool loaded = false;
     GameData();
-    void addScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber);
+    unsigned int addScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber);
     std::vector<Puyo> activePiece;
     long delaySinceTick;
 };
