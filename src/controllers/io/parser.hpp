@@ -9,6 +9,7 @@ class Parser
 public:
     Parser();
     Parser(char *fileName);
+    char* fileName;
     bool next(Grid &constraint);
 
     bool enabled;

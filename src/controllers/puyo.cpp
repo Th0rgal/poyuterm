@@ -1,5 +1,6 @@
 #include "controllers/gameManager.hpp"
 #include "controllers/gridTools.hpp"
+#include "controllers/io/serializer.hpp"
 #include <ncurses.h>
 
 void GameManager::puyoLoop(long delay)
@@ -17,7 +18,14 @@ void GameManager::simulationLoop(long delay)
     {
         if (gameData.activePiece.empty())
         {
-            parser.next(grid);
+            if (!parser.next(grid))
+            {
+                gameData.state = GameData::ended;
+                Serializer serializer("sortie.txt");
+                serializer.writeGrid(grid);
+                serializer.writeScore(gameData.score);
+                return;
+            }
             gameData.activePiece = parser.activePiece;
         }
         else

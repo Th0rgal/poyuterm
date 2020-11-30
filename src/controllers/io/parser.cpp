@@ -7,7 +7,7 @@ Parser::Parser()
     enabled = false;
 }
 
-Parser::Parser(char *fileName)
+Parser::Parser(char *fileName) : fileName(fileName)
 {
     file = std::ifstream(fileName);
     if (!file)

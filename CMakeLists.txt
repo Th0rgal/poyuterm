@@ -15,6 +15,7 @@ set(SRCS
     src/controllers/listeners/gridListener.cpp
     src/controllers/listeners/menuListener.cpp
     src/controllers/io/parser.cpp
+    src/controllers/io/serializer.cpp
 
     src/models/gameData.cpp
     src/models/grid.cpp
@@ -29,6 +30,7 @@ set(HEADERS
     src/controllers/gridTools.hpp
     src/controllers/listeners/inputsListener.hpp
     src/controllers/io/parser.hpp
+    src/controllers/io/serializer.hpp
 
     src/models/gameData.hpp
     src/models/grid.hpp

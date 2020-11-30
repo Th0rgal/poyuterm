@@ -57,7 +57,10 @@ _deps
 bin/*
 poyuterm
 run_tests
-test_*
 bin
 build
 build/*
+
+### project files ###
+input_*
+sortie.txt

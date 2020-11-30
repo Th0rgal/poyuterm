@@ -89,7 +89,7 @@ std::vector<Puyo> GameManager::createNewPiece()
     {
         if (grid.content[puyo.x][puyo.y])
         {
-            gameData.state = GameData::lost;
+            gameData.state = GameData::ended;
             return {};
         }
         (*display.game).setCell(puyo.x, puyo.y, puyo.type);
