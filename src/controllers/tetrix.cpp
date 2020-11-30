@@ -4,7 +4,7 @@
 
 void GameManager::tetrixLoop(long delay)
 {
-    if (_gameData.activePiece.isEmpty())
+    if (_gameData.activePiece.empty)
         _gameData.activePiece = createNewPiece();
 
     if (_gameData.delaySinceTick > 300000000l) // in nanoseconds
@@ -23,7 +23,7 @@ void GameManager::tetrixLoop(long delay)
                 _grid.content[puyo.x][puyo.y] = puyo.type;
                 starts.emplace(puyo.x, puyo.y);
             });
-            _gameData.activePiece.setEmpty();
+            _gameData.activePiece.empty = true;
             // delete groups
             std::vector<std::vector<Puyo>> groupsToDelete = runDetection(_grid, starts);
             for (std::vector<Puyo> group : groupsToDelete)

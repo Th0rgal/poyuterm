@@ -85,11 +85,12 @@ ActivePiece GameManager::createNewPiece()
         if (_grid.content[puyo.x][puyo.y])
         {
             _gameData.state = GameData::ended;
-            activePiece.setEmpty();
+            activePiece.empty = true;
             return;
         }
         (*_display.game).setCell(puyo.x, puyo.y, puyo.type);
     });
+    bool empty = activePiece.empty;
     return activePiece;
 }
 

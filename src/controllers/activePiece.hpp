@@ -13,8 +13,7 @@ public:
     bool rotate(Grid &grid);
     bool shift(Grid &grid, int x, int y);
     void map(const std::function<void(Puyo &puyo)> &function);
-    void setEmpty();
-    bool isEmpty();
+    bool empty;
 
 private:
     enum Orientation
@@ -24,6 +23,5 @@ private:
         east = 2,
         north = 3
     };
-    bool empty;
     Orientation orientation;
 };

@@ -78,7 +78,7 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
     }
 
     // reset activePiece
-    gameData.activePiece.setEmpty();
+    gameData.activePiece.empty = true;
 
     // refresh display
     (*display.game).refreshDiff(contentSnapshot, grid);

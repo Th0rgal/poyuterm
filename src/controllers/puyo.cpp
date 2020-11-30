@@ -5,7 +5,7 @@
 
 void GameManager::puyoLoop(long delay)
 {
-    if (_gameData.activePiece.isEmpty())
+    if (_gameData.activePiece.empty)
         _gameData.activePiece = createNewPiece();
 }
 
@@ -16,7 +16,7 @@ void GameManager::simulationLoop(long delay)
 
     if (_gameData.delaySinceTick > 300000000l)
     {
-        if (_gameData.activePiece.isEmpty())
+        if (_gameData.activePiece.empty)
         {
             if (!parser.next(_grid))
             {

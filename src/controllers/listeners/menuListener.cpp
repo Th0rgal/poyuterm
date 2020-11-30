@@ -56,7 +56,7 @@ void InputsListener::menuEnter()
         _gameData.activePiece.map([&](Puyo &puyo) {
             (*_display.game).setCell(puyo.x, puyo.y, Grid::none);
         });
-        _gameData.activePiece.setEmpty();
+        _gameData.activePiece.empty = true;
         (*_display.game).refreshDiff(contentSnapshot, _grid);
     }
 }

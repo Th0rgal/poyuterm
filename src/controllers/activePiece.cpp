@@ -5,7 +5,8 @@ ActivePiece::ActivePiece() : empty(true)
 {
 }
 
-ActivePiece::ActivePiece(Puyo center, Puyo side, unsigned int orientation) : center(center),
+ActivePiece::ActivePiece(Puyo center, Puyo side, unsigned int orientation) : empty(false),
+                                                                             center(center),
                                                                              side(side),
                                                                              orientation(Orientation(orientation))
 {
@@ -75,14 +76,4 @@ void ActivePiece::map(const std::function<void(Puyo &puyo)> &function)
 {
     function(center);
     function(side);
-}
-
-void ActivePiece::setEmpty()
-{
-    empty = true;
-}
-
-bool ActivePiece::isEmpty()
-{
-    return empty;
 }
