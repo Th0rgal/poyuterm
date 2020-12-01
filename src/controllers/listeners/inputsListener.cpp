@@ -41,14 +41,13 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
         {
             if (_gameData.state == GameData::menu)
                 onMenuKeyPressed(inputCode);
-            else
+            else if (inputCode == 'P' or inputCode == 'p')
+                openMenu();
+            else if (_gameData.state == GameData::running)
                 switch (_gameData.mode)
                 {
                 case GameData::solo:
                     onPuyoKeyPressed(inputCode);
-                    break;
-                case GameData::simulation:
-                    onSimulationKeyPressed(inputCode);
                     break;
                 case GameData::tetrix:
                     onTetrixKeyPressed(inputCode);

@@ -4,23 +4,12 @@
 #include "controllers/activePiece.hpp"
 #include <ncurses.h>
 
-void InputsListener::onSimulationKeyPressed(int code)
-{
-    if (code == 'P' or code == 'p')
-        openMenu();
-}
-
 void InputsListener::onPuyoKeyPressed(int code)
 {
     ActivePiece clone = _gameData.activePiece;
     bool shifted = false;
     switch (code)
     {
-
-    case 'P':
-    case 'p':
-        openMenu();
-        break;
 
     case KEY_LEFT:
         shifted = translateLeft();
@@ -65,13 +54,6 @@ void InputsListener::onTetrixKeyPressed(int code)
     bool shifted;
     switch (code)
     {
-
-    case 'P':
-    case 'p':
-        openMenu();
-        shifted = false;
-        break;
-
     case KEY_LEFT:
         shifted = translateLeft();
         break;

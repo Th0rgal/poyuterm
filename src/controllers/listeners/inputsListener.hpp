@@ -22,7 +22,6 @@ private:
 
     // grid related
     void onPuyoKeyPressed(int code);
-    void onSimulationKeyPressed(int code);
     void onTetrixKeyPressed(int code);
     bool translateLeft();
     bool translateRight();
