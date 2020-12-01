@@ -47,6 +47,9 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
                 case GameData::solo:
                     onPuyoKeyPressed(inputCode);
                     break;
+                case GameData::simulation:
+                    onSimulationKeyPressed(inputCode);
+                    break;
                 case GameData::tetrix:
                     onTetrixKeyPressed(inputCode);
                     break;

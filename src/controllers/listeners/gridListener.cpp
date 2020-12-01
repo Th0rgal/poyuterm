@@ -4,6 +4,12 @@
 #include "controllers/activePiece.hpp"
 #include <ncurses.h>
 
+void InputsListener::onSimulationKeyPressed(int code)
+{
+    if (code == 'P' or code == 'p')
+        openMenu();
+}
+
 void InputsListener::onPuyoKeyPressed(int code)
 {
     ActivePiece clone = _gameData.activePiece;
