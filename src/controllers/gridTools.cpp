@@ -12,7 +12,6 @@
  **/
 void teleportDown(Grid &grid, GameData &gameData, Display &display)
 {
-    int score = 0;
     // erase active Piece from displau
     gameData.activePiece.map([&](Puyo puyo) {
         (*display.game).setCell(puyo.x, puyo.y, Grid::none);
@@ -50,13 +49,15 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
         auto detected = runDetection(grid, starts);
         if (detected.size() > 0)
             combosIndex++;
+        unsigned int score = 0;
         for (std::vector<Puyo> puyoList : detected)
         {
             for (Puyo puyo : puyoList)
                 grid.content[puyo.x][puyo.y] = Grid::none;
             score = gameData.addScore(puyoList.size(), combosIndex, detected.size());
         }
-        (*display.game).displayScore(score);
+        if (score != 0)
+            (*display.game).displayScore(score);
 
         // move everything to the ground
         bool finished;

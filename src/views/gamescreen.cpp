@@ -72,10 +72,9 @@ void GameScreen::close()
 
 void GameScreen::displayScore(unsigned int score)
 {
-    
-    const char *string = std::to_string(score).c_str();
-    mvwprintw(scoreWin, 1, 1, "score : ");
-    mvwprintw(scoreWin, 2, 10, string);
-
+    mvwprintw(scoreWin, 1, 1, "  [score]");
+    std::string scoreText = std::to_string(score);
+    std::string spacing((12 - scoreText.size())/2, ' ');
+    mvwprintw(scoreWin, 2, 1, (spacing + scoreText).c_str());
     wrefresh(scoreWin);
 }
