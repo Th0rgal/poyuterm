@@ -22,7 +22,7 @@ bool ActivePiece::rotate(Grid &grid, unsigned int rotations)
 
     for (std::size_t i = 0; i < rotations; i++)
     {
-        switch (_orientation)
+        switch (clonedOrientation)
         {
         case west:
             center_x -= 1;
@@ -41,7 +41,7 @@ bool ActivePiece::rotate(Grid &grid, unsigned int rotations)
             center_y -= 1;
             break;
         }
-        clonedOrientation = Orientation((_orientation + 1) % 4);
+        clonedOrientation = Orientation((clonedOrientation + 1) % 4);
     }
 
     bool centerCorrect = center_x >= 0 && center_x < grid.width() && center_y >= 0 && center_y < grid.height();
