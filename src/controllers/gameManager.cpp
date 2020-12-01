@@ -29,7 +29,7 @@ GameManager::GameManager(Parser &parser) : parser(parser),
  **/
 void GameManager::start()
 {
-    _display.showMenu();
+    _display.showMenuStart();
     if (_display.started)
     {
         InputsListener inputsListener(_gameData, _display, _grid);

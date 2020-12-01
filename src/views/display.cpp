@@ -2,7 +2,7 @@
 #include <curses.h>
 #include <string>
 #include "views/display.hpp"
-#include "views/menuscreen.hpp"
+#include "views/menu/menuscreen.hpp"
 #include "views/gamescreen.hpp"
 
 /**
@@ -45,9 +45,15 @@ Display::Display()
     started = true;
 }
 
-void Display::showMenu()
+void Display::showMenuStart()
 {
     menu = MenuScreen();
+    (*menu).displayMenuStart();
+}
+
+void Display::showMenuEnd(unsigned int score)
+{
+    (*menu).displayMenuOver(score);
 }
 
 void Display::showGame()

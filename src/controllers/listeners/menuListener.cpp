@@ -22,22 +22,22 @@ void InputsListener::onMenuKeyPressed(int code)
 void InputsListener::openMenu()
 {
     _gameData.state = GameData::menu;
-    _display.showMenu();
+    _display.showMenuStart();
 }
 
 void InputsListener::menuUp()
 {
-    (*_display.menu).previous();
+    (*_display.menu).previous(1);
 }
 
 void InputsListener::menuDown()
 {
-    (*_display.menu).next();
+    (*_display.menu).next(1);
 }
 
 void InputsListener::menuEnter()
 {
-    unsigned int selected = (*_display.menu).select();
+    unsigned int selected = (*_display.menu).select(1);
     if (selected == 3)
     {
         _display.close();

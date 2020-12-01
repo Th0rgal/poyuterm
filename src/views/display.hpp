@@ -2,7 +2,7 @@
 
 #include <ncurses.h>
 #include "views/gamescreen.hpp"
-#include "views/menuscreen.hpp"
+#include "views/menu/menuscreen.hpp"
 #include <optional>
 
 struct Display
@@ -14,7 +14,8 @@ struct Display
     void close();
     void showError();
 
-    void showMenu();
+    void showMenuStart();
+    void showMenuEnd(unsigned int score);
     void showGame();
 
     std::optional<GameScreen> game = std::nullopt;

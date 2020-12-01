@@ -24,7 +24,10 @@ set(SRCS
 
     src/views/display.cpp
     src/views/gamescreen.cpp
-    src/views/menuscreen.cpp
+    src/views/menu/menuscreen.cpp
+    src/views/menu/menustart.cpp
+    src/views/menu/menugameover.cpp
+
     )
 
 set(HEADERS
@@ -41,7 +44,7 @@ set(HEADERS
 
     src/views/display.hpp
     src/views/gamescreen.hpp
-    src/views/menuscreen.hpp
+    src/views/menu/menuscreen.hpp
     )
 
 set(TESTS
