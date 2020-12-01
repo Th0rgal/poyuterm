@@ -60,10 +60,8 @@ bool Parser::next(Grid &constraint)
         {
             Puyo center = Puyo(toPuyoType(activePieceData[0]), column, 0);
             Puyo side = Puyo(toPuyoType(activePieceData[1]), column + 1, 0);
-            activePiece = ActivePiece(center, side, 0);
-
-            for (; rotations != 0; rotations--)
-                activePiece.rotate(constraint);
+            activePiece = ActivePiece(center, side, 1);
+            activePiece.rotate(constraint, (rotations - 1) % 4);
             return true;
         }
     }

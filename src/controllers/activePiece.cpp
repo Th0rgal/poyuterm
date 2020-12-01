@@ -12,35 +12,51 @@ ActivePiece::ActivePiece(Puyo center, Puyo side, unsigned int orientation) : emp
 {
 }
 
-bool ActivePiece::rotate(Grid &grid)
+bool ActivePiece::rotate(Grid &grid, unsigned int rotations)
 {
+    int center_x = center.x;
+    int center_y = center.y;
+    int side_x = side.x;
+    int side_y = side.y;
+    Orientation clonedOrientation = _orientation;
 
-    if (_orientation == west && side.x + 1 < grid.width() && side.y + 1 < grid.height() && not grid.content[side.x + 1][side.y + 1])
+    for (std::size_t i = 0; i < rotations; i++)
     {
+        switch (_orientation)
+        {
+        case west:
+            center_x -= 1;
+            side_y += 1;
+            break;
+        case south:
+            side_x += 1;
+            side_y -= 1;
+            break;
+        case east:
+            center_y += 1;
+            side_x -= 1;
+            break;
+        case north:
+            center_x += 1;
+            center_y -= 1;
+            break;
+        }
+        clonedOrientation = Orientation((_orientation + 1) % 4);
+    }
 
-        side.x += 1;
-        side.y += 1;
-    }
-    else if (_orientation == south && side.x + 1 < grid.width() && side.y > 0 && not grid.content[side.x + 1][side.y - 1])
+    bool centerCorrect = center_x >= 0 && center_x < grid.width() && center_y >= 0 && center_y < grid.height();
+    bool sideCorrect = side_x >= 0 && side_x < grid.width() && side_y >= 0 && side_y < grid.height();
+    if (centerCorrect && sideCorrect && !grid.content[center.x][center.y] && !grid.content[side.x][side.y])
     {
-        side.x += 1;
-        side.y -= 1;
+        center.x = center_x;
+        center.y = center_y;
+        side.x = side_x;
+        side.y = side_y;
+        _orientation = clonedOrientation;
+        return true;
     }
-    else if (_orientation == east && center.y + 1 < grid.height() && side.y > 0 && not grid.content[center.x][center.y + 1] && not grid.content[side.x][side.y - 1])
-    {
-        center.y += 1;
-        side.y -= 1;
-    }
-    else if (_orientation == north && center.x + 1 < grid.width() && center.y > 0 && not grid.content[center.x + 1][center.y - 1])
-    {
-        center.x += 1;
-        center.y -= 1;
-    }
-    else
-        return false;
 
-    _orientation = Orientation((_orientation + 1) % 4);
-    return true;
+    return false;
 }
 
 bool ActivePiece::shift(Grid &grid, int x, int y)

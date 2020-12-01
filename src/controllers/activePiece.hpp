@@ -10,7 +10,7 @@ public:
     ActivePiece(Puyo center, Puyo side, unsigned int orientation);
     Puyo center;
     Puyo side;
-    bool rotate(Grid &grid);
+    bool rotate(Grid &grid, unsigned int rotations = 1);
     bool shift(Grid &grid, int x, int y);
     void map(const std::function<void(Puyo &puyo)> &function);
     bool empty;
