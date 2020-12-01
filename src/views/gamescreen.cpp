@@ -19,7 +19,7 @@ GameScreen::GameScreen()
                                 LINES - gridHeight, COLS / 2 - gridWidth / 2);
     box(gridScreen, ACS_VLINE, ACS_HLINE);
     wrefresh(gridScreen);
-    scoreWin = subwin(stdscr, 4, 30, LINES - gridHeight, COLS / 2 + gridWidth / 2);
+    scoreWin = subwin(stdscr, 4, 11, LINES - gridHeight, COLS / 2 + gridWidth / 2);
     wborder(scoreWin, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
     wrefresh(scoreWin);
 }
