@@ -46,7 +46,7 @@ bool ActivePiece::rotate(Grid &grid, unsigned int rotations)
 
     bool centerCorrect = center_x >= 0 && center_x < grid.width() && center_y >= 0 && center_y < grid.height();
     bool sideCorrect = side_x >= 0 && side_x < grid.width() && side_y >= 0 && side_y < grid.height();
-    if (centerCorrect && sideCorrect && !grid.content[center.x][center.y] && !grid.content[side.x][side.y])
+    if (centerCorrect && sideCorrect && !grid.content[center_x][center_y] && !grid.content[side_x][side_y])
     {
         center.x = center_x;
         center.y = center_y;
