@@ -12,6 +12,7 @@ public:
     Parser(char *fileName);
     char *fileName;
     bool next(Grid &constraint);
+    bool next(std::size_t column);
 
     bool enabled;
     GameData::GameMode gameMode;

@@ -67,3 +67,19 @@ bool Parser::next(Grid &constraint)
     }
     return false;
 }
+
+bool Parser::next(std::size_t column)
+{
+    if (gameMode == GameData::solo)
+    {
+        std::string activePieceData;
+        if (file >> activePieceData)
+        {
+            Puyo side = Puyo(toPuyoType(activePieceData[0]), column, 0);
+            Puyo center = Puyo(toPuyoType(activePieceData[1]), column + 1, 0);
+            activePiece = ActivePiece(center, side, 0);
+            return true;
+        }
+    }
+    return false;
+}
