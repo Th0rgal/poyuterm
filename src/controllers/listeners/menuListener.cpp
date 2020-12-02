@@ -79,17 +79,5 @@ void InputsListener::menuEnterOver()
         exit(0);
         return;
     }
-    GameData::GameMode newGameMode = GameData::GameMode(selected);
-    auto contentSnapshot = _grid.content;
-    _gameData.state = GameData::running;
-    _display.showGame();
-
-    _gameData.mode = newGameMode;
-    _grid.reset();
-
-    _gameData.activePiece.map([&](Puyo &puyo) {
-        (*_display.game).setCell(puyo.x, puyo.y, Grid::none);
-    });
-    _gameData.activePiece.empty = true;
-    (*_display.game).refreshDiff(contentSnapshot, _grid);
+    openMenuStart();
 }
