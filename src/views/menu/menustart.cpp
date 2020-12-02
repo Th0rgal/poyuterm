@@ -42,8 +42,6 @@ void MenuScreen::declareMenuStart()
     set_menu_fore(menuStart, COLOR_PAIR(REDONWHITE));
     set_menu_back(menuStart, COLOR_PAIR(WHITEONRED));
 
-
-    //displayMenuStart();
 }
 
 void MenuScreen::updateMenuStart()

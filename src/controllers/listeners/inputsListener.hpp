@@ -15,10 +15,11 @@ public:
 
 private:
     //menu related
-    void onMenuKeyPressed(int code);
-    void menuUp();
-    void menuDown();
-    void menuEnter();
+    void onMenuKeyPressed(int code, GameData::GameState menuType);
+    void menuUp(GameData::GameState menuType);
+    void menuDown(GameData::GameState menuType);
+    void menuEnterStart();
+    void menuEnterOver();
 
     // grid related
     void onPuyoKeyPressed(int code);
@@ -27,5 +28,6 @@ private:
     bool translateRight();
     bool translateDown();
     bool rotatePiece();
-    void openMenu();
+    void openMenuStart();
+    void openMenuOver();
 };

@@ -42,7 +42,7 @@ void MenuScreen::windowsFilling(WINDOW *pwin)
 
 void MenuScreen::next(int state)
 {
-    if(state == 1){
+    if(state == 2){
         menu_driver(menuStart, REQ_DOWN_ITEM);
         updateMenuStart();
     } else {
@@ -53,7 +53,7 @@ void MenuScreen::next(int state)
 
 void MenuScreen::previous(int state)
 {
-    if(state == 1){
+    if(state == 2){
         menu_driver(menuStart, REQ_UP_ITEM);
         updateMenuStart();
     } else {
@@ -64,7 +64,7 @@ void MenuScreen::previous(int state)
 
 int MenuScreen::select(int state)
 {   
-    if (state == 1) {
+    if (state == 2) {
         my_choice = item_index(current_item(menuStart));
         pos_menu_cursor(menuStart);
         unpost_menu(menuStart);

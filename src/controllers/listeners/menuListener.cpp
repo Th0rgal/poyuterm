@@ -1,43 +1,52 @@
 #include "controllers/listeners/inputsListener.hpp"
 #include "views/display.hpp"
 
-void InputsListener::onMenuKeyPressed(int code)
+void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType)
 {
     switch (code)
     {
     case KEY_UP:
-        menuUp();
+        menuUp(menuType);
         break;
 
     case KEY_DOWN:
-        menuDown();
+        menuDown(menuType);
         break;
 
     case '\n':
-        menuEnter();
+        if(menuType == 2)
+            menuEnterStart();
+        else
+            menuEnterOver();
+        
         break;
     };
 }
 
-void InputsListener::openMenu()
+void InputsListener::openMenuStart()
 {
     _gameData.state = GameData::menu;
     _display.showMenuStart();
 }
 
-void InputsListener::menuUp()
+void InputsListener::openMenuOver()
 {
-    (*_display.menu).previous(1);
+    _display.showMenuEnd(_gameData.score);
 }
 
-void InputsListener::menuDown()
+void InputsListener::menuUp(GameData::GameState menuType)
 {
-    (*_display.menu).next(1);
+    (*_display.menu).previous(menuType);
 }
 
-void InputsListener::menuEnter()
+void InputsListener::menuDown(GameData::GameState menuType)
 {
-    unsigned int selected = (*_display.menu).select(1);
+    (*_display.menu).next(menuType);
+}
+
+void InputsListener::menuEnterStart()
+{
+    unsigned int selected = (*_display.menu).select(2);
     if (selected == 3)
     {
         _display.close();
@@ -59,4 +68,28 @@ void InputsListener::menuEnter()
         _gameData.activePiece.empty = true;
         (*_display.game).refreshDiff(contentSnapshot, _grid);
     }
+}
+
+void InputsListener::menuEnterOver()
+{
+    unsigned int selected = (*_display.menu).select(3);
+    if (selected == 1)
+    {
+        _display.close();
+        exit(0);
+        return;
+    }
+    GameData::GameMode newGameMode = GameData::GameMode(selected);
+    auto contentSnapshot = _grid.content;
+    _gameData.state = GameData::running;
+    _display.showGame();
+
+    _gameData.mode = newGameMode;
+    _grid.reset();
+
+    _gameData.activePiece.map([&](Puyo &puyo) {
+        (*_display.game).setCell(puyo.x, puyo.y, Grid::none);
+    });
+    _gameData.activePiece.empty = true;
+    (*_display.game).refreshDiff(contentSnapshot, _grid);
 }

@@ -39,10 +39,14 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
         }
         else
         {
-            if (_gameData.state == GameData::menu)
-                onMenuKeyPressed(inputCode);
+            if (_gameData.state == GameData::menu ){
+                onMenuKeyPressed(inputCode, _gameData.state);
+            }else if(_gameData.state == GameData::ended){
+                openMenuOver();
+                onMenuKeyPressed(inputCode, _gameData.state);
+            }
             else if (inputCode == 'P' or inputCode == 'p')
-                openMenu();
+                openMenuStart();
             else if (_gameData.state == GameData::running)
                 switch (_gameData.mode)
                 {
