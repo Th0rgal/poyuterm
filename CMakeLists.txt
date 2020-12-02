@@ -28,6 +28,7 @@ set(SRCS
     src/views/menu/menuscreen.cpp
     src/views/menu/menustart.cpp
     src/views/menu/menugameover.cpp
+    src/views/music/music.cpp
 )
 
 set(HEADERS
@@ -46,6 +47,7 @@ set(HEADERS
     src/views/display.hpp
     src/views/gamescreen.hpp
     src/views/menu/menuscreen.hpp
+    src/views/music/music.hpp
 )
 
 set(TESTS
@@ -59,6 +61,7 @@ set(LIBS
     ncurses
     pthread
     menu
+    sfml-audio
 )
 
 add_executable(poyuterm src/main.cpp ${SRCS} ${HEADERS})
