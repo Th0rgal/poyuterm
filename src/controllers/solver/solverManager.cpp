@@ -28,7 +28,9 @@ Solver::Solver(Parser &parser)
 void Solver::write()
 {
     Serializer serializer("sortie.txt");
-    //todo write a file from _pieces that could be simulated
+    serializer.writeMode(GameData::simulation);
+    for (ActivePiece piece : _pieces)
+        serializer.writePiece(piece);
 }
 
 void Solver::start()
@@ -74,7 +76,7 @@ void Solver::browse(Snapshot &output, Snapshot input, unsigned int calls)
 void Solver::browse(Snapshot &output, Snapshot input, unsigned int calls, ActivePiece activePiece)
 {
     input._score += teleportDownVirtually(input._grid, activePiece);
-    browse(output, input, calls, activePiece);
+    browse(output, input, calls);
 }
 
 unsigned int Solver::teleportDownVirtually(Grid &grid, ActivePiece &activePiece)

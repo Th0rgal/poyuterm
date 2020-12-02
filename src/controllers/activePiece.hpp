@@ -2,10 +2,15 @@
 #include <functional>
 #include "models/puyo.hpp"
 
-class ActivePiece
+struct ActivePiece
 {
-
-public:
+    enum Orientation
+    {
+        west = 0,
+        south = 1,
+        east = 2,
+        north = 3
+    };
     ActivePiece();
     ActivePiece(Puyo center, Puyo side, unsigned int orientation);
     Puyo center;
@@ -14,14 +19,6 @@ public:
     bool shift(Grid &grid, int x, int y);
     void map(const std::function<void(Puyo &puyo)> &function);
     bool empty;
-
-private:
-    enum Orientation
-    {
-        west = 0,
-        south = 1,
-        east = 2,
-        north = 3
-    };
     Orientation _orientation;
+
 };
