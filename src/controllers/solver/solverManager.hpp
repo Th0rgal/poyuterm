@@ -1,3 +1,5 @@
+#pragma once
+
 #include "controllers/activePiece.hpp"
 #include "controllers/io/parser.hpp"
 #include <vector>
