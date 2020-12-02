@@ -39,6 +39,6 @@ TEST_CASE("testing rotate")
     bool moved = activePiece.rotate(grid);
 
     CHECK(moved == true);
-    CHECK(activePiece.center == Puyo(Grid::red, 2, 0));
-    CHECK(activePiece.side == Puyo(Grid::green, 2, 1));
+    CHECK(activePiece.center == Puyo(Grid::red, 1, 0));
+    CHECK(activePiece.side == Puyo(Grid::green, 1, 1));
 }
