@@ -7,39 +7,32 @@ find_package(doctest REQUIRED)
 include(doctest)
 
 set(SRCS
-    src/controllers/gameManager.cpp
-    src/controllers/gridTools.cpp
-    src/controllers/puyo.cpp
-    src/controllers/activePiece.cpp
-    src/controllers/tetrix.cpp
-    src/controllers/listeners/inputsListener.cpp
-    src/controllers/listeners/gridListener.cpp
-    src/controllers/listeners/menuListener.cpp
-    src/controllers/io/parser.cpp
-    src/controllers/io/serializer.cpp
-    src/controllers/solver/solverManager.cpp
-
     src/models/gameData.cpp
     src/models/grid.cpp
     src/models/puyo.cpp
 
     src/views/display.cpp
     src/views/gamescreen.cpp
+    src/views/menu/menugameover.cpp
     src/views/menu/menuscreen.cpp
     src/views/menu/menustart.cpp
-    src/views/menu/menugameover.cpp
     src/views/music/music.cpp
+
+
+    src/controllers/activePiece.cpp
+    src/controllers/gameManager.cpp
+    src/controllers/gridTools.cpp
+    src/controllers/puyo.cpp
+    src/controllers/tetrix.cpp
+    src/controllers/io/parser.cpp
+    src/controllers/io/serializer.cpp
+    src/controllers/listeners/gridListener.cpp
+    src/controllers/listeners/inputsListener.cpp
+    src/controllers/listeners/menuListener.cpp
+    src/controllers/solver/solverManager.cpp
 )
 
 set(HEADERS
-    src/controllers/gameManager.hpp
-    src/controllers/gridTools.hpp
-    src/controllers/activePiece.hpp
-    src/controllers/listeners/inputsListener.hpp
-    src/controllers/io/parser.hpp
-    src/controllers/io/serializer.hpp
-    src/controllers/solver/solverManager.hpp
-
     src/models/gameData.hpp
     src/models/grid.hpp
     src/models/puyo.hpp
@@ -48,6 +41,14 @@ set(HEADERS
     src/views/gamescreen.hpp
     src/views/menu/menuscreen.hpp
     src/views/music/music.hpp
+
+    src/controllers/activePiece.hpp
+    src/controllers/gameManager.hpp
+    src/controllers/gridTools.hpp
+    src/controllers/io/parser.hpp
+    src/controllers/io/serializer.hpp
+    src/controllers/listeners/inputsListener.hpp
+    src/controllers/solver/solverManager.hpp
 )
 
 set(TESTS
@@ -57,8 +58,8 @@ set(TESTS
     tests/models/grid.cpp
     tests/models/gameData.cpp
 
-    tests/gridTools.cpp
-    tests/activePiece.cpp
+    tests/controllers/activePiece.cpp
+    tests/controllers/gridTools.cpp
 )
 
 set(LIBS
