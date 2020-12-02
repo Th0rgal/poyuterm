@@ -4,6 +4,15 @@
 #include "models/gameData.hpp"
 #include "models/grid.hpp"
 
+/**
+ * entry point of the program
+ * @param int argsSize size of the splitted start command
+ * @param  char *args[] splitted start command
+ * 
+ * @return exit code (0 if no exceptions occured)
+ * @author Thomas Marchand
+ * @confidence 3 (not possible to test)
+ **/
 int main(int argsSize, char *args[])
 {
 

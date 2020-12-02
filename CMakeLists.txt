@@ -52,6 +52,7 @@ set(HEADERS
 
 set(TESTS
     tests/tests.cpp
+    tests/puyo.cpp
     tests/grid.cpp
     tests/gridTools.cpp
     tests/activePiece.cpp

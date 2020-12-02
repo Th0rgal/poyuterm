@@ -5,6 +5,7 @@
  * of type none with (0,0) coordinates
  * 
  * @author Thomas Marchand
+ * @confidence 5
  **/
 Puyo::Puyo() : type(Grid::none), x(0), y(0)
 {
@@ -17,6 +18,7 @@ Puyo::Puyo() : type(Grid::none), x(0), y(0)
  * @param std::size_t y, position of the Puyo on the y axis
  * 
  * @author Thomas Marchand
+ * @confidence 5
  **/
 Puyo::Puyo(Grid::PuyoType type,
            std::size_t x,
@@ -31,6 +33,7 @@ Puyo::Puyo(Grid::PuyoType type,
  * @param int yAdd, shift to add to the y axis
  * 
  * @author Thomas Marchand
+ * @confidence 5
  **/
 void Puyo::move(int xAdd,
                 int yAdd)
@@ -45,6 +48,7 @@ void Puyo::move(int xAdd,
  * @return bool true if Puyo are similar
  * 
  * @author Thomas Marchand
+ * @confidence 5
  **/
 bool Puyo::operator==(const Puyo &other) const
 {
