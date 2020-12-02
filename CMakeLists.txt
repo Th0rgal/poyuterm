@@ -28,8 +28,7 @@ set(SRCS
     src/views/menu/menuscreen.cpp
     src/views/menu/menustart.cpp
     src/views/menu/menugameover.cpp
-
-    )
+)
 
 set(HEADERS
     src/controllers/gameManager.hpp
@@ -47,14 +46,14 @@ set(HEADERS
     src/views/display.hpp
     src/views/gamescreen.hpp
     src/views/menu/menuscreen.hpp
-    )
+)
 
 set(TESTS
     tests/tests.cpp
     tests/grid.cpp
     tests/gridTools.cpp
     tests/activePiece.cpp
-    )
+)
 
 set(LIBS
     ncurses
