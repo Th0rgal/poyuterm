@@ -2,6 +2,8 @@
 #include "controllers/io/serializer.hpp"
 #include "controllers/gridTools.hpp"
 #include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
 
 Snapshot::Snapshot(unsigned int score, Grid grid, std::size_t index) : _score(score), _grid(grid), _index(index)
 {
@@ -16,27 +18,37 @@ void Snapshot::update(Snapshot snapshot)
 
 Solver::Solver(Parser &parser)
 {
-    while (parser.next(0)) {
+    while (parser.next(0))
+    {
         _pieces.push_back(parser.activePiece);
     }
+    std::cout << _pieces.size() << " pieces loaded successfully!" << std::endl;
 }
 
 void Solver::write()
 {
+    Serializer serializer("sortie.txt");
     //todo write a file from _pieces that could be simulated
 }
 
 void Solver::start()
 {
-
     Grid baseGrid{std::vector<std::vector<Grid::PuyoType>>(6, std::vector<Grid::PuyoType>(12))};
+    Snapshot gameFrame{0, baseGrid, 0};
+    for (std::size_t i = 0; i < _pieces.size(); i++)
+    {
+        std::cout << i << std::endl;
+        browse(gameFrame, gameFrame, 1);
+    }
+    std::cout << gameFrame._score << std::endl;
 }
 
 void Solver::browse(Snapshot &output, Snapshot input, unsigned int calls)
 {
-    if (calls == 0 && (input._score > output._score || output._index < input._index))
+    if (calls == 0)
     {
-        output.update(input);
+        if (input._score > output._score || output._index < input._index)
+            output.update(input);
         return;
     }
 
@@ -44,23 +56,25 @@ void Solver::browse(Snapshot &output, Snapshot input, unsigned int calls)
     input._index++;
     for (std::size_t column = 0; column < input._grid.width() - 1; column++)
     {
-        teleportDownVirtually(input._grid, piece);
-        browse(output, input, calls - 1);
+        browse(output, input, calls - 1, piece);
         piece.rotate(input._grid, 2);
-        teleportDownVirtually(input._grid, piece);
-        browse(output, input, calls - 1);
+        browse(output, input, calls - 1, piece);
         piece.shift(input._grid, 1, 0);
     }
     piece.rotate(input._grid, 1);
     for (std::size_t column = 0; column < input._grid.width(); column++)
     {
-        teleportDownVirtually(input._grid, piece);
-        browse(output, input, calls - 1);
+        browse(output, input, calls - 1, piece);
         piece.rotate(input._grid, 2);
-        teleportDownVirtually(input._grid, piece);
-        browse(output, input, calls - 1);
+        browse(output, input, calls - 1, piece);
         piece.shift(input._grid, -1, 0);
     }
+}
+
+void Solver::browse(Snapshot &output, Snapshot input, unsigned int calls, ActivePiece activePiece)
+{
+    input._score += teleportDownVirtually(input._grid, activePiece);
+    browse(output, input, calls, activePiece);
 }
 
 unsigned int Solver::teleportDownVirtually(Grid &grid, ActivePiece &activePiece)

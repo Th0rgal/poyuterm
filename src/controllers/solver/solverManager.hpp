@@ -22,6 +22,7 @@ public:
 
 private:
     void browse(Snapshot &output, Snapshot input, unsigned int calls);
+    void browse(Snapshot &output, Snapshot input, unsigned int calls, ActivePiece activePiece);
     void teleportDownVirtually(Grid &grid, GameData &gameData);
 };
 
