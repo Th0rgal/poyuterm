@@ -70,7 +70,7 @@ bool Parser::next(Grid &constraint)
 
 bool Parser::next(std::size_t column)
 {
-    if (gameMode == GameData::solo)
+    if (gameMode == GameData::solo || gameMode == GameData::ia)
     {
         std::string activePieceData;
         if (file >> activePieceData)

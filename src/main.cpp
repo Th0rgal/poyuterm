@@ -7,9 +7,12 @@ int main(int argsSize, char *args[])
 {
 
     Parser parser = (argsSize >= 2) ? Parser(args[1]) : Parser();
-
-    // load controllers
-    GameManager(parser).start();
+    if (parser.gameMode == GameData::ia)
+    {
+    }
+    else
+        // load controllers
+        GameManager(parser).start();
 
     return 0;
 }
