@@ -1,5 +1,4 @@
 #include "controllers/activePiece.hpp"
-#include <iostream>
 
 ActivePiece::ActivePiece() : empty(true)
 {

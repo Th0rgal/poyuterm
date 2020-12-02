@@ -1,8 +1,8 @@
 #pragma once
-#include "models/gameData.hpp"
-#include "models/grid.hpp"
-#include <vector>
+
 #include <fstream>
+#include "models/grid.hpp"
+#include "models/gameData.hpp"
 #include "controllers/activePiece.hpp"
 
 class Parser

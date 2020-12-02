@@ -1,9 +1,4 @@
 #include "controllers/gridTools.hpp"
-#include "models/grid.hpp"
-#include "models/gameData.hpp"
-#include "models/puyo.hpp"
-#include <bits/stdc++.h>
-#include <ncurses.h>
 
 /**
  * to teleport the active piece to the bottom if it is possible

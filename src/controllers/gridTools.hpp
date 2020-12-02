@@ -1,11 +1,11 @@
 #pragma once
 
 #include <vector>
+#include <bits/stdc++.h>
 #include "models/grid.hpp"
 #include "models/gameData.hpp"
 #include "models/puyo.hpp"
 #include "views/display.hpp"
-#include <bits/stdc++.h>
 
 struct Coordinates
 {

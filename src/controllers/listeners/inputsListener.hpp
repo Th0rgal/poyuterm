@@ -1,4 +1,5 @@
 #pragma once
+
 #include <functional>
 #include "models/gameData.hpp"
 #include "models/grid.hpp"

@@ -1,5 +1,4 @@
 #include "controllers/io/serializer.hpp"
-#include <fstream>
 
 Serializer::Serializer(const char *fileName)
 {

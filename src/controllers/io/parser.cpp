@@ -1,7 +1,4 @@
 #include "controllers/io/parser.hpp"
-#include "controllers/gridTools.hpp"
-#include "controllers/activePiece.hpp"
-#include <string>
 
 Parser::Parser()
 {

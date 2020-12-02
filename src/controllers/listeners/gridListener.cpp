@@ -1,8 +1,5 @@
 #include "controllers/listeners/inputsListener.hpp"
-#include "views/display.hpp"
 #include "controllers/gridTools.hpp"
-#include "controllers/activePiece.hpp"
-#include <ncurses.h>
 
 void InputsListener::onPuyoKeyPressed(int code)
 {

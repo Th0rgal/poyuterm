@@ -1,5 +1,4 @@
 #include "controllers/listeners/inputsListener.hpp"
-#include "views/display.hpp"
 
 void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType)
 {

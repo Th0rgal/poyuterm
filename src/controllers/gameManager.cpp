@@ -1,11 +1,5 @@
 #include "controllers/gameManager.hpp"
-#include "models/gameData.hpp"
 #include "controllers/listeners/inputsListener.hpp"
-#include <stdlib.h>
-#include <ncurses.h>
-#include <string>
-#include <iostream>
-#include "views/display.hpp"
 
 /**
  * to intialize a GameManager object
