@@ -1,6 +1,5 @@
 #include "controllers/activePiece.hpp"
 #include "controllers/io/parser.hpp"
-#include "controllers/io/serializer.hpp"
 #include <vector>
 
 struct Snapshot
@@ -16,7 +15,7 @@ class Solver
 {
 public:
     Solver(Parser &parser);
-    void write(Serializer &serializer);
+    void write();
     void start();
     std::vector<ActivePiece> _pieces;
     unsigned int teleportDownVirtually(Grid &grid, ActivePiece &activePiece);

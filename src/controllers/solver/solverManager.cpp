@@ -1,4 +1,5 @@
 #include "controllers/solver/solverManager.hpp"
+#include "controllers/io/serializer.hpp"
 #include "controllers/gridTools.hpp"
 #include <bits/stdc++.h>
 
@@ -15,10 +16,12 @@ void Snapshot::update(Snapshot snapshot)
 
 Solver::Solver(Parser &parser)
 {
-    //todo : store all Puyos in pieces
+    while (parser.next(0)) {
+        _pieces.push_back(parser.activePiece);
+    }
 }
 
-void Solver::write(Serializer &serializer)
+void Solver::write()
 {
     //todo write a file from _pieces that could be simulated
 }
