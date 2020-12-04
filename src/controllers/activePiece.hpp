@@ -21,5 +21,4 @@ struct ActivePiece
     void map(const std::function<void(Puyo &puyo)> &function);
     bool empty;
     Orientation _orientation;
-
 };
