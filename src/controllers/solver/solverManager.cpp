@@ -162,8 +162,14 @@ unsigned int Solver::computeEfficiencyIndex(Grid &grid, unsigned int tempHighest
     std::unordered_set<Coordinates> starts;
     for (std::size_t x = 0; x < grid.width(); x++)
         for (std::size_t y = 1; y < grid.height(); y++)
+        {
             if (!grid.content[x][y - 1] && grid.content[x][y])
                 starts.emplace(x, y);
+            else if (x > 0 && !grid.content[x - 1][y] && grid.content[x][y])
+                starts.emplace(x, y);
+            else if (x + 1 < grid.width() - 1 && !grid.content[x + 1][y] && grid.content[x][y])
+                starts.emplace(x, y);
+        }
 
     unsigned int counter = 0;
     if (tempHighestColumnSize < grid.height() - 3)
