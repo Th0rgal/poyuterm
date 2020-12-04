@@ -30,6 +30,7 @@ void GameManager::start()
         inputsListener.handleInputs([&](int delay) {
             loop(delay);
         });
+        parser.close();
         _display.close();
     }
 }
