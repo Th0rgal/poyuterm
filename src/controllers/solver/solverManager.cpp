@@ -5,78 +5,74 @@
 #include <algorithm>
 #include <iostream>
 
-Snapshot::Snapshot(unsigned int score, Grid grid, std::size_t index) : _score(score), _grid(grid), _index(index)
+Solver::Solver(Parser &parser) : _parser(parser)
 {
-}
-
-void Snapshot::update(Snapshot snapshot)
-{
-    _score = snapshot._score;
-    _grid = snapshot._grid;
-    _index = snapshot._index;
-}
-
-Solver::Solver(Parser &parser)
-{
-    while (parser.next(0))
-    {
-        _pieces.push_back(parser.activePiece);
-    }
-    std::cout << _pieces.size() << " pieces loaded successfully!" << std::endl;
-}
-
-void Solver::write()
-{
-    Serializer serializer("sortie.txt");
-    serializer.writeMode(GameData::simulation);
-    for (ActivePiece piece : _pieces)
-        serializer.writePiece(piece);
 }
 
 void Solver::start()
 {
-    Grid baseGrid{std::vector<std::vector<Grid::PuyoType>>(6, std::vector<Grid::PuyoType>(12))};
-    Snapshot gameFrame{0, baseGrid, 0};
-    for (std::size_t i = 0; i < _pieces.size(); i++)
+    Serializer serializer("sortie.txt");
+    serializer.writeMode(GameData::simulation);
+    Grid grid{std::vector<std::vector<Grid::PuyoType>>(6, std::vector<Grid::PuyoType>(12))};
+    unsigned int score = 0;
+    while (_parser.next(0))
     {
-        std::cout << i << std::endl;
-        browse(gameFrame, gameFrame, 1);
+        ActivePiece piece = _parser.activePiece;
+        unsigned int scoreBonus = 0;
+        bool scoreChanged;
+        unsigned int efficiencyIndex = 0;
+        bool efficiencyChanged;
+        unsigned int highestColumnSize = grid.height() + 1;
+        Grid gridClone = grid;
+        for (std::size_t column = 0; column < grid.width() - 1; column++)
+        {
+            compute(grid, piece, gridClone, scoreBonus, scoreChanged, efficiencyIndex, efficiencyChanged, highestColumnSize);
+            piece.rotate(grid, 2);
+            compute(grid, piece, gridClone, scoreBonus, scoreChanged, efficiencyIndex, efficiencyChanged, highestColumnSize);
+            piece.shift(grid, 1, 0);
+        }
+        piece.rotate(grid, 1);
+        for (std::size_t column = 0; column < grid.width(); column++)
+        {
+            compute(grid, piece, gridClone, scoreBonus, scoreChanged, efficiencyIndex, efficiencyChanged, highestColumnSize);
+            piece.rotate(grid, 2);
+            compute(grid, piece, gridClone, scoreBonus, scoreChanged, efficiencyIndex, efficiencyChanged, highestColumnSize);
+            piece.shift(grid, -1, 0);
+        }
+        grid = gridClone;
+        serializer.writePiece(piece);
     }
-    std::cout << gameFrame._score << std::endl;
 }
 
-void Solver::browse(Snapshot &output, Snapshot input, unsigned int calls)
+void Solver::compute(Grid grid, ActivePiece piece, Grid &clone, unsigned int &scoreBonus, bool &scoreChanged, unsigned int &efficiencyIndex,
+                     bool &efficiencyChanged, unsigned int &highestColumnSize)
 {
-    if (calls == 0)
+    unsigned int tempScore = teleportDownVirtually(grid, piece);
+    if (tempScore > scoreBonus)
     {
-        if (input._score > output._score || output._index < input._index)
-            output.update(input);
+        scoreChanged = true;
+        clone = grid;
+        scoreBonus = tempScore;
+    }
+    if (scoreChanged)
         return;
-    }
 
-    ActivePiece piece = _pieces[input._index];
-    input._index++;
-    for (std::size_t column = 0; column < input._grid.width() - 1; column++)
+    unsigned int tempEfficiencyIndex = computeEfficiencyIndex(grid);
+    if (tempEfficiencyIndex > efficiencyIndex)
     {
-        browse(output, input, calls - 1, piece);
-        piece.rotate(input._grid, 2);
-        browse(output, input, calls - 1, piece);
-        piece.shift(input._grid, 1, 0);
+        efficiencyChanged = true;
+        clone = grid;
+        efficiencyIndex = tempEfficiencyIndex;
     }
-    piece.rotate(input._grid, 1);
-    for (std::size_t column = 0; column < input._grid.width(); column++)
-    {
-        browse(output, input, calls - 1, piece);
-        piece.rotate(input._grid, 2);
-        browse(output, input, calls - 1, piece);
-        piece.shift(input._grid, -1, 0);
-    }
-}
+    if (efficiencyChanged)
+        return;
 
-void Solver::browse(Snapshot &output, Snapshot input, unsigned int calls, ActivePiece activePiece)
-{
-    input._score += teleportDownVirtually(input._grid, activePiece);
-    browse(output, input, calls);
+    unsigned int tempHighestColumnSize = computeHighestColumnSize(grid);
+    if (tempHighestColumnSize < highestColumnSize)
+    {
+        clone = grid;
+        highestColumnSize = tempHighestColumnSize;
+    }
 }
 
 unsigned int Solver::teleportDownVirtually(Grid &grid, ActivePiece &activePiece)
@@ -115,7 +111,6 @@ unsigned int Solver::teleportDownVirtually(Grid &grid, ActivePiece &activePiece)
         auto detected = runDetection(grid, starts);
         if (detected.size() > 0)
             combosIndex++;
-
         for (std::vector<Puyo> puyoList : detected)
         {
             for (Puyo puyo : puyoList)
@@ -142,6 +137,26 @@ unsigned int Solver::teleportDownVirtually(Grid &grid, ActivePiece &activePiece)
         } while (not finished);
     }
     return scoreBonus;
+}
+
+unsigned int Solver::computeEfficiencyIndex(Grid &grid)
+{
+    return 0;
+}
+
+unsigned int Solver::computeHighestColumnSize(Grid &grid)
+{
+    unsigned int highestColumnSize = 0;
+    for (auto column : grid.content)
+    {
+        unsigned int columnSize = 0;
+        for (Grid::PuyoType type : column)
+            if (type != Grid::none)
+                columnSize += 1;
+        if (columnSize > highestColumnSize)
+            highestColumnSize = columnSize;
+    }
+    return highestColumnSize;
 }
 
 unsigned int getScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber)

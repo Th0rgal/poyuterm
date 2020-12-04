@@ -21,7 +21,6 @@ int main(int argsSize, char *args[])
     {
         Solver solver{parser};
         solver.start();
-        solver.write();
     }
     else
         // load controllers

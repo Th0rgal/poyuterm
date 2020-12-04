@@ -4,28 +4,19 @@
 #include "controllers/io/parser.hpp"
 #include <vector>
 
-struct Snapshot
-{
-    Snapshot(unsigned int score, Grid grid, std::size_t index);
-    unsigned int _score;
-    Grid _grid;
-    std::size_t _index;
-    void update(Snapshot snapshot);
-};
-
 class Solver
 {
 public:
     Solver(Parser &parser);
-    void write();
     void start();
-    std::vector<ActivePiece> _pieces;
     unsigned int teleportDownVirtually(Grid &grid, ActivePiece &activePiece);
+    unsigned int computeEfficiencyIndex(Grid &grid);
+    unsigned int computeHighestColumnSize(Grid &grid);
 
 private:
-    void browse(Snapshot &output, Snapshot input, unsigned int calls);
-    void browse(Snapshot &output, Snapshot input, unsigned int calls, ActivePiece activePiece);
-    void teleportDownVirtually(Grid &grid, GameData &gameData);
+    Parser &_parser;
+    void compute(Grid grid, ActivePiece piece, Grid &clone, unsigned int &scoreBonus, bool &scoreChanged, unsigned int &efficiencyIndex,
+                 bool &efficiencyChanged, unsigned int &highestColumnSize);
 };
 
 unsigned int getScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber);
