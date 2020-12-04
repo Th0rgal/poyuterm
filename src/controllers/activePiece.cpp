@@ -85,6 +85,29 @@ bool ActivePiece::shift(Grid &grid, int x, int y)
     return true;
 }
 
+bool ActivePiece::shiftNoCheck(Grid &grid, int x, int y)
+{
+
+    std::vector<Puyo> piece = {center, side};
+    for (Puyo &puyo : piece)
+    {
+        // avoid impossible x
+        if (static_cast<int>(puyo.x) + x < 0 ||
+            static_cast<int>(puyo.x) + x >= static_cast<int>(grid.width()))
+            return false;
+
+        // avoid impossible y
+        if (static_cast<int>(puyo.y) + y < 0 ||
+            static_cast<int>(puyo.y) + y >= static_cast<int>(grid.height()))
+            return false;
+
+        puyo.move(x, y);
+    }
+    center = piece[0];
+    side = piece[1];
+    return true;
+}
+
 void ActivePiece::map(const std::function<void(Puyo &puyo)> &function)
 {
     function(center);

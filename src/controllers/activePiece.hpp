@@ -17,6 +17,7 @@ struct ActivePiece
     Puyo side;
     bool rotate(Grid &grid, unsigned int rotations = 1);
     bool shift(Grid &grid, int x, int y);
+    bool shiftNoCheck(Grid &grid, int x, int y);
     void map(const std::function<void(Puyo &puyo)> &function);
     bool empty;
     Orientation _orientation;
