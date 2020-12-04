@@ -17,6 +17,7 @@ void Solver::start()
     unsigned int score = 0;
     while (_parser.next(0))
     {
+        _changed = false;
         _scoreBonus = 0;
         _scoreChanged = false;
         _efficiencyIndex = 0;
@@ -39,13 +40,28 @@ void Solver::start()
             compute(grid, piece);
             piece.shift(grid, -1, 0);
         }
+
+        if (!_changed)
+            break;
+
         grid = _gridClone;
         serializer.writePiece(_piece);
     }
+    _parser.close();
+    serializer.close();
 }
 
 void Solver::compute(Grid grid, ActivePiece piece)
 {
+    bool changed = true;
+    piece.map([&](Puyo &puyo) {
+        if (grid.content[puyo.x][puyo.y])
+            changed = false;
+    });
+    if (!changed)
+        return;
+    _changed = true;
+
     unsigned int tempScore = teleportDownVirtually(grid, piece);
     if (tempScore > _scoreBonus && tempScore > 280)
     {

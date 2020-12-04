@@ -80,3 +80,8 @@ bool Parser::next(std::size_t column)
     }
     return false;
 }
+
+void Parser::close()
+{
+    file.close();
+}

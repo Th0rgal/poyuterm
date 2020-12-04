@@ -15,6 +15,7 @@ public:
 
 private:
     Parser &_parser;
+    bool _changed;
     unsigned int _scoreBonus;
     bool _scoreChanged;
     unsigned int _efficiencyIndex;

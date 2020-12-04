@@ -26,5 +26,6 @@ int main(int argsSize, char *args[])
         // load controllers
         GameManager(parser).start();
 
+    parser.close();
     return 0;
 }

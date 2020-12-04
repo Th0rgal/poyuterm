@@ -13,6 +13,7 @@ public:
     char *fileName;
     bool next(Grid &constraint);
     bool next(std::size_t column);
+    void close();
 
     bool enabled;
     GameData::GameMode gameMode;

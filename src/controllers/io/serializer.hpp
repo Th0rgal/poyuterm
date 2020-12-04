@@ -11,6 +11,7 @@ public:
     void writePiece(ActivePiece &piece);
     void writeGrid(Grid &grid);
     void writeScore(unsigned int score);
+    void close();
 
 private:
     char toLetter(const Grid::PuyoType type);

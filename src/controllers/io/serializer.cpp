@@ -77,3 +77,7 @@ char Serializer::toLetter(const Grid::PuyoType type)
         return '?';
     }
 }
+
+void Serializer::close() {
+    file.close();
+}
