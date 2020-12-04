@@ -17,61 +17,63 @@ void Solver::start()
     unsigned int score = 0;
     while (_parser.next(0))
     {
+        _scoreBonus = 0;
+        _scoreChanged = false;
+        _efficiencyIndex = 0;
+        _efficiencyChanged = false;
+        _highestColumnSize = grid.height() + 1;
+        _gridClone = grid;
         ActivePiece piece = _parser.activePiece;
-        unsigned int scoreBonus = 0;
-        bool scoreChanged;
-        unsigned int efficiencyIndex = 0;
-        bool efficiencyChanged;
-        unsigned int highestColumnSize = grid.height() + 1;
-        Grid gridClone = grid;
         for (std::size_t column = 0; column < grid.width() - 1; column++)
         {
-            compute(grid, piece, gridClone, scoreBonus, scoreChanged, efficiencyIndex, efficiencyChanged, highestColumnSize);
+            compute(grid, piece);
             piece.rotate(grid, 2);
-            compute(grid, piece, gridClone, scoreBonus, scoreChanged, efficiencyIndex, efficiencyChanged, highestColumnSize);
+            compute(grid, piece);
             piece.shift(grid, 1, 0);
         }
         piece.rotate(grid, 1);
         for (std::size_t column = 0; column < grid.width(); column++)
         {
-            compute(grid, piece, gridClone, scoreBonus, scoreChanged, efficiencyIndex, efficiencyChanged, highestColumnSize);
+            compute(grid, piece);
             piece.rotate(grid, 2);
-            compute(grid, piece, gridClone, scoreBonus, scoreChanged, efficiencyIndex, efficiencyChanged, highestColumnSize);
+            compute(grid, piece);
             piece.shift(grid, -1, 0);
         }
-        grid = gridClone;
-        serializer.writePiece(piece);
+        grid = _gridClone;
+        serializer.writePiece(_piece);
     }
 }
 
-void Solver::compute(Grid grid, ActivePiece piece, Grid &clone, unsigned int &scoreBonus, bool &scoreChanged, unsigned int &efficiencyIndex,
-                     bool &efficiencyChanged, unsigned int &highestColumnSize)
+void Solver::compute(Grid grid, ActivePiece piece)
 {
     unsigned int tempScore = teleportDownVirtually(grid, piece);
-    if (tempScore > scoreBonus)
+    if (tempScore > _scoreBonus && tempScore > 280)
     {
-        scoreChanged = true;
-        clone = grid;
-        scoreBonus = tempScore;
+        _scoreChanged = true;
+        _gridClone = grid;
+        _scoreBonus = tempScore;
+        _piece = piece;
     }
-    if (scoreChanged)
-        return;
-
-    unsigned int tempEfficiencyIndex = computeEfficiencyIndex(grid);
-    if (tempEfficiencyIndex > efficiencyIndex)
-    {
-        efficiencyChanged = true;
-        clone = grid;
-        efficiencyIndex = tempEfficiencyIndex;
-    }
-    if (efficiencyChanged)
+    if (_scoreChanged)
         return;
 
     unsigned int tempHighestColumnSize = computeHighestColumnSize(grid);
-    if (tempHighestColumnSize < highestColumnSize)
+    unsigned int tempEfficiencyIndex = computeEfficiencyIndex(grid, tempHighestColumnSize);
+    if (tempEfficiencyIndex > _efficiencyIndex)
     {
-        clone = grid;
-        highestColumnSize = tempHighestColumnSize;
+        _efficiencyChanged = true;
+        _gridClone = grid;
+        _efficiencyIndex = tempEfficiencyIndex;
+        _piece = piece;
+    }
+    if (_efficiencyChanged)
+        return;
+
+    if (tempHighestColumnSize < _highestColumnSize)
+    {
+        _gridClone = grid;
+        _highestColumnSize = tempHighestColumnSize;
+        _piece = piece;
     }
 }
 
@@ -139,9 +141,20 @@ unsigned int Solver::teleportDownVirtually(Grid &grid, ActivePiece &activePiece)
     return scoreBonus;
 }
 
-unsigned int Solver::computeEfficiencyIndex(Grid &grid)
+unsigned int Solver::computeEfficiencyIndex(Grid &grid, unsigned int tempHighestColumnSize)
 {
-    return 0;
+    std::unordered_set<Coordinates> starts;
+    for (std::size_t x = 0; x < grid.width(); x++)
+        for (std::size_t y = 1; y < grid.height(); y++)
+            if (!grid.content[x][y - 1] && grid.content[x][y])
+                starts.emplace(x, y);
+
+    unsigned int counter = 0;
+    if (tempHighestColumnSize < grid.height() - 3)
+        for (auto group : runDetection(grid, starts, 2))
+            counter += group.size();
+
+    return counter;
 }
 
 unsigned int Solver::computeHighestColumnSize(Grid &grid)

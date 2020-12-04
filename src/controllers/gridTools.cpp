@@ -84,7 +84,7 @@ void teleportDown(Grid &grid, GameData &gameData, Display &display)
  * 
  * 
  **/
-std::vector<std::vector<Puyo>> runDetection(Grid &grid, std::unordered_set<Coordinates> &starts)
+std::vector<std::vector<Puyo>> runDetection(Grid &grid, std::unordered_set<Coordinates> &starts, const unsigned int triggerSize)
 {
     std::vector<std::vector<Puyo>> groups;
     std::vector<std::vector<Grid::PuyoType>> contentSample(grid.width(),
@@ -108,7 +108,7 @@ std::vector<std::vector<Puyo>> runDetection(Grid &grid, std::unordered_set<Coord
                 contentSample[puyo.x][puyo.y] = puyo.type;
             }
         }
-        if (!duplicate && group.size() >= 4)
+        if (!duplicate && group.size() >= triggerSize)
             groups.push_back(group);
     }
     return groups;

@@ -22,7 +22,9 @@ struct std::hash<Coordinates>
 };
 
 void teleportDown(Grid &grid, GameData &gameData, Display &display);
-std::vector<std::vector<Puyo>> runDetection(Grid &grid, std::unordered_set<Coordinates> &starts);
+std::vector<std::vector<Puyo>> runDetection(Grid &grid,
+                                            std::unordered_set<Coordinates> &starts,
+                                            const unsigned int triggerSize = 4);
 
 void extractGroup(std::vector<Puyo> &group,
                   Grid &clonedGrid,

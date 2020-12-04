@@ -10,13 +10,19 @@ public:
     Solver(Parser &parser);
     void start();
     unsigned int teleportDownVirtually(Grid &grid, ActivePiece &activePiece);
-    unsigned int computeEfficiencyIndex(Grid &grid);
+    unsigned int computeEfficiencyIndex(Grid &grid, unsigned int tempHighestColumnSize);
     unsigned int computeHighestColumnSize(Grid &grid);
 
 private:
     Parser &_parser;
-    void compute(Grid grid, ActivePiece piece, Grid &clone, unsigned int &scoreBonus, bool &scoreChanged, unsigned int &efficiencyIndex,
-                 bool &efficiencyChanged, unsigned int &highestColumnSize);
+    unsigned int _scoreBonus;
+    bool _scoreChanged;
+    unsigned int _efficiencyIndex;
+    bool _efficiencyChanged;
+    unsigned int _highestColumnSize;
+    ActivePiece _piece;
+    Grid _gridClone{std::vector<std::vector<Grid::PuyoType>>(6, std::vector<Grid::PuyoType>(12))};
+    void compute(Grid grid, ActivePiece piece);
 };
 
 unsigned int getScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber);
