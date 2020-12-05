@@ -51,18 +51,6 @@ void CAudio::menuChangePlay()
 }
 
 /**
- * play combo effect
- *
- * @author Valeran MAYTIE
- * @confidence 3 : impossible to test sound 
- **/
-void CAudio::comboPlay()
-{
-	comboMusic.openFromFile("music/combo.wav");
-	comboMusic.play();
-}
-
-/**
  * Play Easter Egg music
  *
  * @author Valeran MAYTIE
