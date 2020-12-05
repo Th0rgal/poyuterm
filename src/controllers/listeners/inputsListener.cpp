@@ -40,10 +40,10 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
         else
         {
             if (_gameData.state == GameData::menu ){
-                onMenuKeyPressed(inputCode, _gameData.state);
+                onMenuKeyPressed(inputCode, _gameData.state, 1);
             }else if(_gameData.state == GameData::ended){
                 openMenuOver();
-                onMenuKeyPressed(inputCode, _gameData.state);
+                onMenuKeyPressed(inputCode, _gameData.state, _gameData.score);
             }
             else if (inputCode == 'P' or inputCode == 'p')
             {

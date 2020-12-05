@@ -45,21 +45,45 @@ Display::Display()
     started = true;
 }
 
+/**
+ * To diplay menu Start
+ *
+ * @author Valeran MAYTIE
+ **/
 void Display::showMenuStart()
 {
     menu = MenuScreen();
     (*menu).displayMenuStart();
 }
 
+/**
+ * To display menu Game Over
+ *
+ * @aparam unsigned int represent score
+ * @author Valeran MAYTIE
+ **/
+
 void Display::showMenuEnd(unsigned int score)
 {
     (*menu).displayMenuOver(score);
 }
 
+/**
+ * decalre Game screen
+ *
+ * @author Thomas Marchand
+ **/
+
 void Display::showGame()
 {
     game = GameScreen();
 }
+
+/**
+ * Close menu and display
+ *
+ * @author Thomas Marchand
+ **/
 
 void Display::close()
 {

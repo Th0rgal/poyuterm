@@ -3,7 +3,11 @@
 #include <string>
 #include "views/menu/menuscreen.hpp"
 
-
+/**
+ * Declare game over menu
+ *
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::declareMenuOver()
 {
 	char *choices[] = /* The menu choices */
@@ -44,6 +48,12 @@ void MenuScreen::declareMenuOver()
 
 }
 
+/**
+ * Diplay game over menu
+ *
+ * @aparam unsigned int represent score
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::displayMenuOver(unsigned int score)
 {
 	refresh();
@@ -52,6 +62,11 @@ void MenuScreen::displayMenuOver(unsigned int score)
     updateMenuOver();
 }
 
+/**
+ * Update game over menu
+ *
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::updateMenuOver()
 {
 	touchwin(wMenuGameOver);
@@ -60,6 +75,12 @@ void MenuScreen::updateMenuOver()
     wrefresh(wBorderGameOver);
 }
 
+/**
+ * Display score in menu game over
+ *
+ * @aparam unsigned int represent score
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::ScoreInMenu(unsigned int score)
 {
     const char *scoreString = std::to_string(score).c_str();

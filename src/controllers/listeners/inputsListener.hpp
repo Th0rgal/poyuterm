@@ -18,7 +18,7 @@ public:
 
 private:
     //menu related
-    void onMenuKeyPressed(int code, GameData::GameState menuType);
+    void onMenuKeyPressed(int code, GameData::GameState menuType, unsigned int score);
     void menuUp(GameData::GameState menuType);
     void menuDown(GameData::GameState menuType);
     void menuEnterStart();

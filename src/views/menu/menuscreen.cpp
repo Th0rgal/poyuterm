@@ -2,6 +2,11 @@
 #include <string.h> /* strlen() */
 #include "views/menu/menuscreen.hpp"
 
+/**
+ * Decalre Colros and menu start / game Over
+ *
+ * @author Valeran MAYTIE
+ **/
 MenuScreen::MenuScreen()
 {
     if (has_colors())
@@ -17,7 +22,13 @@ MenuScreen::MenuScreen()
     declareMenuOver();
 }
 
-
+/**
+ * Make a more beautiful windows border
+ *
+ * @param WINDOW *pwin background Window
+ * @param const cahr *title title of Menu
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::windowsBorderTitle(WINDOW *pwin, const char *title)
 {
     int x, maxy, maxx, stringsize;
@@ -31,6 +42,12 @@ void MenuScreen::windowsBorderTitle(WINDOW *pwin, const char *title)
     waddch(pwin, ACS_LTEE);
 }
 
+/**
+ * Filling background window
+ *
+ * @param WINDOW *pwin background Window
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::windowsFilling(WINDOW *pwin)
 {
     int y, x, maxy, maxx;
@@ -40,6 +57,12 @@ void MenuScreen::windowsFilling(WINDOW *pwin)
             mvwaddch(pwin, y, x, ' ');
 }
 
+/**
+ * move the cursor to the next box
+ *
+ * @param int state choice of menu to change
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::next(int state)
 {
     if(state == 2){
@@ -51,6 +74,12 @@ void MenuScreen::next(int state)
     }
 }
 
+/**
+ * move the cursor to the previous box
+ *
+ * @param int state choice of menu to change
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::previous(int state)
 {
     if(state == 2){
@@ -62,6 +91,13 @@ void MenuScreen::previous(int state)
     }
 }
 
+/**
+ * select a box in the menu
+ *
+ * @param int state choice of menu
+ * @return coefficient of choice
+ * @author Valeran MAYTIE
+ **/
 int MenuScreen::select(int state)
 {   
     if (state == 2) {
@@ -93,6 +129,11 @@ int MenuScreen::select(int state)
     return my_choice;
 }
 
+/**
+ * close evry menu
+ *
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::close()
 {
     endwin();

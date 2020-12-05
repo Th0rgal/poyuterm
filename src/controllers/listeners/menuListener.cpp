@@ -1,6 +1,6 @@
 #include "controllers/listeners/inputsListener.hpp"
 
-void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType)
+void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType, unsigned int score)
 {
     switch (code)
     {
@@ -19,6 +19,11 @@ void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType)
             menuEnterOver();
         
         break;
+    case 'c':
+        if(menuType != 2 && score == 0){
+            _music.easterEggsPlay();
+        }
+        break;
     };
 }
 
@@ -30,6 +35,7 @@ void InputsListener::openMenuStart()
 
 void InputsListener::openMenuOver()
 {
+    _music.PausedMusicGame();
     _display.showMenuEnd(_gameData.score);
 }
 

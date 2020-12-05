@@ -2,6 +2,11 @@
 #include <string.h> /* strlen() */
 #include "views/menu/menuscreen.hpp"
 
+/**
+ * Declare a start menu
+ *
+ * @autore Valeran MAYTIE
+ **/
 void MenuScreen::declareMenuStart()
 {
 	char *choices[] = /* The menu choices */
@@ -44,6 +49,11 @@ void MenuScreen::declareMenuStart()
 
 }
 
+/**
+ * Update menu Start
+ *
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::updateMenuStart()
 {
     touchwin(wMenuStart);
@@ -52,6 +62,11 @@ void MenuScreen::updateMenuStart()
     wrefresh(wBorderStart);
 }
 
+/**
+ * Display menu Start
+ *
+ * @author Valeran MAYTIE
+ **/
 void MenuScreen::displayMenuStart()
 {
     refresh();

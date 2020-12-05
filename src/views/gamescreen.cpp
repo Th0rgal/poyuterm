@@ -2,6 +2,12 @@
 #include <ncurses.h>
 #include <string>
 
+/**
+ * Declare a Windows for game and the window for score
+ *
+ * @author Valeran MAYTIE
+ **/
+
 GameScreen::GameScreen()
 {
     // to make getch() not blocking
@@ -54,6 +60,11 @@ void GameScreen::setCell(int x,
     attroff(COLOR_PAIR(type));
 }
 
+/**
+ * refresh Grid in the terminal
+ *
+ * @author Valeran MAYTIE
+ **/
 void GameScreen::refreshDiff(std::vector<std::vector<Grid::PuyoType>> &snapshot,
                              Grid &grid)
 {
@@ -65,11 +76,21 @@ void GameScreen::refreshDiff(std::vector<std::vector<Grid::PuyoType>> &snapshot,
         }
 }
 
+/**
+ * Close ncurses
+ *
+ * @author Valeran MAYTIE
+ **/
 void GameScreen::close()
 {
     endwin();
 }
 
+/**
+ * Diplay Score right of the window
+ *
+ * @author
+ **/
 void GameScreen::displayScore(unsigned int score)
 {
     mvwprintw(scoreWin, 1, 1, "  [score]");
