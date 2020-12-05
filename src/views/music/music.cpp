@@ -14,3 +14,9 @@ void CAudio::PausedMusicGame()
 {
 	musicInGame.pause();
 }
+
+void CAudio::menuChangePlay()
+{
+	menuChange.openFromFile("music/menuChange.wav");
+	menuChange.play();
+}

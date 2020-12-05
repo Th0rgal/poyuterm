@@ -35,11 +35,13 @@ void InputsListener::openMenuOver()
 
 void InputsListener::menuUp(GameData::GameState menuType)
 {
+    _music.menuChangePlay();
     (*_display.menu).previous(menuType);
 }
 
 void InputsListener::menuDown(GameData::GameState menuType)
 {
+    _music.menuChangePlay();
     (*_display.menu).next(menuType);
 }
 
