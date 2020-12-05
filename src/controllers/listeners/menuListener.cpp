@@ -1,5 +1,13 @@
 #include "controllers/listeners/inputsListener.hpp"
 
+/**
+ * interactive function between menu and key
+ *
+ * @param int code key to chack
+ * @param GameData::GameState menuType menu to use
+ * @param usinged int score score for easter egg
+ * @author Valeran MAYTIE
+ **/
 void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType, unsigned int score)
 {
     switch (code)
@@ -27,30 +35,55 @@ void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType, un
     };
 }
 
+/**
+ * Open menu Start and change _gameFata.state
+ * 
+ * @author Valeran MAYTIE
+ **/
 void InputsListener::openMenuStart()
 {
     _gameData.state = GameData::menu;
     _display.showMenuStart();
 }
 
+/**
+ * Open menu Start and change _gameFata.state and stop music
+ * 
+ * @author Valeran MAYTIE
+ **/
 void InputsListener::openMenuOver()
 {
     _music.PausedMusicGame();
     _display.showMenuEnd(_gameData.score);
 }
 
+/**
+ * mounted menu cursor and play sound effects
+ * 
+ * @author Valeran MAYTIE
+ **/
 void InputsListener::menuUp(GameData::GameState menuType)
 {
     _music.menuChangePlay();
     (*_display.menu).previous(menuType);
 }
 
+/**
+ * go down menu cursor and play sound effects
+ * 
+ * @author Valeran MAYTIE
+ **/
 void InputsListener::menuDown(GameData::GameState menuType)
 {
     _music.menuChangePlay();
     (*_display.menu).next(menuType);
 }
 
+/**
+ * Select iteam in menu
+ * 
+ * @author Valeran MAYTIE and Thomas MARCHAND
+ **/
 void InputsListener::menuEnterStart()
 {
     unsigned int selected = (*_display.menu).select(2);
@@ -78,6 +111,11 @@ void InputsListener::menuEnterStart()
     }
 }
 
+/**
+ * Select iteam in menu over
+ *
+ * @author Valeran MAYTIE
+ **/
 void InputsListener::menuEnterOver()
 {
     unsigned int selected = (*_display.menu).select(3);

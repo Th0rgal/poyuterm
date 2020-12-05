@@ -1,6 +1,12 @@
 #include "controllers/listeners/inputsListener.hpp"
 #include "controllers/gridTools.hpp"
 
+/**
+ * to translate user inputs to actions in puyo mode(e.g. movements on the grid)
+ * @param int code the key code
+ * 
+ * @author Thomas Marchand and Valeran Maytié
+ **/
 void InputsListener::onPuyoKeyPressed(int code)
 {
     ActivePiece clone = _gameData.activePiece;
@@ -40,7 +46,7 @@ void InputsListener::onPuyoKeyPressed(int code)
 }
 
 /**
- * to translate user inputs to actions (e.g. movements on the grid)
+ * to translate user inputs to actions in tetrix mode(e.g. movements on the grid)
  * @param int code the key code
  * 
  * @author Thomas Marchand and Valeran Maytié
