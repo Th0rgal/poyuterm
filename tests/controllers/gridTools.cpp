@@ -55,3 +55,25 @@ TEST_CASE("testing gravity")
         for (std::size_t y = 0; y < grid.width(); y++)
             CHECK(grid.content[x][y] == expectedContent[x][y]);
 }
+
+TEST_CASE("testing Coordinates hash")
+{
+    std::hash<Coordinates> hasher;
+    Coordinates coordinatesA{4, 6};
+    Coordinates coordinatesB{4, 6};
+    Coordinates coordinatesC{5, 6};
+
+    CHECK(hasher(coordinatesA) == 2);
+    CHECK(hasher(coordinatesB) == 2);
+    CHECK(hasher(coordinatesC) == 3);
+}
+
+TEST_CASE("testing Coordinates egality operator")
+{
+    Coordinates coordinatesA{4, 6};
+    Coordinates coordinatesB{4, 6};
+    Coordinates coordinatesC{5, 6};
+
+    CHECK(coordinatesA == coordinatesB);
+    CHECK(!(coordinatesA == coordinatesC));
+}
