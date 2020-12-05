@@ -79,7 +79,7 @@ void Solver::compute(Grid grid, ActivePiece piece)
     _changed = true;
 
     unsigned int tempScore = teleportDownVirtually(grid, piece);
-    if (tempScore > _scoreBonus && tempScore > 280)
+    if (tempScore > _scoreBonus)
     {
         _scoreChanged = true;
         _gridClone = grid;
