@@ -1,10 +1,24 @@
 #include "controllers/io/parser.hpp"
 
+/**
+ * Default constructor
+ * 
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
 Parser::Parser()
 {
     enabled = false;
 }
 
+/**
+ * Constructor
+ * 
+ * @param const char *fileName a fileName
+ * 
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
 Parser::Parser(const char *fileName) : fileName(fileName)
 {
     file = std::ifstream(fileName);
@@ -27,6 +41,16 @@ Parser::Parser(const char *fileName) : fileName(fileName)
     enabled = true;
 }
 
+/**
+ * Translate a letter to a PuyoType
+ * 
+ * @param char letter the letter to translate
+ * 
+ * @return PuyoType the translated letter
+ * 
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
 Grid::PuyoType Parser::toPuyoType(char letter)
 {
     switch (letter)
@@ -46,6 +70,15 @@ Grid::PuyoType Parser::toPuyoType(char letter)
     }
 }
 
+/**
+ * Read the next ActivePiece for simulation
+ * 
+ * @param Grid &constraint to use for validation
+ * 
+ * @return bool true if activePiece has been successfully changed
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
 bool Parser::next(Grid &constraint)
 {
     if (gameMode == GameData::simulation)
@@ -65,6 +98,15 @@ bool Parser::next(Grid &constraint)
     return false;
 }
 
+/**
+ * Read the next ActivePiece for solo
+ * 
+ * @param std::size_t column the place to spawn the piece
+ * 
+ * @return bool true if activePiece has been successfully oaded
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
 bool Parser::next(std::size_t column)
 {
     if (gameMode == GameData::solo || gameMode == GameData::ia)
