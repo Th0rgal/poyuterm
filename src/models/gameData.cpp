@@ -1,6 +1,7 @@
 #include "models/gameData.hpp"
 #include "views/display.hpp"
 #include "views/gamescreen.hpp"
+#include "views/music/music.hpp"
 #include <math.h>
 
 /**
@@ -28,6 +29,7 @@ GameData::GameData()
  **/
 unsigned int GameData::addScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber)
 {
+	_musicCommbo.comboPlay();
     score = score + 10 * groupSize * (pow(4, combosIndex) + pow(3, groupsNumber));
     if (score > 999999)
         score = 999999;

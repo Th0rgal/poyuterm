@@ -100,7 +100,7 @@ void InputsListener::menuEnterStart()
         coninueGame = false;
         return;
     }
-    _music.startMusicGame();
+    _music.startMusicGame(selected);
     GameData::GameMode newGameMode = GameData::GameMode(selected);
     auto contentSnapshot = _grid.content;
     _gameData.state = GameData::running;

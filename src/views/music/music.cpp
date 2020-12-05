@@ -5,11 +5,23 @@
  * Play Game music
  *
  * @author Valeran MAYTIE
- * @confidence 3 : impossible to test display
+ * @confidence 3 : impossible to test sound 
  **/
-void CAudio::startMusicGame()
+void CAudio::startMusicGame(int musicType)
 {
-	musicInGame.openFromFile("music/music.wav");
+	switch(musicType)
+	{
+		case 0:
+			musicInGame.openFromFile("music/bronze.wav");
+			break;
+		case 1:
+			musicInGame.openFromFile("music/bach.wav");
+			break;
+		case 2:
+			musicInGame.openFromFile("music/music.wav");
+			break;
+	}
+    
     musicInGame.setLoop(true);
 	musicInGame.play();
 
@@ -19,7 +31,7 @@ void CAudio::startMusicGame()
  * pause the music
  *
  * @author Valeran MAYTIE
- * @confidence 3 : impossible to test display
+ * @confidence 3 : impossible to test sound 
  **/
 void CAudio::PausedMusicGame()
 {
@@ -30,7 +42,7 @@ void CAudio::PausedMusicGame()
  * Play sound effect menu
  *
  * @author Valeran MAYTIE
- * @confidence 3 : impossible to test display
+ * @confidence 3 : impossible to test sound 
  **/
 void CAudio::menuChangePlay()
 {
@@ -39,10 +51,22 @@ void CAudio::menuChangePlay()
 }
 
 /**
+ * play combo effect
+ *
+ * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test sound 
+ **/
+void CAudio::comboPlay()
+{
+	comboMusic.openFromFile("music/combo.wav");
+	comboMusic.play();
+}
+
+/**
  * Play Easter Egg music
  *
  * @author Valeran MAYTIE
- * @confidence 3 : impossible to test display 
+ * @confidence 3 : impossible to test sound 
  **/
 void CAudio::easterEggsPlay()
 {

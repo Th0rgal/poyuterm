@@ -3,10 +3,11 @@
 #include "models/grid.hpp"
 #include "models/puyo.hpp"
 #include "controllers/activePiece.hpp"
+#include "views/music/music.hpp"
 
 struct GameData
 {
-
+    CAudio _musicCommbo{};
     enum GameState
     {
         running = 0,
