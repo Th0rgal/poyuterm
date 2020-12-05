@@ -33,7 +33,7 @@ void Solver::start()
             piece.shiftNoCheck(grid, 1, 0);
         }
         piece.rotate(grid, 1);
-        for (std::size_t column = 0; column < grid.width(); column++)
+        for (std::size_t column = 0; column < grid.width() - 1; column++)
         {
             compute(grid, piece);
             piece.rotate(grid, 2);
@@ -41,6 +41,22 @@ void Solver::start()
             piece.shiftNoCheck(grid, -1, 0);
         }
 
+        if (!_changed)
+        {
+            piece.center.x = 0;
+            piece.center.y = 0;
+            piece.side.x = 0;
+            piece.side.y = 1;
+            compute(grid, piece);
+            piece.rotate(grid, 2);
+            compute(grid, piece);
+
+            piece.center.x = grid.width() - 1;
+            piece.side.x = grid.width() - 1;
+            compute(grid, piece);
+            piece.rotate(grid, 2);
+            compute(grid, piece);
+        }
         if (!_changed)
             break;
 
