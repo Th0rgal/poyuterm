@@ -11,6 +11,7 @@ using namespace std::chrono;
  * @param Grid &grid the Grid instance
  * 
  * @author Thomas Marchand
+ * @confidence 3: impossible to test listeners
  **/
 InputsListener::InputsListener(GameData &gameData,
                                Display &display,
@@ -25,6 +26,7 @@ InputsListener::InputsListener(GameData &gameData,
  * @param std::function<void(long)> loop the game loop function (callback)
  * 
  * @author Thomas Marchand
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::handleInputs(const std::function<void(long)> &loop)
 {

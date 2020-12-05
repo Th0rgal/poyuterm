@@ -6,6 +6,7 @@
  * @param int code the key code
  * 
  * @author Thomas Marchand and Valeran Maytié
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::onPuyoKeyPressed(int code)
 {
@@ -50,6 +51,7 @@ void InputsListener::onPuyoKeyPressed(int code)
  * @param int code the key code
  * 
  * @author Thomas Marchand and Valeran Maytié
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::onTetrixKeyPressed(int code)
 {
@@ -93,6 +95,7 @@ void InputsListener::onTetrixKeyPressed(int code)
  * to shift the falling piece to the left (one case) if it is possible
  * 
  * @author Thomas Marchand
+ * @confidence 3: impossible to test listeners
  **/
 bool InputsListener::translateLeft()
 {
@@ -103,6 +106,7 @@ bool InputsListener::translateLeft()
  * to shift the falling piece to the right (one case) if it is possible
  * 
  * @author Thomas Marchand
+ * @confidence 3: impossible to test listeners
  **/
 bool InputsListener::translateRight()
 {
@@ -113,6 +117,7 @@ bool InputsListener::translateRight()
  * to shift the falling piece to the bottom (one case) if it is possible
  * 
  * @author Thomas Marchand
+ * @confidence 3: impossible to test listeners
  **/
 bool InputsListener::translateDown()
 {
@@ -123,6 +128,7 @@ bool InputsListener::translateDown()
  * to rotate the falling piece clockwisely
  * 
  * @author Valeran Maytié
+ * @confidence 3: impossible to test listeners
  **/
 bool InputsListener::rotatePiece()
 {

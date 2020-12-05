@@ -5,8 +5,10 @@
  *
  * @param int code key to chack
  * @param GameData::GameState menuType menu to use
- * @param usinged int score score for easter egg
+ * @param usigned int score score for easter egg
+ * 
  * @author Valeran MAYTIE
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType, unsigned int score)
 {
@@ -39,6 +41,7 @@ void InputsListener::onMenuKeyPressed(int code, GameData::GameState menuType, un
  * Open menu Start and change _gameFata.state
  * 
  * @author Valeran MAYTIE
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::openMenuStart()
 {
@@ -50,6 +53,7 @@ void InputsListener::openMenuStart()
  * Open menu Start and change _gameFata.state and stop music
  * 
  * @author Valeran MAYTIE
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::openMenuOver()
 {
@@ -61,6 +65,7 @@ void InputsListener::openMenuOver()
  * mounted menu cursor and play sound effects
  * 
  * @author Valeran MAYTIE
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::menuUp(GameData::GameState menuType)
 {
@@ -72,6 +77,7 @@ void InputsListener::menuUp(GameData::GameState menuType)
  * go down menu cursor and play sound effects
  * 
  * @author Valeran MAYTIE
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::menuDown(GameData::GameState menuType)
 {
@@ -83,6 +89,7 @@ void InputsListener::menuDown(GameData::GameState menuType)
  * Select iteam in menu
  * 
  * @author Valeran MAYTIE and Thomas MARCHAND
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::menuEnterStart()
 {
@@ -115,6 +122,7 @@ void InputsListener::menuEnterStart()
  * Select iteam in menu over
  *
  * @author Valeran MAYTIE
+ * @confidence 3: impossible to test listeners
  **/
 void InputsListener::menuEnterOver()
 {
