@@ -11,8 +11,6 @@
 
 GameScreen::GameScreen()
 {
-    // to make getch() not blocking
-    nodelay(stdscr, TRUE);
 
     int boxHeight = LINES - 2;
     // it must be superior to 0

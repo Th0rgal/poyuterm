@@ -15,6 +15,7 @@ public:
     Display &_display;
     Grid &_grid;
     CAudio _music{};
+    bool coninueGame = true;
 
 private:
     //menu related

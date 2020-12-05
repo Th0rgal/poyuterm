@@ -29,6 +29,8 @@ Display::Display()
 
         return;
     }
+    // to make getch() not blocking
+    nodelay(stdscr, TRUE);
 
     // to disable cursor
     curs_set(0);

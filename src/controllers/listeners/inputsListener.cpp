@@ -25,14 +25,14 @@ InputsListener::InputsListener(GameData &gameData,
  * to handle user inputs while callig the game loop
  * @param std::function<void(long)> loop the game loop function (callback)
  * 
- * @author Thomas Marchand
+ * @author Thomas Marchand and Valeran MAYTIE
  * @confidence 3: impossible to test listeners
  **/
 void InputsListener::handleInputs(const std::function<void(long)> &loop)
 {
     int inputCode;
     high_resolution_clock::time_point previousTime = high_resolution_clock::now();
-    while ((inputCode = getch()) != 'q')
+    while ((inputCode = getch()) != 'q' && coninueGame)
     {
         if (inputCode == ERR)
         {

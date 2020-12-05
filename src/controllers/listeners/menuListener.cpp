@@ -96,8 +96,8 @@ void InputsListener::menuEnterStart()
     unsigned int selected = (*_display.menu).select(2);
     if (selected == 3)
     {
-        _display.close();
-        exit(0);
+        //_display.close();
+        coninueGame = false;
         return;
     }
     _music.startMusicGame();
@@ -129,8 +129,8 @@ void InputsListener::menuEnterOver()
     unsigned int selected = (*_display.menu).select(3);
     if (selected == 1)
     {
-        _display.close();
-        exit(0);
+        //_display.close();
+        coninueGame = false;
         return;
     }
     openMenuStart();
