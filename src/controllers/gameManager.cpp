@@ -43,7 +43,7 @@ void GameManager::start()
  **/
 void GameManager::loop(long delay)
 {
-    if (_gameData.state == GameData::running)
+    if (_gameData.state == GameData::running){
         switch (_gameData.mode)
         {
         case GameData::tetrix:
@@ -61,6 +61,7 @@ void GameManager::loop(long delay)
         default:
             break;
         }
+    }
 }
 
 /**

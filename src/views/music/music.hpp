@@ -2,8 +2,12 @@
 
 #include <SFML/Audio.hpp>
 
-struct Music
+
+class CAudio
 {
-	sf::Music musicInGame
-	sf::Music musicInMenu
+	sf::Music musicInGame;
+
+public:
+	void startMusicGame();
+	void PausedMusicGame();
 };

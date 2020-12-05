@@ -15,7 +15,6 @@
  **/
 int main(int argsSize, char *args[])
 {
-
     Parser parser = (argsSize >= 2) ? Parser(args[1]) : Parser();
     if (parser.gameMode == GameData::ia)
     {

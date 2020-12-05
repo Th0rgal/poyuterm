@@ -46,8 +46,11 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
                 onMenuKeyPressed(inputCode, _gameData.state);
             }
             else if (inputCode == 'P' or inputCode == 'p')
+            {
+                _music.PausedMusicGame();
                 openMenuStart();
-            else if (_gameData.state == GameData::running)
+            }
+            else if (_gameData.state == GameData::running){
                 switch (_gameData.mode)
                 {
                 case GameData::solo:
@@ -59,6 +62,7 @@ void InputsListener::handleInputs(const std::function<void(long)> &loop)
                 default:
                     break;
                 }
+            }
         }
     }
 }

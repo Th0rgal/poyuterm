@@ -4,6 +4,7 @@
 #include "models/gameData.hpp"
 #include "models/grid.hpp"
 #include "views/display.hpp"
+#include "views/music/music.hpp"
 
 class InputsListener
 {
@@ -13,6 +14,7 @@ public:
     GameData &_gameData;
     Display &_display;
     Grid &_grid;
+    CAudio _music{};
 
 private:
     //menu related

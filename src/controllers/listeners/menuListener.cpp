@@ -52,6 +52,7 @@ void InputsListener::menuEnterStart()
         exit(0);
         return;
     }
+    _music.startMusicGame();
     GameData::GameMode newGameMode = GameData::GameMode(selected);
     auto contentSnapshot = _grid.content;
     _gameData.state = GameData::running;
