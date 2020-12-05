@@ -27,7 +27,7 @@ void GameManager::simulationLoop(long delay)
     if (!parser.enabled)
         return;
 
-    if (_gameData.delaySinceTick > 50000000l)
+    if (_gameData.delaySinceTick > 100000000l)
     {
         if (_gameData.activePiece.empty)
         {
