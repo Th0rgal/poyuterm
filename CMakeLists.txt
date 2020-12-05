@@ -58,6 +58,7 @@ set(TESTS
     tests/models/grid.cpp
     tests/models/gameData.cpp
 
+    tests/controllers/gameManager.cpp
     tests/controllers/activePiece.cpp
     tests/controllers/gridTools.cpp
 )

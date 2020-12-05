@@ -9,8 +9,8 @@ class Parser
 {
 public:
     Parser();
-    Parser(char *fileName);
-    char *fileName;
+    Parser(const char *fileName);
+    const char *fileName;
     bool next(Grid &constraint);
     bool next(std::size_t column);
     void close();

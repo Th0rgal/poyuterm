@@ -2,6 +2,12 @@
 #include "controllers/gridTools.hpp"
 #include <bits/stdc++.h>
 
+/**
+ * to bridge the different game mechanics of Tetrix with the display
+ * @param long delay the delay in nanoseconds since last call
+ * 
+ * @confidence 3 : this can't be tested
+ **/
 void GameManager::tetrixLoop(long delay)
 {
     if (_gameData.activePiece.empty)

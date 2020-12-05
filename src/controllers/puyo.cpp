@@ -3,12 +3,23 @@
 #include "controllers/io/serializer.hpp"
 #include <ncurses.h>
 
+/**
+ * to regenerate the activePiece when it is empty
+ * 
+ * @confidence 5
+ **/
 void GameManager::puyoLoop(long delay)
 {
     if (_gameData.activePiece.empty)
         _gameData.activePiece = createNewPiece();
 }
 
+/**
+ * to bridge the different game mechanics of simulation with the display
+ * @param long delay the delay in nanoseconds since last call
+ * 
+ * @confidence 3 : this can't be tested
+ **/
 void GameManager::simulationLoop(long delay)
 {
     if (!parser.enabled)
