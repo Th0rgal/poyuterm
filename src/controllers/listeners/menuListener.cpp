@@ -64,6 +64,7 @@ void InputsListener::openMenuOver()
 /**
  * mounted menu cursor and play sound effects
  * 
+ * @param GameData::GameState menuType menu to use
  * @author Valeran MAYTIE
  * @confidence 3: impossible to test listeners
  **/
@@ -76,6 +77,7 @@ void InputsListener::menuUp(GameData::GameState menuType)
 /**
  * go down menu cursor and play sound effects
  * 
+ * @param GameData::GameState menuType menu to use
  * @author Valeran MAYTIE
  * @confidence 3: impossible to test listeners
  **/
