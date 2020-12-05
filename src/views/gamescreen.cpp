@@ -1,5 +1,4 @@
 #include "views/gamescreen.hpp"
-#include "views/music/music.hpp"
 #include <ncurses.h>
 #include <string>
 

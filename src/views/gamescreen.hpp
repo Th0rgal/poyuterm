@@ -3,7 +3,6 @@
 #include "models/grid.hpp"
 #include <string>
 #include <ncurses.h>
-#include "views/music/music.hpp"
 
 class GameScreen
 {
