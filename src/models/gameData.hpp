@@ -7,7 +7,6 @@
 
 struct GameData
 {
-    CAudio _musicCommbo{};
     enum GameState
     {
         running = 0,
