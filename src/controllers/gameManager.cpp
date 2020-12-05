@@ -7,6 +7,7 @@
  * @param Grid &grid a Grid instance passed by reference
  * @param Display &display a GameDisplay instance passed by reference
  * 
+ * @confidence 5: no tests needed
  * @author Thomas Marchand
  **/
 GameManager::GameManager(Parser &parser) : parser(parser),
@@ -19,6 +20,7 @@ GameManager::GameManager(Parser &parser) : parser(parser),
  * to load the display and start listening to inputs. The inputsListener
  * takes a callback to the loop function.
  * 
+ * @confidence 3: not possible to test
  * @author Thomas Marchand
  **/
 void GameManager::start()
@@ -39,6 +41,7 @@ void GameManager::start()
  * The game loop called everytime a user input hasn't been detected
  * @param long delay the delay in nanoseconds with the previous loop call
  * 
+ * @confidence 3: not possible to test
  * @author Thomas Marchand
  **/
 void GameManager::loop(long delay)
@@ -69,6 +72,7 @@ void GameManager::loop(long delay)
  * @return std::vector<Puyo> a vector of two linked Puyo generated randomly
  * on the first line (y:=0) with a random color
  * 
+ * @confidence 3: not possible to test, private
  * @author Thomas Marchand
  **/
 ActivePiece GameManager::createNewPiece()
@@ -111,6 +115,7 @@ ActivePiece GameManager::createNewPiece()
  * @param std::size_t lower the biggest possible number
  * @return std::size_t a positive number between lower and higher
  * 
+ * @confidence 3: not possible to test, private
  * @author Thomas Marchand
  **/
 std::size_t GameManager::random_index(std::size_t lower, std::size_t higher)

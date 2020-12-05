@@ -23,6 +23,7 @@ GameData::GameData()
  * @return unsigned int the sum of the current score and the newly calculated 
  * score bonus with a limit of 999999
  * 
+ * @author Thomas Marchand
  * @confidence 5
  **/
 unsigned int GameData::addScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber)

@@ -6,7 +6,8 @@
 /**
  * to regenerate the activePiece when it is empty
  * 
- * @confidence 5
+ * @author Thomas Marchand
+ * @confidence 3: this can't be tested (private)
  **/
 void GameManager::puyoLoop(long delay)
 {
@@ -18,7 +19,8 @@ void GameManager::puyoLoop(long delay)
  * to bridge the different game mechanics of simulation with the display
  * @param long delay the delay in nanoseconds since last call
  * 
- * @confidence 3 : this can't be tested
+ * @author Thomas Marchand
+ * @confidence 3 : this can't be tested (private)
  **/
 void GameManager::simulationLoop(long delay)
 {

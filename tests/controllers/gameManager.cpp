@@ -4,4 +4,5 @@
 TEST_CASE("puyoLoop")
 {
     Parser parser{"./tests/inputs/example_simulation.txt"};
+    GameManager gameManager{parser};
 }
