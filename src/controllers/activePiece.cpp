@@ -1,9 +1,25 @@
 #include "controllers/activePiece.hpp"
 
+/**
+ * Default constructor of ActivePiece
+ * 
+ * @confidence 5
+ * @author Thomas Marchand
+ **/
 ActivePiece::ActivePiece() : empty(true)
 {
 }
 
+/**
+ * Full constructor of ActivePiece
+ * 
+ * @param Puyo center the main Puyo
+ * @param Puyo side the second Puyo
+ * @param unsigned int orientation the orientation
+ * 
+ * @confidence 5
+ * @author Thomas Marchand
+ **/
 ActivePiece::ActivePiece(Puyo center, Puyo side, unsigned int orientation) : empty(false),
                                                                              center(center),
                                                                              side(side),
@@ -11,6 +27,16 @@ ActivePiece::ActivePiece(Puyo center, Puyo side, unsigned int orientation) : emp
 {
 }
 
+/**
+ * To rotate the ActivePiece if this is possible
+ * 
+ * @param Grid &grid the constraints' grid
+ * @param unsigned int rotations the amount of rotations
+ * 
+ * @return true if it moved
+ * @confidence 4
+ * @author Thomas Marchand
+ **/
 bool ActivePiece::rotate(Grid &grid, unsigned int rotations)
 {
     int center_x = center.x;
@@ -58,6 +84,17 @@ bool ActivePiece::rotate(Grid &grid, unsigned int rotations)
     return false;
 }
 
+/**
+ * To shift the ActivePiece if this is possible
+ * 
+ * @param Grid &grid the constraints' grid
+ * @param int x the shift on the x axis
+ * @param int y the shift on the y axis
+ * 
+ * @return true if it moved
+ * @confidence 4
+ * @author Thomas Marchand
+ **/
 bool ActivePiece::shift(Grid &grid, int x, int y)
 {
 
@@ -85,6 +122,17 @@ bool ActivePiece::shift(Grid &grid, int x, int y)
     return true;
 }
 
+/**
+ * To shift the ActivePiece even though this would override something on the grid
+ * 
+ * @param Grid &grid the constraints' grid
+ * @param int x the shift on the x axis
+ * @param int y the shift on the y axis
+ * 
+ * @return true if it moved
+ * @confidence 4
+ * @author Thomas Marchand
+ **/
 bool ActivePiece::shiftNoCheck(Grid &grid, int x, int y)
 {
 
@@ -108,6 +156,14 @@ bool ActivePiece::shiftNoCheck(Grid &grid, int x, int y)
     return true;
 }
 
+/**
+ * To avoid duplicate code
+ * 
+ * const std::function<void(Puyo &puyo)> &function a function to call for center and side
+ * 
+ * @confidence 5
+ * @author Thomas Marchand
+ **/
 void ActivePiece::map(const std::function<void(Puyo &puyo)> &function)
 {
     function(center);
