@@ -5,10 +5,22 @@
 #include <algorithm>
 #include <iostream>
 
+/**
+ * Constructor
+ * 
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
 Solver::Solver(Parser &parser) : _parser(parser)
 {
 }
 
+/**
+ * To start the solving process
+ * 
+ * @author Thomas Marchand
+ * @confidence 3: can't be tested
+ **/
 void Solver::start()
 {
     Serializer serializer("sortie.txt");
@@ -67,6 +79,16 @@ void Solver::start()
     serializer.close();
 }
 
+/**
+ * To check a possibility and select the best according to
+ * multiple heuristics
+ * 
+ * @param Grid grid the current grid
+ * @param ActivePiece piece the possible ActivePiece
+ * 
+ * @author Thomas Marchand
+ * @confidence 3: can't be tested (private local variables)
+ **/
 void Solver::compute(Grid grid, ActivePiece piece)
 {
     bool changed = true;
@@ -109,6 +131,15 @@ void Solver::compute(Grid grid, ActivePiece piece)
     }
 }
 
+/**
+ * To simulate a game round without display
+ * 
+ * @param Grid &grid the current grid
+ * @param ActivePiece &piece the piece to place
+ * 
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
 unsigned int Solver::teleportDownVirtually(Grid &grid, ActivePiece &activePiece)
 {
     unsigned int scoreBonus = 0;
@@ -173,6 +204,38 @@ unsigned int Solver::teleportDownVirtually(Grid &grid, ActivePiece &activePiece)
     return scoreBonus;
 }
 
+/**
+ * to get the highest column size
+ * 
+ * @param Grid &grid the current grid
+ * 
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
+unsigned int Solver::computeHighestColumnSize(Grid &grid)
+{
+    unsigned int highestColumnSize = 0;
+    for (auto column : grid.content)
+    {
+        unsigned int columnSize = 0;
+        for (Grid::PuyoType type : column)
+            if (type != Grid::none)
+                columnSize += 1;
+        if (columnSize > highestColumnSize)
+            highestColumnSize = columnSize;
+    }
+    return highestColumnSize;
+}
+
+/**
+ * custom heuristic to rank the grid composition
+ * 
+ * @param Grid &grid the current grid
+ * @param unsigned int tempHighestColumnSize the highest column size
+ * 
+ * @author Thomas Marchand
+ * @confidence 4
+ **/
 unsigned int Solver::computeEfficiencyIndex(Grid &grid, unsigned int tempHighestColumnSize)
 {
     std::unordered_set<Coordinates> starts;
@@ -195,21 +258,16 @@ unsigned int Solver::computeEfficiencyIndex(Grid &grid, unsigned int tempHighest
     return counter;
 }
 
-unsigned int Solver::computeHighestColumnSize(Grid &grid)
-{
-    unsigned int highestColumnSize = 0;
-    for (auto column : grid.content)
-    {
-        unsigned int columnSize = 0;
-        for (Grid::PuyoType type : column)
-            if (type != Grid::none)
-                columnSize += 1;
-        if (columnSize > highestColumnSize)
-            highestColumnSize = columnSize;
-    }
-    return highestColumnSize;
-}
-
+/**
+ * to calculate the score
+ * 
+ * @param std::size_t groupSize, size of the group
+ * @param unsigned int combosIndex, index of the combo
+ * @param unsigned int groupsNumber, the amount of groups
+ * 
+ * @author Thomas Marchand
+ * @confidence 5
+ **/
 unsigned int getScore(std::size_t groupSize, unsigned int combosIndex, unsigned int groupsNumber)
 {
     return 10 * groupSize * (pow(4, combosIndex) + pow(3, groupsNumber));

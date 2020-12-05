@@ -57,9 +57,9 @@ set(TESTS
     tests/models/puyo.cpp
     tests/models/grid.cpp
     tests/models/gameData.cpp
-
     tests/controllers/io/parser.cpp
     tests/controllers/io/serializer.cpp
+    tests/controllers/solver/solverManager.cpp
     tests/controllers/activePiece.cpp
     tests/controllers/gridTools.cpp
 )
