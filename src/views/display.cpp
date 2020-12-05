@@ -9,6 +9,7 @@
  * to intialize a display
  * 
  * @author Valeran Maytié
+ * @confidence 3 : impossible to test display
  **/
 Display::Display()
 {
@@ -49,6 +50,7 @@ Display::Display()
  * To diplay menu Start
  *
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display
  **/
 void Display::showMenuStart()
 {
@@ -61,6 +63,7 @@ void Display::showMenuStart()
  *
  * @aparam unsigned int represent score
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display 
  **/
 
 void Display::showMenuEnd(unsigned int score)
@@ -72,6 +75,7 @@ void Display::showMenuEnd(unsigned int score)
  * decalre Game screen
  *
  * @author Thomas Marchand
+ * @confidence 3 : impossible to test display 
  **/
 
 void Display::showGame()
@@ -83,6 +87,7 @@ void Display::showGame()
  * Close menu and display
  *
  * @author Thomas Marchand
+ * @confidence 3 : impossible to test display
  **/
 
 void Display::close()

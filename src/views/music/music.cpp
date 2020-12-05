@@ -5,6 +5,7 @@
  * Play Game music
  *
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display
  **/
 void CAudio::startMusicGame()
 {
@@ -18,6 +19,7 @@ void CAudio::startMusicGame()
  * pause the music
  *
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display
  **/
 void CAudio::PausedMusicGame()
 {
@@ -28,6 +30,7 @@ void CAudio::PausedMusicGame()
  * Play sound effect menu
  *
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display
  **/
 void CAudio::menuChangePlay()
 {
@@ -39,6 +42,7 @@ void CAudio::menuChangePlay()
  * Play Easter Egg music
  *
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display 
  **/
 void CAudio::easterEggsPlay()
 {

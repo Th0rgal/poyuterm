@@ -6,6 +6,7 @@
  * Declare a Windows for game and the window for score
  *
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display
  **/
 
 GameScreen::GameScreen()
@@ -37,6 +38,7 @@ GameScreen::GameScreen()
  * @param Grid::PuyoType type of the Puyo (affects its color)
  * 
  * @author Valeran Maytié
+ * @confidence 3 : impossible to test display
  **/
 void GameScreen::setCell(int x,
                          int y,
@@ -64,6 +66,7 @@ void GameScreen::setCell(int x,
  * refresh Grid in the terminal
  *
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display
  **/
 void GameScreen::refreshDiff(std::vector<std::vector<Grid::PuyoType>> &snapshot,
                              Grid &grid)
@@ -80,6 +83,7 @@ void GameScreen::refreshDiff(std::vector<std::vector<Grid::PuyoType>> &snapshot,
  * Close ncurses
  *
  * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display
  **/
 void GameScreen::close()
 {
@@ -89,7 +93,8 @@ void GameScreen::close()
 /**
  * Diplay Score right of the window
  *
- * @author
+ * @author Valeran MAYTIE
+ * @confidence 3 : impossible to test display
  **/
 void GameScreen::displayScore(unsigned int score)
 {
