@@ -35,7 +35,7 @@ ActivePiece::ActivePiece(Puyo center, Puyo side, unsigned int orientation) : emp
  * 
  * @return true if it moved
  * @confidence 4
- * @author Thomas Marchand
+ * @author Thomas Marchand and Valeran Maytie
  **/
 bool ActivePiece::rotate(Grid &grid, unsigned int rotations)
 {
