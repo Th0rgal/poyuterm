@@ -3,7 +3,6 @@
 #include "models/grid.hpp"
 #include "models/puyo.hpp"
 #include "controllers/activePiece.hpp"
-#include "views/music/music.hpp"
 
 struct GameData
 {

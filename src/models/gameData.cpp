@@ -1,7 +1,4 @@
 #include "models/gameData.hpp"
-#include "views/display.hpp"
-#include "views/gamescreen.hpp"
-#include "views/music/music.hpp"
 #include <math.h>
 
 /**

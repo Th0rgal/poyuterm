@@ -1,4 +1,3 @@
-#include "controllers/gameManager.hpp"
 #include "controllers/io/parser.hpp"
 #include "controllers/solver/solverManager.hpp"
 #include "models/gameData.hpp"
@@ -21,9 +20,6 @@ int main(int argsSize, char *args[])
         Solver solver{parser};
         solver.start();
     }
-    else
-        // load controllers
-        GameManager(parser).start();
 
     parser.close();
     return 0;
