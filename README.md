@@ -4,7 +4,7 @@
   <br>
 </h1>
 
-<h4 align="center">👾 A retro game within terminal.</h4>
+<h4 align="center">👾 A retro game within your terminal.</h4>
 
 <p align="center">
     <a href="https://lgtm.com/projects/g/Th0rgal/poyuterm/context:cpp">
